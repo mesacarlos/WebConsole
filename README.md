@@ -28,6 +28,7 @@ The following tables represent how server communicates with the client(s), somet
 #### Websocket Server -> Client
 
 Server communicate with all connected clients using JSON. The following table shows all possible JSON variables.
+
 | Variable            |Meaning                                                                      |
 |---------------------|-----------------------------------------------------------------------------|
 | status              |Status code (as integer), representing response type. See table below        |
@@ -46,6 +47,7 @@ Server communicate with all connected clients using JSON. The following table sh
 #### Client -> Websocket Server
 
 Clients can communicate with server using commands. The following table shows existing commands.
+
 | Code                |Meaning                                  |Extra info    |
 |---------------------|-----------------------------------------|--------------|
 |LOGIN *(password)*   |Login to start communication with server |              |
