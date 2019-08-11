@@ -10,6 +10,10 @@ Dont worry about privacy: all data is stored in your browser offline and your PC
 
 1. Plugin download
 2. Filling config.yml. Port and password configuration
+3. SSL config
+If generated with
+keytool -genkey -keyalg RSA -validity 3650 -keystore "keystore.jks" -storepass "storepassword" -keypass "keypassword" -alias "default" -dname "CN=127.0.0.1, OU=MyOrgUnit, O=MyOrg, L=MyCity, S=MyRegion, C=MyCountry"
+then need to https://localhost:8080/
 
 
 ## How it works
@@ -31,7 +35,7 @@ Server communicate with all connected clients using JSON. The following table sh
 
 | Variable            |Meaning                                                                      |
 |---------------------|-----------------------------------------------------------------------------|
-| status              |Status code (as integer), representing response type. See table below        |
+| status              |Status code (as integer), representing response type. See listing below*     |
 | statusDescription   |Status description (as String) describing status code                        |
 | respondsTo          |`(Optional)` Original command sent by client which triggered this response|
 | message             |Response content                                                             |
