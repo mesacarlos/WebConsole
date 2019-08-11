@@ -12,11 +12,16 @@ import org.java_websocket.server.WebSocketServer;
 import com.mesacarlos.webconsole.WebConsole;
 import com.mesacarlos.webconsole.command.CommandFactory;
 import com.mesacarlos.webconsole.command.WSCommand;
+import com.mesacarlos.webconsole.json.ConsoleOutput;
+import com.mesacarlos.webconsole.json.Forbidden;
+import com.mesacarlos.webconsole.json.JSONOutput;
+import com.mesacarlos.webconsole.json.LoginRequired;
+import com.mesacarlos.webconsole.json.UnknownWSCmd;
 import com.mesacarlos.webconsole.util.LoginManager;
 
 public class WSServer extends WebSocketServer {
-	private WebConsole plugin;
 	private HashMap<String, WSCommand> commands = CommandFactory.getCommandsHashMap();
+	private WebConsole plugin;
 
 	public WSServer(WebConsole plugin, InetSocketAddress address) {
 		super(address);
@@ -25,15 +30,12 @@ public class WSServer extends WebSocketServer {
 
 	@Override
 	public void onOpen(WebSocket conn, ClientHandshake handshake) {
-		conn.send("Connection started, waiting login");
+		sendToClient(conn, new LoginRequired("Connection started, waiting login"));
 		Bukkit.getLogger().info("[WebConsole] Connected and waiting login from " + conn.getRemoteSocketAddress());
 	}
 
 	@Override
 	public void onMessage(WebSocket conn, String message) {
-		// Log this action to console
-		Bukkit.getLogger().info("[WebConsole] Received signal from " + conn.getRemoteSocketAddress() + ": " + message);
-
 		// Get command and params
 		String wsCommand = message.split(" ")[0];
 		String wsCommandParams = "";
@@ -44,14 +46,16 @@ public class WSServer extends WebSocketServer {
 		WSCommand cmd = commands.get(wsCommand);
 
 		if (cmd == null) {
+			//Command does not exist
+			sendToClient(conn, new UnknownWSCmd("Unknown command", message));
 			Bukkit.getLogger().info(
-					"[WebConsole] Signal was not processed since is not valid. Is your plugin/web interface up to date?");
+					"[WebConsole] Signal '" + message + "' was not processed since is not valid. Is your plugin/web interface up to date?");
 		} else if (!LoginManager.getInstance().isLoggedIn(conn.getRemoteSocketAddress().getAddress().toString())
 				&& !wsCommand.equals("LOGIN")) {
-			// DO NOTHING. User is not authorised
-			conn.send("403 Forbidden");
+			//User is not authorised. DO NOTHING, IMPORTANT!
+			sendToClient(conn, new Forbidden("Forbidden", message));
 			Bukkit.getLogger().warning("[WebConsole] " + conn.getRemoteSocketAddress()
-					+ " tried to run a command while not authenticated!");
+					+ " tried to run '" + message + "' while not logged in!");
 		} else {
 			cmd.execute(this, conn, wsCommandParams);
 		}
@@ -72,9 +76,17 @@ public class WSServer extends WebSocketServer {
 
 	@Override
 	public void onStart() {
-		Bukkit.getLogger().info("[WebConsole] WebSockets Server started successfully");
+		Bukkit.getLogger().info("[WebConsole] WebSocket Server started successfully");
 	}
-
+	
+	/**
+	 * Returns main class
+	 * @return Main plugin class
+	 */
+	public WebConsole getMainClass() {
+		return plugin;
+	}
+	
 	/**
 	 * Sends the message to all connected AND logged-in users
 	 */
@@ -82,17 +94,17 @@ public class WSServer extends WebSocketServer {
 		Collection<WebSocket> connections = getConnections();
 		for (WebSocket connection : connections) {
 			if (LoginManager.getInstance().isLoggedIn(connection.getRemoteSocketAddress().getAddress().toString()))
-				connection.send("LOG " + line);
+				sendToClient(connection, new ConsoleOutput(line));
 		}
 	}
-
+	
 	/**
-	 * Returns main class
-	 * 
-	 * @return
+	 * Sends this JSONOutput to client
+	 * @param conn Connection to client
+	 * @param content JSONOutput object
 	 */
-	public WebConsole getMainClass() {
-		return plugin;
+	public void sendToClient(WebSocket conn, JSONOutput content) {
+		conn.send(content.toJSON());
 	}
 
 }
