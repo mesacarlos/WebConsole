@@ -6,6 +6,10 @@ public class Processed implements JSONOutput{
 	private String message;
 	private String respondsTo;
 	
+	public Processed(String message) {
+		this.message = message;
+	}
+	
 	public Processed(String message, String respondsTo) {
 		this.message = message;
 		this.respondsTo = respondsTo;

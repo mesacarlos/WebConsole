@@ -13,9 +13,9 @@ import com.mesacarlos.webconsole.WebConsole;
 import com.mesacarlos.webconsole.command.CommandFactory;
 import com.mesacarlos.webconsole.command.WSCommand;
 import com.mesacarlos.webconsole.json.ConsoleOutput;
-import com.mesacarlos.webconsole.json.Forbidden;
 import com.mesacarlos.webconsole.json.JSONOutput;
 import com.mesacarlos.webconsole.json.LoginRequired;
+import com.mesacarlos.webconsole.json.Processed;
 import com.mesacarlos.webconsole.json.UnknownWSCmd;
 import com.mesacarlos.webconsole.util.LoginManager;
 
@@ -30,7 +30,10 @@ public class WSServer extends WebSocketServer {
 
 	@Override
 	public void onOpen(WebSocket conn, ClientHandshake handshake) {
-		sendToClient(conn, new LoginRequired("Connection started, waiting login"));
+		if(LoginManager.getInstance().isLoggedIn(conn.getRemoteSocketAddress()))
+			sendToClient(conn, new Processed("Connected. Already logged in, welcome back!"));
+		else
+			sendToClient(conn, new LoginRequired("Connection started, waiting login"));
 		Bukkit.getLogger().info("[WebConsole] Connected and waiting login from " + conn.getRemoteSocketAddress());
 	}
 
@@ -50,10 +53,10 @@ public class WSServer extends WebSocketServer {
 			sendToClient(conn, new UnknownWSCmd("Unknown command", message));
 			Bukkit.getLogger().info(
 					"[WebConsole] Signal '" + message + "' was not processed since is not valid. Is your plugin/web interface up to date?");
-		} else if (!LoginManager.getInstance().isLoggedIn(conn.getRemoteSocketAddress().getAddress().toString())
+		} else if (!LoginManager.getInstance().isLoggedIn(conn.getRemoteSocketAddress())
 				&& !wsCommand.equals("LOGIN")) {
 			//User is not authorised. DO NOTHING, IMPORTANT!
-			sendToClient(conn, new Forbidden("Forbidden", message));
+			sendToClient(conn, new LoginRequired("Forbidden"));
 			Bukkit.getLogger().warning("[WebConsole] " + conn.getRemoteSocketAddress()
 					+ " tried to run '" + message + "' while not logged in!");
 		} else {
@@ -63,7 +66,7 @@ public class WSServer extends WebSocketServer {
 
 	@Override
 	public void onClose(WebSocket conn, int code, String reason, boolean remote) {
-		LoginManager.getInstance().logOut(conn.getRemoteSocketAddress().getAddress().toString());
+		LoginManager.getInstance().logOut(conn.getRemoteSocketAddress());
 		Bukkit.getLogger()
 				.info("[WebConsole] Closed WS connection " + conn.getRemoteSocketAddress() + ". Reason: " + reason);
 	}
@@ -93,7 +96,7 @@ public class WSServer extends WebSocketServer {
 	public void onNewConsoleLinePrinted(String line) {
 		Collection<WebSocket> connections = getConnections();
 		for (WebSocket connection : connections) {
-			if (LoginManager.getInstance().isLoggedIn(connection.getRemoteSocketAddress().getAddress().toString()))
+			if (LoginManager.getInstance().isLoggedIn(connection.getRemoteSocketAddress()))
 				sendToClient(connection, new ConsoleOutput(line));
 		}
 	}

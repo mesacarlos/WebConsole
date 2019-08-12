@@ -78,7 +78,7 @@ Server communicate with all connected clients using JSON. The following table sh
 | Variable            |Meaning                                                                      |
 |---------------------|-----------------------------------------------------------------------------|
 | status              |Status code (as integer), representing response type. See listing below*     |
-| statusDescription   |Status description (as String) describing status code                        |
+| statusDescription   |Status description (as String) describing response type.                     |
 | respondsTo          |`(Optional)` Original command sent by client which triggered this response|
 | message             |Response content                                                             |
 
@@ -87,7 +87,6 @@ Server communicate with all connected clients using JSON. The following table sh
  - **200**: Ok/Processed.
  - **400**: Unknown command.
  - **401**: Login required/Not logged in.
- - **403**: Forbidden/Unauthorised (Probably not logged in).
 
 
 #### Client -> Websocket Server

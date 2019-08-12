@@ -139,10 +139,6 @@ function onWebSocketsMessage(message){
 				$('#passwordModal').modal('show');
 			}
 			break;
-		case 403:
-			//Forbidden
-			
-			break;
 		default:
 			console.log('Unknown server response:');
 	}

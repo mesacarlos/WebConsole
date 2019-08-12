@@ -1,10 +1,11 @@
 package com.mesacarlos.webconsole.util;
 
+import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LoginManager {
-	private List<String> loggedInUsers = new ArrayList<String>();
+	private List<InetSocketAddress> loggedInUsers = new ArrayList<InetSocketAddress>();
 	private static LoginManager instance;
 	
 	private LoginManager() {}
@@ -15,15 +16,15 @@ public class LoginManager {
 		return instance;
 	}
 	
-	public void logIn(String address) {
+	public void logIn(InetSocketAddress address) {
 		loggedInUsers.add(address);
 	}
 	
-	public void logOut(String address) {
+	public void logOut(InetSocketAddress address) {
 		loggedInUsers.remove(address);
 	}
 	
-	public boolean isLoggedIn(String address) {
+	public boolean isLoggedIn(InetSocketAddress address) {
 		return loggedInUsers.contains(address);
 	}
 }

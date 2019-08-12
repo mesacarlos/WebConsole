@@ -13,7 +13,7 @@ public class LogInCommand implements WSCommand {
 	@Override
 	public void execute(WSServer wsServer, WebSocket conn, String password) {
 		// If user is logged in, then return.
-		if (LoginManager.getInstance().isLoggedIn(conn.getRemoteSocketAddress().getAddress().toString()))
+		if (LoginManager.getInstance().isLoggedIn(conn.getRemoteSocketAddress()))
 			return;
 
 		// Get password from config files
@@ -21,7 +21,7 @@ public class LogInCommand implements WSCommand {
 
 		if (receivedPassword.equals(password)) {
 			// Password is correct, logging in
-			LoginManager.getInstance().logIn(conn.getRemoteSocketAddress().getAddress().toString());
+			LoginManager.getInstance().logIn(conn.getRemoteSocketAddress());
 			wsServer.sendToClient(conn, new Processed("Logged In", "LOGIN ********"));
 			Bukkit.getLogger().info("[WebConsole] Successfully logged in from " + conn.getRemoteSocketAddress());
 		} else {
