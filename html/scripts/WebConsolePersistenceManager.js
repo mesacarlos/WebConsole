@@ -7,20 +7,28 @@
 class WebConsolePersistenceManager{
 	
 	/**
-	* Saves server into WebStorage
+	* Saves or updates server into WebStorage
 	*/
-	saveServer(serverName, serverURI, serverPassword){
-		this.createListIfUndefined();
+	saveServer(serverObject){
+		this.initializeLocalStorage();
 		
-		//Create anonymous object
-		var server = new Object();
-		server.serverName = serverName;
-		server.serverURI = serverURI;
-		server.serverPassword = serverPassword;
-		
-		//Save to WebStorage
+		//Check if server exists
+		var i;
+		var found = false;
 		var servers = this.getAllServers();
-		servers.push(server);
+		for (i = 0; i < servers.length; i++) { 
+			if(servers[i].serverName == serverObject.serverName){
+				//Exists, replacing it
+				servers[i] = serverObject;
+				found = true;
+			}
+		}
+		
+		//Not found, adding it
+		if(found == false){
+			servers.push(serverObject);
+		}
+		
 		this.replaceAllServers(servers);
 	}
 	
@@ -28,9 +36,10 @@ class WebConsolePersistenceManager{
 	* Delete server from saved servers
 	*/
 	deleteServer(serverName){
-		this.createListIfUndefined();
+		this.initializeLocalStorage();
 		
 		//Find server
+		var i;
 		var index = -1;
 		var servers = this.getAllServers();
 		for (i = 0; i < servers.length; i++) { 
@@ -52,8 +61,9 @@ class WebConsolePersistenceManager{
 	* Get server details as object
 	*/
 	getServer(serverName){
-		this.createListIfUndefined();
+		this.initializeLocalStorage();
 		
+		var i;
 		var servers = this.getAllServers();
 		for (i = 0; i < servers.length; i++) { 
 			if(servers[i].serverName == serverName){
@@ -66,16 +76,23 @@ class WebConsolePersistenceManager{
 	* Get all servers
 	*/
 	getAllServers(){
-		this.createListIfUndefined();
-		return JSON.parse(window.localStorage.servers);
+		this.initializeLocalStorage();
+		
+		var storageObj = JSON.parse(window.localStorage.WebConsole);
+		return storageObj.servers;
 	}
 	
 	/**
 	* Create server list if not defined
 	*/
-	createListIfUndefined(){
-		if (typeof window.localStorage.servers === 'undefined') {
-			window.localStorage.servers = JSON.stringify(new Array());
+	initializeLocalStorage(){
+		if (typeof window.localStorage.WebConsole === 'undefined') {
+			//Create empty object
+			var storageObj = new Object();
+			storageObj.servers = new Array();
+			
+			//Save to WebStorage
+			window.localStorage.WebConsole = JSON.stringify(storageObj);
 		}
 	}
 	
@@ -83,7 +100,19 @@ class WebConsolePersistenceManager{
 	* Replaces all server list with provided list
 	*/
 	replaceAllServers(newServerList){
-		window.localStorage.servers = JSON.stringify(newServerList);
+		//Retrieve saved data
+		var storageObj = JSON.parse(window.localStorage.WebConsole);
+		storageObj.servers = newServerList;
+		
+		//Save to WebStorage
+		window.localStorage.WebConsole = JSON.stringify(storageObj);
 	}
 	
+}
+
+class WSServer{
+	constructor(serverName, serverURI){
+		this.serverName = serverName;
+		this.serverURI = serverURI;
+	}
 }

@@ -6,7 +6,7 @@
 */
 class WebConsoleManager {
 	constructor(){
-		this.activeConnections = [];
+		this.activeConnections = []; //Active Connectors list
 	}
 	
 	/**
@@ -20,6 +20,7 @@ class WebConsoleManager {
 	* Retrieve server by name
 	*/
 	getConnection(serverName){
+		var i;
 		for (i = 0; i < this.activeConnections.length; i++) { 
 			if(this.activeConnections[i].serverName == serverName){
 				return this.activeConnections[i];

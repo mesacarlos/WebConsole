@@ -20,17 +20,16 @@
 				<div class="collapse navbar-collapse" id="navbarContainer">
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item">
-							<a class="nav-link" href="#">Home</a>
+							<a class="nav-link" href="index.html">Home</a>
 						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="serversDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								Your servers
 							</a>
 							<div class="dropdown-menu" id="ServerListDropDown" aria-labelledby="serversDropdown">
-								<a class="dropdown-item" href="#">Add Server</a>
+								<a class="dropdown-item" href data-toggle="modal" data-target="#addServerModal">Add Server</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item servermenuitem" href="#">Survival</a>
-								<a class="dropdown-item servermenuitem" href="#">SkyBlock</a>
+								<a class="dropdown-item servermenuitem" href="#">Example server</a>
 							</div>
 						</li>
 					</ul>
@@ -45,18 +44,91 @@
 		
 		<!-- Begin page content -->
 		<main role="main" class="flex-shrink-0">
-			<!-- Index container -->
-			<div class="container">
+			<!-- Welcome container -->
+			<div class="container" id="welcomeContainer">
 				<h1 class="mt-5">Select a server from the menu</h1>
 				<p class="lead">Use the navigation bar to add a new Minecraft Server or connect to a previously added one.</p>
 			</div>
 			
 			<!-- Server management container -->
-			<div class="container" hidden>
+			<div class="container" id="serverContainer">
 				<h1 class="mt-5">Survival</h1>
 				<p class="lead">Manage now your Minecraft Server.</p>
+				<p>Here will be all control buttons and console logs</p>
 			</div>
 		</main>
+		
+		<!-- Add Server Modal -->
+		<div class="modal fade" id="addServerModal" tabindex="-1" role="dialog" aria-labelledby="addServerModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="addServerModalLongTitle">Add a new server</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label for="server-name" class="col-form-label">Server name:</label>
+								<input type="text" class="form-control" id="server-name">
+							</div>
+							<div class="form-group">
+								<label for="server-uri" class="col-form-label">Server URI:</label>
+								<input type="text" class="form-control" id="server-uri" placeholder="ws://localhost:8080">
+							</div>
+							<div class="form-group">
+								<label for="server-pwd" class="col-form-label">Password:</label>
+								<input type="text" class="form-control" id="server-pwd">
+							</div>
+							<div class="form-group">
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" id="rememberPwdCheckbox">
+									<label class="form-check-label" for="rememberPwdCheckbox">Remember password</label>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="saveAndConnectServerButton">Save and connect</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Password Modal -->
+		<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="passwordModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="passwordModalLongTitle">Add a new server</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="form-group">
+								<label for="server-pwd" class="col-form-label">Password:</label>
+								<input type="text" class="form-control" id="server-pwd">
+							</div>
+							<div class="form-group">
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" id="rememberPwdCheckbox">
+									<label class="form-check-label" for="rememberPwdCheckbox">Remember password</label>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="passwordTypedButton">Save and connect</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		
 		<!-- Webpage footer -->
 		<footer class="footer mt-auto py-3">
@@ -71,9 +143,9 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 		
 		<!-- WebConsole JS Scripts -->
-		<script src="scripts/WebConsole.js"></script>
-		<script src="scripts/WebConsolePersistenceManager.js"></script>
-		<script src="scripts/WebConsoleManager.js"></script>
 		<script src="scripts/WebConsoleConnector.js"></script>
+		<script src="scripts/WebConsoleManager.js"></script>
+		<script src="scripts/WebConsolePersistenceManager.js"></script>
+		<script src="scripts/WebConsole.js"></script>
 	</body>
 </html>
