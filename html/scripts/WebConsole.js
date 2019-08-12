@@ -76,6 +76,9 @@ $('#passwordModal').on('hidden.bs.modal', function (e) {
 		svObj.setPassword(pwd);
 		persistenceManager.saveServer(svObj);
 	}
+	
+	//Remove password from modal
+	$("#server-pwd").val('');
 });
 
 
@@ -89,11 +92,24 @@ function openServer(serverName){
 	$("#welcomeContainer").hide();
 	$("#serverContainer").show();
 	
+	//Change server name and related info
+	$("#serverTitle").text(serverName);
+	$("#consoleTextArea").text("");
+	
 	//New server, new variables:
 	autoPasswordCompleted = false;
 	
 	//Create or retrieve connection
 	connectionManager.loadConnection(serverName);
+	
+	//Load saved messages
+	var i;
+	var messages = connectionManager.activeConnection.messages;
+	for(i = 0; i < messages.length; i++){
+		if(messages[i].status != 401){
+			onWebSocketsMessage(messages[i]);
+		}
+	}
 	
 	//Subscribe a function
 	connectionManager.activeConnection.subscribe(onWebSocketsMessage);
@@ -137,7 +153,7 @@ function onWebSocketsMessage(message){
 * Write to console
 */
 function writeToWebConsole(msg){
-	$("#consoleTextArea").append(msg + "\n"); 
+	$("#consoleTextArea").append(msg + "\n");
 }
 
 /**
@@ -173,7 +189,7 @@ function updateServerList(){
 	//Add all servers
 	var servers = persistenceManager.getAllServers();
 	for(var i = 0; i < servers.length; i++){
-		$('#ServerListDropDown').append('<a class="dropdown-item servermenuitem" href="#" onclick=openServer("' + servers[i].serverName + '")>' + servers[i].serverName + '</a>');
+		$('#ServerListDropDown').append('<a class="dropdown-item servermenuitem" href="#" onclick="openServer(\'' + servers[i].serverName + '\')">' + servers[i].serverName + '</a>');
 	}
 	
 	//Show a "no servers" message when no servers are added
