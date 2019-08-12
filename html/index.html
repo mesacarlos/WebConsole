@@ -53,8 +53,15 @@
 			<!-- Server management container -->
 			<div class="container" id="serverContainer">
 				<h1 class="mt-5">Survival</h1>
-				<p class="lead">Manage now your Minecraft Server.</p>
-				<p>Here will be all control buttons and console logs</p>
+				<div class="input-group mb-3">
+					<textarea class="form-control" rows="20" id="consoleTextArea" disabled></textarea>
+				</div>
+				<div class="input-group mb-3">
+					<input type="text" class="form-control" id="commandInput">
+					<div class="input-group-append">
+						<button class="btn btn-outline-secondary" type="button" id="sendCommandButton">Send</button>
+					</div>
+				</div>
 			</div>
 		</main>
 		
@@ -64,7 +71,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<h5 class="modal-title" id="addServerModalLongTitle">Add a new server</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<button type="button" class="close" data-dismiss="modal" aria-label="CloseAddServer">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
@@ -77,16 +84,6 @@
 							<div class="form-group">
 								<label for="server-uri" class="col-form-label">Server URI:</label>
 								<input type="text" class="form-control" id="server-uri" placeholder="ws://localhost:8080">
-							</div>
-							<div class="form-group">
-								<label for="server-pwd" class="col-form-label">Password:</label>
-								<input type="text" class="form-control" id="server-pwd">
-							</div>
-							<div class="form-group">
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" id="rememberPwdCheckbox">
-									<label class="form-check-label" for="rememberPwdCheckbox">Remember password</label>
-								</div>
 							</div>
 						</form>
 					</div>
@@ -103,16 +100,16 @@
 			<div class="modal-dialog modal-dialog-centered" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="passwordModalLongTitle">Add a new server</h5>
+						<h5 class="modal-title" id="passwordModalLongTitle">Password required</h5>
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
 					<div class="modal-body">
-						<form>
+						<form id="passwordForm">
 							<div class="form-group">
 								<label for="server-pwd" class="col-form-label">Password:</label>
-								<input type="text" class="form-control" id="server-pwd">
+								<input type="password" class="form-control" id="server-pwd">
 							</div>
 							<div class="form-group">
 								<div class="form-check">
@@ -124,7 +121,27 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary" data-dismiss="modal" id="passwordTypedButton">Save and connect</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" id="passwordSendButton">Login</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Disconnection Modal -->
+		<div class="modal fade" id="disconnectionModal" tabindex="-1" role="dialog" aria-labelledby="disconnectionModalCenterTitle" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="disconnectionModalLongTitle">Disconnected</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						Connection was lost with the server you were connected to. Moved back to welcome screen.
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</div>

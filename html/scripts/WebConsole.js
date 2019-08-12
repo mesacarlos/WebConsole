@@ -10,6 +10,7 @@
 */
 var persistenceManager = new WebConsolePersistenceManager();
 var connectionManager = new WebConsoleManager();
+var autoPasswordCompleted = false; //When true, saved password was used. If a 401 is received, then saved password is not correct
 
 /**
 * Show saved serverlist on startup
@@ -39,13 +40,46 @@ $("#saveAndConnectServerButton").click(function() {
 	openServer(name);
 });
 
+
+
+
 /**
-* Server saver button click handler
+* Server password typed (modal 'done' button clicked)
 */
-$("#passwordTypedButton").click(function() {
-	//Send LOGIN command to server
-	
+$("#passwordSendButton").click(function() {
+	//Close modal
+	$('#passwordModal').modal('hide');
 });
+
+/**
+* Enter button keyboard pressed on password modal
+*/
+$("#passwordForm").submit(function(event){
+	//Solves bug with forms:
+	event.preventDefault();
+	
+	//Close modal
+	$('#passwordModal').modal('hide');
+});
+
+$('#passwordModal').on('hidden.bs.modal', function (e) {
+	//Send LOGIN command to server
+	var pwd = $("#server-pwd").val();
+	connectionManager.sendPassword(pwd);
+	
+	//Save password if set
+	var savePasswordChecked = $("#rememberPwdCheckbox").prop("checked");
+	if(savePasswordChecked){
+		var serverName = connectionManager.activeConnection.serverName;
+		var serverURI = connectionManager.activeConnection.serverURI;
+		var svObj = new WSServer(serverName, serverURI);
+		svObj.setPassword(pwd);
+		persistenceManager.saveServer(svObj);
+	}
+});
+
+
+
 
 /**
 * Prepare and show server to user
@@ -55,44 +89,39 @@ function openServer(serverName){
 	$("#welcomeContainer").hide();
 	$("#serverContainer").show();
 	
-	//If a connection is already active, delete all subscribers
-	if(typeof connectionManager.activeConnection  !== "undefined"){
-		connectionManager.activeConnection.removeSubscribers();
-	}
+	//New server, new variables:
+	autoPasswordCompleted = false;
 	
-	//Start connection or retrieve it if already exists
-	if(typeof connectionManager.getConnection(serverName)  === "undefined"){
-		//Retrieve from persistence
-		var serverObj = persistenceManager.getServer(serverName);
-		connectionManager.activeConnection = new WebConsoleConnector(serverObj.serverName, serverObj.serverURI);
-	}else{
-		//Use active connection
-		connectionManager.activeConnection = connectionManager.getConnection(serverName);
-		
-	}
+	//Create or retrieve connection
+	connectionManager.loadConnection(serverName);
 	
-	//Subscribe a function and connect
+	//Subscribe a function
 	connectionManager.activeConnection.subscribe(onWebSocketsMessage);
-	connectionManager.activeConnection.connect();
 }
 
 function onWebSocketsMessage(message){
 	switch (message.status) {
 		case 10:
 			//Console Output
-			
+			writeToWebConsole(message.message);
 			break;
 		case 200:
 			//Processed
-			
+			writeToWebConsole(message.message);
 			break;
 		case 400:
 			//Unknown Command
-			
+			writeToWebConsole(message.message);
 			break;
 		case 401:
-			//Waiting for login
-			
+			//Waiting for login. Show password modal or retrieve password
+			var savedPwd = persistenceManager.getServer(connectionManager.activeConnection.serverName).serverPassword;
+			if(typeof savedPwd !== "undefined" && !autoPasswordCompleted){
+				connectionManager.sendPassword(savedPwd);
+				autoPasswordCompleted = true;
+			}else{
+				$('#passwordModal').modal('show');
+			}
 			break;
 		case 403:
 			//Forbidden
@@ -100,9 +129,38 @@ function onWebSocketsMessage(message){
 			break;
 		default:
 			console.log('Unknown server response:');
-			console.log(message);
 	}
 	console.log(message);
+}
+
+/**
+* Write to console
+*/
+function writeToWebConsole(msg){
+	$("#consoleTextArea").append(msg + "\n"); 
+}
+
+/**
+* On send command button click
+*/
+$("#sendCommandButton").click(function() {
+	connectionManager.sendConsoleCmd($('#commandInput').val());
+	$('#commandInput').val('');
+});
+
+/**
+* Called from WebConsoleConnector only.
+*/
+function closedConnection(serverName){
+	if(connectionManager.activeConnection.serverName == serverName){
+		//Disable GUI, back to welcome page
+		$("#welcomeContainer").show();
+		$("#serverContainer").hide();
+		
+		//Inform user
+		$('#disconnectionModal').modal('show');
+	}
+	connectionManager.deleteConnection(serverName);
 }
 
 /**

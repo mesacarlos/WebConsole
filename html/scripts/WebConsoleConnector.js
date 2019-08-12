@@ -4,14 +4,6 @@
  https://github.com/mesacarlos
  2019 Carlos Mesa under MIT License.
 */
-/* 
-USAGE
-1 Create needed GUI
-2 Create a object of this class
-3 subscribe a function to receive the login required message
-4 show password modal
-5 subscribe console output list etc...
-*/
 class WebConsoleConnector {
 	
 	constructor(serverName, serverURI) {
@@ -45,7 +37,7 @@ class WebConsoleConnector {
 	* Internal function
 	*/
 	onClose(evt){
-		//TODO
+		closedConnection(this.serverName);
 	}
 	
 	/**
