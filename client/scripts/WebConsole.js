@@ -149,7 +149,7 @@ function onWebSocketsMessage(message){
 * Write to console
 */
 function writeToWebConsole(msg){
-	$("#consoleTextArea").append(msg + "\n");
+	$("#consoleTextArea").append(msg.replace("<", "&lt;") + "\n");
 }
 
 /**
