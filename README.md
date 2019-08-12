@@ -58,10 +58,11 @@ WebConsole does not support PEM certificates, so you will need to convert it to 
 4. Copy keystore.jks to your plugin folder (plugins/WebConsole/keystore.jks)
 
 
-## How it works
+## Using web interface
 
-1. How to install web interface / connect to github pages
-2. How to add servers
+1. Download web interface from [Releases](https://github.com/mesacarlos/WebConsole/releases)
+2. If you want, you can host it in a web server, or use it offline. That's up to you.
+3. To start adding servers, click on `Your servers`, and then `Add server`. Fill Server name and URI and you are ready to go. You will be prompted for password when connecting.
 
 
 ## Technical information
