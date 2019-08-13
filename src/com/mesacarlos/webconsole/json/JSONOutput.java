@@ -8,13 +8,6 @@ public interface JSONOutput {
 	int getStatusCode();
 	
 	/**
-	 * Returns the command sended by client who created this response.
-	 * In case of a server-generated response (like ConsoleOutput), this will be null
-	 * @return
-	 */
-	String getRespondsTo();
-	
-	/**
 	 * Explanatory message of this response
 	 * @return Explanatory message of this response
 	 */

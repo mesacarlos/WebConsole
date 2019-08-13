@@ -4,10 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.security.KeyManagementException;
 import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.UnrecoverableKeyException;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
@@ -78,8 +75,7 @@ public class WebConsole extends JavaPlugin {
 	/**
 	 * Start WebSocket server
 	 */
-	private void startWS() throws Exception,
-			KeyStoreException, UnrecoverableKeyException, KeyManagementException {
+	private void startWS() throws Exception {
 		// Create WebSocket server
 		server = new WSServer(this, new InetSocketAddress(config.getString("host"), config.getInt("port")));
 		

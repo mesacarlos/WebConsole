@@ -2,11 +2,11 @@ package com.mesacarlos.webconsole.json;
 
 import com.google.gson.JsonObject;
 
-public class UnknownWSCmd implements JSONOutput{
+public class UnknownCommand implements JSONOutput{
 	private String message;
 	private String respondsTo;
 	
-	public UnknownWSCmd(String message, String respondsTo) {
+	public UnknownCommand(String message, String respondsTo) {
 		this.message = message;
 		this.respondsTo = respondsTo;
 	}
@@ -21,7 +21,10 @@ public class UnknownWSCmd implements JSONOutput{
 		return message;
 	}
 	
-	@Override
+	/**
+	 * The command that originated this response
+	 * @return WebSockets full command and parameters
+	 */
 	public String getRespondsTo() {
 		return respondsTo;
 	}

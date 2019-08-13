@@ -2,30 +2,41 @@ package com.mesacarlos.webconsole.json;
 
 import com.google.gson.JsonObject;
 
-public class LoginRequired implements JSONOutput{
+public class CpuUsage implements JSONOutput{
 	private String message;
-	
-	public LoginRequired(String message) {
+	private double usage;
+
+	public CpuUsage(String message, double usage) {
 		this.message = message;
+		this.usage = usage;
 	}
-	
+
 	@Override
 	public int getStatusCode() {
-		return 401;
+		return 1001;
 	}
 
 	@Override
 	public String getMessage() {
 		return message;
 	}
-
+	
+	/**
+	 * Gets system CPU Usage
+	 * @return Global CPU Usage
+	 */
+	public double getUsage() {
+		return usage;
+	}
+	
 	@Override
 	public String toJSON() {
 		JsonObject object = new JsonObject();
 		object.addProperty("status", getStatusCode());
-		object.addProperty("statusDescription", "Login Required");
+		object.addProperty("statusDescription", "Cpu Usage");
+		object.addProperty("usage", getUsage());
 		object.addProperty("message", getMessage());
 		return object.toString();
 	}
-
+	
 }

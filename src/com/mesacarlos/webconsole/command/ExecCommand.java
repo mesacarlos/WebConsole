@@ -8,7 +8,7 @@ import org.java_websocket.WebSocket;
 
 import com.mesacarlos.webconsole.websockets.WSServer;
 
-public class ExecuteCmdCommand implements WSCommand {
+public class ExecCommand implements WSCommand {
 
 	@Override
 	public void execute(WSServer wsServer, WebSocket conn, String command) {

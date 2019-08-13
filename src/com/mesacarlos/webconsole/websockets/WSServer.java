@@ -16,7 +16,7 @@ import com.mesacarlos.webconsole.json.ConsoleOutput;
 import com.mesacarlos.webconsole.json.JSONOutput;
 import com.mesacarlos.webconsole.json.LoginRequired;
 import com.mesacarlos.webconsole.json.Processed;
-import com.mesacarlos.webconsole.json.UnknownWSCmd;
+import com.mesacarlos.webconsole.json.UnknownCommand;
 import com.mesacarlos.webconsole.util.LoginManager;
 
 public class WSServer extends WebSocketServer {
@@ -50,7 +50,7 @@ public class WSServer extends WebSocketServer {
 
 		if (cmd == null) {
 			//Command does not exist
-			sendToClient(conn, new UnknownWSCmd("Unknown command", message));
+			sendToClient(conn, new UnknownCommand("Unknown command", message));
 			Bukkit.getLogger().info(
 					"[WebConsole] Signal '" + message + "' was not processed since is not valid. Is your plugin/web interface up to date?");
 		} else if (!LoginManager.getInstance().isLoggedIn(conn.getRemoteSocketAddress())

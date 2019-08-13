@@ -18,11 +18,6 @@ public class ConsoleOutput implements JSONOutput{
 	public String getMessage() {
 		return message;
 	}
-	
-	@Override
-	public String getRespondsTo() {
-		return null;
-	}
 
 	@Override
 	public String toJSON() {

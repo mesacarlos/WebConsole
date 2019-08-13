@@ -25,8 +25,11 @@ public class Processed implements JSONOutput{
 		return message;
 	}
 	
-	@Override
-	public String getRespondsTo() {
+	/**
+	 * The command that originated this response
+	 * @return WebSockets full command and parameters
+	 */
+	private String getRespondsTo() {
 		return respondsTo;
 	}
 	
