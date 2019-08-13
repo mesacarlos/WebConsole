@@ -1,6 +1,5 @@
 /**
  Main JS file for WebConsole.
- Version v1.0.0
  https://github.com/mesacarlos
  2019 Carlos Mesa under MIT License.
 */
@@ -11,78 +10,7 @@
 var persistenceManager = new WebConsolePersistenceManager();
 var connectionManager = new WebConsoleManager();
 var autoPasswordCompleted = false; //When true, saved password was used. If a 401 is received, then saved password is not correct
-
-/**
-* Show saved serverlist on startup
-*/
-$(document).ready(function() {
-	$("#serverContainer").hide();
-	updateServerList();
-});
-
-/**
-* Server saver button click handler
-*/
-$("#saveAndConnectServerButton").click(function() {
-	//Save server
-	var name = $("#server-name").val();
-	var uri = $("#server-uri").val();
-	persistenceManager.saveServer(new WSServer(name, uri));
-	
-	//Empty all modal values
-	$("#server-name").val("");
-	$("#server-uri").val("");
-	
-	//Update GUI serverlist
-	updateServerList();
-	
-	//Connect to server
-	openServer(name);
-});
-
-
-
-
-/**
-* Server password typed (modal 'done' button clicked)
-*/
-$("#passwordSendButton").click(function() {
-	//Close modal
-	$('#passwordModal').modal('hide');
-});
-
-/**
-* Enter button keyboard pressed on password modal
-*/
-$("#passwordForm").submit(function(event){
-	//Solves bug with forms:
-	event.preventDefault();
-	
-	//Close modal
-	$('#passwordModal').modal('hide');
-});
-
-$('#passwordModal').on('hidden.bs.modal', function (e) {
-	//Send LOGIN command to server
-	var pwd = $("#server-pwd").val();
-	connectionManager.sendPassword(pwd);
-	
-	//Save password if set
-	var savePasswordChecked = $("#rememberPwdCheckbox").prop("checked");
-	if(savePasswordChecked){
-		var serverName = connectionManager.activeConnection.serverName;
-		var serverURI = connectionManager.activeConnection.serverURI;
-		var svObj = new WSServer(serverName, serverURI);
-		svObj.setPassword(pwd);
-		persistenceManager.saveServer(svObj);
-	}
-	
-	//Remove password from modal
-	$("#server-pwd").val('');
-});
-
-
-
+var statusCommandsInterval = -1;
 
 /**
 * Prepare and show server to user
@@ -139,40 +67,104 @@ function onWebSocketsMessage(message){
 				$('#passwordModal').modal('show');
 			}
 			break;
+		case 1000:
+			//Players
+			writePlayerInfo(message.connectedPlayers, message.maxPlayers);
+			break;
+		case 1001:
+			//Cpu Usage
+			writeCpuInfo(message.usage);
+			break;
+		case 1002:
+			//RAM Usage
+			writeRamInfo(message.free, message.used, message.max);
+			break;
 		default:
 			console.log('Unknown server response:');
 	}
 	console.log(message);
+	
+	//Add interval for Players, CPU and RAM info, if not set
+	if(statusCommandsInterval == -1){
+		statusCommandsInterval = setInterval(function(){
+			connectionManager.askForInfo();
+		}, 2500);
+	}
 }
 
 /**
 * Write to console
 */
 function writeToWebConsole(msg){
+	var isScrolledDown = document.getElementById("consoleTextArea").scrollHeight - document.getElementById("consoleTextArea").scrollTop - 12 == $("#consoleTextArea").height();
+	
 	$("#consoleTextArea").append(msg.replace("<", "&lt;") + "\n");
+	
+	if(isScrolledDown){
+		var textarea = document.getElementById('consoleTextArea');
+		textarea.scrollTop = textarea.scrollHeight;
+	}
 }
 
 /**
-* On send command button click
+* Fill connected players card
 */
-$("#sendCommandButton").click(function() {
-	connectionManager.sendConsoleCmd($('#commandInput').val());
-	$('#commandInput').val('');
-});
+function writePlayerInfo(connected, maximum){
+	$("#connectedPlayers").text(connected);
+	$("#maxPlayers").text(maximum);
+	
+	var percent = (connected/maximum)*100;
+	$("#playerProgressBar").width(percent + "%");
+}
+
+/**
+* Fill CPU info card
+*/
+function writeCpuInfo(usage){
+	$("#cpuInfo").text(usage + "%");
+	
+	$("#CpuProgressBar").width(usage + "%");
+}
+
+/**
+* Fill RAM info card
+*/
+function writeRamInfo(free, used, total){
+	$("#usedRam").text(used);
+	$("#totalRam").text(total);
+	
+	var percent = (used/total)*100;
+	$("#RamProgressBar").width(percent + "%");
+}
 
 /**
 * Called from WebConsoleConnector only.
 */
 function closedConnection(serverName){
 	if(connectionManager.activeConnection.serverName == serverName){
-		//Disable GUI, back to welcome page
-		$("#welcomeContainer").show();
-		$("#serverContainer").hide();
+		backToHomepage();
 		
 		//Inform user
 		$('#disconnectionModal').modal('show');
 	}
 	connectionManager.deleteConnection(serverName);
+}
+
+/**
+* Shows welcome screen
+*/
+function backToHomepage(){
+	//Stop gathering info from server
+	clearInterval(statusCommandsInterval);
+	statusCommandsInterval = -1;
+	
+	//Clear all server indicators
+	writePlayerInfo(0, 0);
+	writeCpuInfo(0);
+	writeRamInfo(0, 0, 0);
+	
+	$("#welcomeContainer").show();
+	$("#serverContainer").hide();
 }
 
 /**

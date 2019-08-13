@@ -8,19 +8,22 @@
 		<!-- Bootstrap CSS -->
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		
+		<!-- Custom CSS -->
+		<link rel="stylesheet" href="styles/WebConsole.css">
+		
 		<title>WebConsole</title>
 	</head>
 	<body class="d-flex flex-column h-100">
 		<header>
 			<nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark">
-				<a class="navbar-brand" href="index.html">WebConsole</a>
+				<a class="navbar-brand" href="#" id="navbarBrandLink">WebConsole</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContainer" aria-controls="navbarContainer" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarContainer">
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item">
-							<a class="nav-link" href="index.html">Home</a>
+							<a class="nav-link" href="#" id="navbarHomeLink">Home</a>
 						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle" href="#" id="serversDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -34,9 +37,7 @@
 						</li>
 					</ul>
 					<ul class="navbar-nav ml-auto">
-						<li class="nav-item">
-							<a class="nav-link" href="#">Something</a>
-						</li>
+						<!-- Elements on the right -->
 					</ul>
 				</div>
 			</nav>
@@ -52,7 +53,43 @@
 			
 			<!-- Server management container -->
 			<div class="container" id="serverContainer" style="display: none;">
-				<h1 class="mt-5" id="serverTitle"></h1>
+				<h1 class="mt-4" id="serverTitle"></h1>
+				
+				<div class="row p-3">
+					<div class="col-sm-3 mb-2">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">Players Online</h5>
+								<p class="card-text"><span id="connectedPlayers">0</span> / <span id="maxPlayers">Unknown</span></p>
+								<div class="progress flat-progressbar">
+									<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;" id="playerProgressBar"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3 mb-2">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">CPU</h5>
+								<p class="card-text" id="cpuInfo">0%</p>
+								<div class="progress flat-progressbar">
+									<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;" id="CpuProgressBar"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3 mb-2">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">RAM</h5>
+								<p class="card-text"><span id="usedRam">0</span> MB / <span id="totalRam">0</span> MB</p>
+								<div class="progress flat-progressbar">
+									<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;" id="RamProgressBar"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="input-group mb-3">
 					<textarea class="form-control" rows="20" id="consoleTextArea" disabled style="resize: none;"></textarea>
 				</div>
@@ -150,7 +187,7 @@
 		<!-- Webpage footer -->
 		<footer class="footer mt-auto py-3">
 			<div class="container">
-				<span class="text-muted">WebConsole 1.0.0 - <a href="https://github.com/mesacarlos/WebConsole">GitHub</a></span>
+				<span class="text-muted">WebConsole 1.1.0 - <a href="https://github.com/mesacarlos/WebConsole">GitHub</a></span>
 			</div>
 		</footer>
 		
@@ -164,5 +201,6 @@
 		<script src="scripts/WebConsoleManager.js"></script>
 		<script src="scripts/WebConsolePersistenceManager.js"></script>
 		<script src="scripts/WebConsole.js"></script>
+		<script src="scripts/WebConsoleJqueryHandler.js"></script>
 	</body>
 </html>

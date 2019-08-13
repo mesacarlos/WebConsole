@@ -33,7 +33,7 @@ public class CpuUsage implements JSONOutput{
 	public String toJSON() {
 		JsonObject object = new JsonObject();
 		object.addProperty("status", getStatusCode());
-		object.addProperty("statusDescription", "Cpu Usage");
+		object.addProperty("statusDescription", "CPU Usage");
 		object.addProperty("usage", getUsage());
 		object.addProperty("message", getMessage());
 		return object.toString();

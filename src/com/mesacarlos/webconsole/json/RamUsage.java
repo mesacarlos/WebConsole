@@ -55,7 +55,7 @@ public class RamUsage implements JSONOutput {
 		object.addProperty("status", getStatusCode());
 		object.addProperty("statusDescription", "RAM Usage");
 		object.addProperty("free", getFree());
-		object.addProperty("total", getUsed());
+		object.addProperty("used", getUsed());
 		object.addProperty("max", getMax());
 		object.addProperty("message", getMessage());
 		return object.toString();

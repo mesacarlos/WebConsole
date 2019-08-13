@@ -1,5 +1,5 @@
 /**
- WebConsole Manager for WebConsole v1.0.0
+ WebConsole Manager for WebConsole
  Used to manage active connections
  https://github.com/mesacarlos
  2019 Carlos Mesa under MIT License.
@@ -68,6 +68,15 @@ class WebConsoleManager {
 	*/
 	sendConsoleCmd(cmd){
 		this.activeConnection.sendToServer("EXEC " + cmd);
+	}
+	
+	/**
+	* Asks server for CPU, RAM and players info
+	*/
+	askForInfo(){
+		this.activeConnection.sendToServer("PLAYERS");
+		this.activeConnection.sendToServer("CPUUSAGE");
+		this.activeConnection.sendToServer("RAMUSAGE");
 	}
 	
 }

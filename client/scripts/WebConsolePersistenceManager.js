@@ -1,5 +1,5 @@
 /**
- WebConsole Persistence Manager for WebConsole v1.0.0
+ WebConsole Persistence Manager for WebConsole
  Used to save your servers into your browser
  https://github.com/mesacarlos
  2019 Carlos Mesa under MIT License.
