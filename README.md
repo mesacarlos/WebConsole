@@ -14,12 +14,12 @@ Dont worry about privacy or security: all data is stored in your browser offline
 > StoreType: JKS  
 > KeyStore: plugins/WebConsole/keystore.jks  
 > StorePassword: storepassword  
-> KeyPassword: keypassword 
+> KeyPassword: keypassword  
 > host: localhost  
 > port: 8080  
 > password: yourPasswordGoesHere  
 
-Fill `host`, `port` and `password` values. They are the IP you server is running at, port where WebSockets will run and login password, respectively. Password will be asked every time you connect to your server.
+Fill `host`, `port` and `password` values. They are, respectively, the IP and port your server is listening at and the login password. Password will be asked every time you connect to your server.
 
 
 #### SSL Configuration
