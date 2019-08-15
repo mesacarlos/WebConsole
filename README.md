@@ -2,7 +2,9 @@
 
 WebConsole is a Spigot plugin for Minecraft 1.8-1.14 that enables you to view your server console and manage your server from anywhere. It creates a WebSocket server in the background used by the web interface to send commands, receive your console log and manage your server.
 
-Dont worry about privacy or security: all data is stored in your browser offline and your PC will connect directly to your minecraft server. No intermediary web servers, just you and your server.
+Dont worry about privacy or security: all data is stored in your browser offline and your PC will connect directly to your minecraft server. No intermediary web servers, just you and your MC server.
+
+![Screenshot](https://i.imgur.com/Zx1a8HG.png)
 
 
 ## Plugin installation
@@ -19,7 +21,7 @@ Dont worry about privacy or security: all data is stored in your browser offline
 > port: 8080  
 > password: yourPasswordGoesHere  
 
-Fill `host`, `port` and `password` values. They are, respectively, the IP and port your server is listening at and the login password. Password will be asked every time you connect to your server.
+Fill `host`, `port` and `password` values. They are, respectively, your server IP, a port where to run this plugin (cannot be the port you are using for Minecraft) and the login password. Password will be asked every time you connect to WebConsole.
 
 
 #### SSL Configuration
@@ -58,9 +60,9 @@ WebConsole does not support PEM certificates, so you will need to convert it to 
 
 ## Using web interface
 
-1. Download web interface from [Releases](https://github.com/mesacarlos/WebConsole/releases)
+1. Download web interface (client.zip) from [Releases](https://github.com/mesacarlos/WebConsole/releases)
 2. If you want, you can host it in a web server, or use it offline. That's up to you.
-3. To start adding servers, click on `Your servers`, and then `Add server`. Fill Server name and URI and you are ready to go. You will be prompted for password when connecting.
+3. To start adding servers, click on `Your servers`, and then `Add server`. Fill Server name, IP and port, and you are ready to go. You will be prompted for password when connecting.
 
 
 ## Technical information

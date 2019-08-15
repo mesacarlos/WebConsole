@@ -18,12 +18,21 @@ $(document).ready(function() {
 $("#saveAndConnectServerButton").click(function() {
 	//Save server
 	var name = $("#server-name").val();
-	var uri = $("#server-uri").val();
+	var wcIp = $("#server-ip").val();
+	var wcPort = $("#server-port").val();
+	var wcSsl = $("#server-ssl").prop('checked');
+	var uri;
+	if(wcSsl){
+		uri = "wss://" + wcIp + ":" + wcPort;
+	}else{
+		uri = "ws://" + wcIp + ":" + wcPort;
+	}
 	persistenceManager.saveServer(new WSServer(name, uri));
 	
 	//Empty all modal values
 	$("#server-name").val("");
-	$("#server-uri").val("");
+	$("#server-ip").val("");
+	$("#server-port").val("");
 	
 	//Update GUI serverlist
 	updateServerList();
@@ -77,8 +86,24 @@ $('#passwordModal').on('hidden.bs.modal', function (e) {
 * On send command button click
 */
 $("#sendCommandButton").click(function() {
-	connectionManager.sendConsoleCmd($('#commandInput').val());
-	$('#commandInput').val('');
+	connectionManager.sendConsoleCmd($("#commandInput").val());
+	$("#commandInput").val('');
+});
+
+/**
+* Enter key on command input
+*/
+$("#commandInput").on('keypress', function (e) {
+	if(e.which === 13){
+		//Disable textbox to prevent multiple submit
+		$(this).attr("disabled", "disabled");
+		
+		//Send command
+		sendCommandButton.click();
+
+		//Enable the textbox again.
+		$(this).removeAttr("disabled");
+	}
 });
 
 /**
@@ -94,5 +119,4 @@ $("#navbarBrandLink").click(function() {
 $("#navbarHomeLink").click(function() {
 	backToHomepage();
 });
-
 
