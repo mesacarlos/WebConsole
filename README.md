@@ -62,7 +62,7 @@ WebConsole does not support PEM certificates, so you will need to convert it to 
 
 1. Download web interface (client.zip) from [Releases](https://github.com/mesacarlos/WebConsole/releases)
 2. If you want, you can host it in a web server, or use it offline. That's up to you.
-3. To start adding servers, click on `Your servers`, and then `Add server`. Fill Server name, IP and port, and you are ready to go. You will be prompted for password when connecting.
+3. To start adding servers, click on `Your servers`, and then `Add server`. Fill Server name, IP and WebConsole port (the one you placed into config.yml before), and you are ready to go. You will be prompted for password when connecting.
 
 
 ## Technical information
