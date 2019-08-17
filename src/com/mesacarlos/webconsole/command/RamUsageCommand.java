@@ -11,11 +11,12 @@ public class RamUsageCommand implements WSCommand {
 	public void execute(WSServer wsServer, WebSocket conn, String params) {
 		Runtime r = Runtime.getRuntime();
 		
-		int free = (int) r.freeMemory()/1024/1024;
-		int max = (int) r.maxMemory()/1024/1024;
+		int free = (int) r.freeMemory() / 1024 / 1024;
+		int max = (int) r.maxMemory() / 1024 / 1024;
 		int used = max - free;
 		
-		wsServer.sendToClient(conn, new RamUsage(free + " free, " + used + " used, " + max + " maximum memmory", free, used, max));
+		wsServer.sendToClient(conn,
+				new RamUsage(free + " free, " + used + " used, " + max + " maximum memory", free, used, max));
 	}
 
 }

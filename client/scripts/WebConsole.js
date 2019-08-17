@@ -85,7 +85,7 @@ function onWebSocketsMessage(message){
 	console.log(message);
 	
 	//Add interval for Players, CPU and RAM info, if not set
-	if(statusCommandsInterval == -1){
+	if(statusCommandsInterval == -1 && message.status !== 401){
 		statusCommandsInterval = setInterval(function(){
 			connectionManager.askForInfo();
 		}, 2500);
