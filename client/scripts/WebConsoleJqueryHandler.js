@@ -107,6 +107,28 @@ $("#commandInput").on('keypress', function (e) {
 });
 
 /**
+* On delete server button click
+*/
+$("#deleteServerButton").click(function() {
+	var name = connectionManager.activeConnection.serverName;
+	//Remove subscribers
+	connectionManager.activeConnection.removeSubscribers();
+	
+	//Delete from active connections
+	connectionManager.deleteConnection(name);
+	
+	//Back to homepage
+	backToHomepage();
+	
+	//Remove from persistence
+	persistenceManager.deleteServer(name);
+	
+	//Update dropdown
+	updateServerList();
+	
+});
+
+/**
 * On Navbar Home link clicked
 */
 $("#navbarBrandLink").click(function() {
