@@ -4,7 +4,7 @@ WebConsole is a Spigot plugin for Minecraft 1.8-1.14 that enables you to view yo
 
 Dont worry about privacy or security: all data is stored in your browser offline and your PC will connect directly to your minecraft server. No intermediary web servers, just you and your MC server.
 
-![Screenshot](https://i.imgur.com/Zx1a8HG.png)
+![Screenshot](https://i.imgur.com/sN1sYju.png)
 
 
 ## Plugin installation
