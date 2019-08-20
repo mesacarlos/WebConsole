@@ -103,6 +103,9 @@ $("#commandInput").on('keypress', function (e) {
 
 		//Enable the textbox again.
 		$(this).removeAttr("disabled");
+		
+		//Focus again
+		$(this).focus();
 	}
 });
 
