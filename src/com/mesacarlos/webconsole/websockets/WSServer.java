@@ -68,7 +68,7 @@ public class WSServer extends WebSocketServer {
 	public void onClose(WebSocket conn, int code, String reason, boolean remote) {
 		LoginManager.getInstance().logOut(conn.getRemoteSocketAddress());
 		Bukkit.getLogger()
-				.info("[WebConsole] Closed WS connection " + conn.getRemoteSocketAddress() + ". Reason: " + reason);
+				.info("[WebConsole] Closed WS connection " + conn.getRemoteSocketAddress());
 	}
 
 	@Override

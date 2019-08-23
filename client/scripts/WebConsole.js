@@ -11,6 +11,7 @@ var persistenceManager = new WebConsolePersistenceManager();
 var connectionManager = new WebConsoleManager();
 var autoPasswordCompleted = false; //When true, saved password was used. If a 401 is received, then saved password is not correct
 var statusCommandsInterval = -1;
+var commandHistoryIndex = -1; //Saves current command history index. -1 when not browsing history.
 
 /**
 * Prepare and show server to user
@@ -26,6 +27,7 @@ function openServer(serverName){
 	
 	//New server, new variables:
 	autoPasswordCompleted = false;
+	commandHistoryIndex = -1; //Reset command history index
 	
 	//Create or retrieve connection
 	connectionManager.loadConnection(serverName);
@@ -206,6 +208,9 @@ function backToHomepage(){
 	//Stop gathering info from server
 	clearInterval(statusCommandsInterval);
 	statusCommandsInterval = -1;
+
+	//Reset command history index
+	commandHistoryIndex = -1;
 	
 	//Clear all server indicators
 	writePlayerInfo(0, 0);

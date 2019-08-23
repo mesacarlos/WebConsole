@@ -88,13 +88,14 @@ $('#passwordModal').on('hidden.bs.modal', function (e) {
 $("#sendCommandButton").click(function() {
 	connectionManager.sendConsoleCmd($("#commandInput").val());
 	$("#commandInput").val('');
+	commandHistoryIndex = -1; //Reset command history index
 });
 
 /**
-* Enter key on command input
+* Enter or arrow up key on command input
 */
-$("#commandInput").on('keypress', function (e) {
-	if(e.which === 13){
+$("#commandInput").on('keydown', function (e) {
+	if(e.which === 13){ //Detect enter key
 		//Disable textbox to prevent multiple submit
 		$(this).attr("disabled", "disabled");
 		
@@ -106,6 +107,21 @@ $("#commandInput").on('keypress', function (e) {
 		
 		//Focus again
 		$(this).focus();
+	}else if(e.which === 38){ //Detect arrow up key
+		//Replace with older command
+		if(commandHistoryIndex == -1){
+			//If not browsing history, start by latest command sent
+			commandHistoryIndex = connectionManager.activeConnection.commands.length;
+		}
+		$("#commandInput").val(connectionManager.activeConnection.commands[commandHistoryIndex - 1]);
+		commandHistoryIndex = commandHistoryIndex - 1;
+	}else if(e.which === 40){ //Detect arrow down key
+		//Replace with newer command
+		if(commandHistoryIndex !== -1){
+			//If not browsing history, do nothing
+			$("#commandInput").val(connectionManager.activeConnection.commands[commandHistoryIndex + 1]);
+			commandHistoryIndex = commandHistoryIndex + 1;
+		}
 	}
 });
 

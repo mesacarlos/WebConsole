@@ -68,6 +68,7 @@ class WebConsoleManager {
 	*/
 	sendConsoleCmd(cmd){
 		this.activeConnection.sendToServer("EXEC " + cmd);
+		this.activeConnection.commands.push(cmd);
 	}
 	
 	/**

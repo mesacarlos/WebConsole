@@ -11,6 +11,7 @@ class WebConsoleConnector {
 		this.serverURI = serverURI;
 		this.subscribers = []; //List of functions called when a new message arrive
 		this.messages = []; //All messages retrieved since connection start
+		this.commands = []; //EXEC Commands sent by user to this server
 	}
 	
 	/**
