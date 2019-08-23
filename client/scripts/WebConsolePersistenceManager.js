@@ -81,6 +81,32 @@ class WebConsolePersistenceManager{
 		var storageObj = JSON.parse(window.localStorage.WebConsole);
 		return storageObj.servers;
 	}
+
+	/**
+	 * Save language for this client
+	 */
+	setLanguage(lang){
+		this.initializeLocalStorage();
+
+		//Retrieve saved data
+		var storageObj = JSON.parse(window.localStorage.WebConsole);
+		storageObj.language = lang;
+		
+		//Save to WebStorage
+		window.localStorage.WebConsole = JSON.stringify(storageObj);
+	}
+
+	/**
+	 * Get saved language for this client
+	 */
+	getLanguage(){
+		this.initializeLocalStorage();
+		
+		var storageObj = JSON.parse(window.localStorage.WebConsole);
+		if(!storageObj.language)
+			return "en_US";
+		return storageObj.language;
+	}
 	
 	/**
 	* Create server list if not defined
@@ -90,6 +116,7 @@ class WebConsolePersistenceManager{
 			//Create empty object
 			var storageObj = new Object();
 			storageObj.servers = new Array();
+			storageObj.language = "en_US";
 			
 			//Save to WebStorage
 			window.localStorage.WebConsole = JSON.stringify(storageObj);

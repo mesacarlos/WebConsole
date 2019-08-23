@@ -9,6 +9,7 @@
 */
 var persistenceManager = new WebConsolePersistenceManager();
 var connectionManager = new WebConsoleManager();
+var lang;
 var autoPasswordCompleted = false; //When true, saved password was used. If a 401 is received, then saved password is not correct
 var statusCommandsInterval = -1;
 var commandHistoryIndex = -1; //Saves current command history index. -1 when not browsing history.

@@ -30,14 +30,22 @@
 								Your servers
 							</a>
 							<div class="dropdown-menu" id="ServerListDropDown" aria-labelledby="serversDropdown">
-								<a class="dropdown-item" href data-toggle="modal" data-target="#addServerModal">Add Server</a>
+								<a class="dropdown-item" href data-toggle="modal" data-target="#addServerModal" id="add_server">Add Server</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item servermenuitem" href="#">Example server</a>
 							</div>
 						</li>
 					</ul>
 					<ul class="navbar-nav ml-auto">
-						<!-- Elements on the right -->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="lang_dropdown">
+								Language
+							</a>
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="langDropdown">
+								<a class="dropdown-item" href="#" onclick="setLanguage('en_US')">English</a>
+								<a class="dropdown-item" href="#" onclick="setLanguage('es_ES')">Español</a>
+							</div>
+						</li>
 					</ul>
 				</div>
 			</nav>
@@ -47,8 +55,8 @@
 		<main role="main" class="flex-shrink-0">
 			<!-- Welcome container -->
 			<div class="container" id="welcomeContainer">
-				<h1 class="mt-5">Select a server from the menu</h1>
-				<p class="lead">Use the navigation bar to add a new Minecraft Server or connect to a previously added one.</p>
+				<h1 class="mt-5" id="home_header">Select a server from the menu</h1>
+				<p class="lead" id="home_description">Use the navigation bar to add a new Minecraft Server or connect to a previously added one.</p>
 			</div>
 			
 			<!-- Server management container -->
@@ -59,7 +67,7 @@
 					<div class="col-sm-3 mb-2">
 						<div class="card">
 							<div class="card-body">
-								<h5 class="card-title">Players Online</h5>
+								<h5 class="card-title" id="players_online">Players Online</h5>
 								<p class="card-text"><span id="connectedPlayers">0</span> / <span id="maxPlayers">Unknown</span></p>
 								<div class="progress flat-progressbar">
 									<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;" id="playerProgressBar"></div>
@@ -118,25 +126,25 @@
 					<div class="modal-body">
 						<form>
 							<div class="form-group">
-								<label for="server-name" class="col-form-label">Server name:</label>
+								<label for="server-name" class="col-form-label" id="addServerModalSvName">Server name:</label>
 								<input type="text" class="form-control" id="server-name">
 							</div>
 							<div class="form-group">
-								<label for="server-ip" class="col-form-label">Server IP:</label>
+								<label for="server-ip" class="col-form-label" id="addServerModalSvIp">Server IP:</label>
 								<input type="text" class="form-control" id="server-ip" placeholder="localhost">
 							</div>
 							<div class="form-group">
-								<label for="server-port" class="col-form-label">Server port:</label>
+								<label for="server-port" class="col-form-label" id="addServerModalSvPort">Server port:</label>
 								<input type="number" class="form-control" id="server-port" placeholder="8080">
 							</div>
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" id="server-ssl">
-								<label class="form-check-label" for="server-ssl">Server is SSL enabled</label>
+								<label class="form-check-label" for="server-ssl" id="addServerModalSvSsl">Server is SSL enabled</label>
 							</div>
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" id="addServerModalClose">Close</button>
 						<button type="button" class="btn btn-primary" data-dismiss="modal" id="saveAndConnectServerButton">Save and connect</button>
 					</div>
 				</div>
@@ -156,19 +164,19 @@
 					<div class="modal-body">
 						<form id="passwordForm">
 							<div class="form-group">
-								<label for="server-pwd" class="col-form-label">Password:</label>
+								<label for="server-pwd" class="col-form-label" id="passwordModalLabel">Password:</label>
 								<input type="password" class="form-control" id="server-pwd">
 							</div>
 							<div class="form-group">
 								<div class="form-check">
 									<input class="form-check-input" type="checkbox" id="rememberPwdCheckbox">
-									<label class="form-check-label" for="rememberPwdCheckbox">Remember password</label>
+									<label class="form-check-label" for="rememberPwdCheckbox" id="passwordModalRememberLabel">Remember password</label>
 								</div>
 							</div>
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" id="passwordModalCloseButton">Close</button>
 						<button type="button" class="btn btn-primary" data-dismiss="modal" id="passwordSendButton">Login</button>
 					</div>
 				</div>
@@ -185,7 +193,7 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body" id="disconnectionModalDescription">
 						Connection was lost with the server you were connected to. Moved back to welcome screen.
 					</div>
 					<div class="modal-footer">
@@ -198,7 +206,7 @@
 		<!-- Webpage footer -->
 		<footer class="footer mt-auto py-3">
 			<div class="container">
-				<span class="text-muted">WebConsole v1.1 (rev. 2) - <a href="https://github.com/mesacarlos/WebConsole">GitHub</a></span>
+				<span class="text-muted">WebConsole v1.1 (rev. 3) - <a href="https://github.com/mesacarlos/WebConsole">GitHub</a></span>
 			</div>
 		</footer>
 		
@@ -208,6 +216,7 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 		
 		<!-- WebConsole JS Scripts -->
+		<script src="scripts/WebConsoleLanguage.js"></script>
 		<script src="scripts/WebConsoleConnector.js"></script>
 		<script src="scripts/WebConsoleManager.js"></script>
 		<script src="scripts/WebConsolePersistenceManager.js"></script>

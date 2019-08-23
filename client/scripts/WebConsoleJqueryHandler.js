@@ -10,6 +10,7 @@
 $(document).ready(function() {
 	$("#serverContainer").hide();
 	updateServerList();
+	setLanguage(persistenceManager.getLanguage());
 });
 
 /**
@@ -92,7 +93,7 @@ $("#sendCommandButton").click(function() {
 });
 
 /**
-* Enter or arrow up key on command input
+* Enter or arrow down/up key on command input
 */
 $("#commandInput").on('keydown', function (e) {
 	if(e.which === 13){ //Detect enter key
