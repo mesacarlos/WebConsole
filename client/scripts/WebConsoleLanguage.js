@@ -65,6 +65,33 @@ function setLanguage(locale){
 				"sendCommandButton": "Enviar"
 			}
 			break;
+		case "ru_RU":
+			lang = {
+				"home_link": "Главная",
+				"home_header": "Выберите сервер из меню",
+				"home_description": "Используйте панель навигации, чтобы добавить новый сервер Minecraft или подключиться к ранее добавленному.",
+				"server_dropdown": "Ваши серверы",
+				"add_server": "Добавить сервер",
+				"lang_dropdown": "Язык",
+				"addServerModalLongTitle": "Добавить новый сервер",
+				"addServerModalSvName": "Название сервера:",
+				"addServerModalSvIp": "IP сервера:",
+				"addServerModalSvPort": "Порт WebConsole:",
+				"addServerModalSvSsl": "Сервер с поддержкой SSL",
+				"addServerModalClose": "Закрыть",
+				"saveAndConnectServerButton": "Сохранить и подключить",
+				"passwordModalLongTitle": "Требуется пароль",
+				"passwordModalLabel": "Пароль:",
+				"passwordModalRememberLabel": "Запомнить пароль",
+				"passwordModalCloseButton": "Закрыть",
+				"passwordSendButton": "Войти",
+				"disconnectionModalLongTitle": "Отключение!",
+				"disconnectionModalDescription": "Соединение с сервером, к которому вы подключены, потеряно.",
+				"players_online": "Игроки",
+				"deleteServerButton": "Удалить сервер",
+				"sendCommandButton": "Отправить"
+			}
+			break;
 		default:
 			console.error("No language set");
 	}
