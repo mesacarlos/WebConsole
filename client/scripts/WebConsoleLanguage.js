@@ -65,7 +65,7 @@ function setLanguage(locale){
 				"sendCommandButton": "Enviar"
 			}
 			break;
-		case "ru_RU":
+		case "ru_RU": //Credit to Stashenko
 			lang = {
 				"home_link": "Главная",
 				"home_header": "Выберите сервер из меню",
