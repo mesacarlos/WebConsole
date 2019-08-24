@@ -7,7 +7,7 @@
 function setLanguage(locale){
 	//Save to persistence
 	persistenceManager.setLanguage(locale);
-	//Set dialog phrases
+	//Set locale phrases
 	switch(locale){
 		case "en_US":
 			lang = {
@@ -33,6 +33,8 @@ function setLanguage(locale){
 				"disconnectionModalDescription": "Connection was lost with the server you were connected to, probably caused by a server stop. Moved back to welcome screen.",
 				"disconnectionModalCloseButton": "Close",
 				"players_online": "Players Online",
+				"cpu_title": "CPU",
+				"ram_title": "RAM",
 				"deleteServerButton": "Delete server",
 				"sendCommandButton": "Send"
 			}
@@ -61,6 +63,8 @@ function setLanguage(locale){
 				"disconnectionModalDescription": "Se ha perdido la conexión con el servidor al que estabas conectado. Esto puede ser debido a que el servidor se ha cerrado. Se ha vuelto a la ventana principal.",
 				"disconnectionModalCloseButton": "Cerrar",
 				"players_online": "Jugadores en línea",
+				"cpu_title": "CPU",
+				"ram_title": "RAM",
 				"deleteServerButton": "Borrar servidor",
 				"sendCommandButton": "Enviar"
 			}
@@ -88,6 +92,8 @@ function setLanguage(locale){
 				"disconnectionModalLongTitle": "Отключение!",
 				"disconnectionModalDescription": "Соединение с сервером, к которому вы подключены, потеряно.",
 				"players_online": "Игроки",
+				"cpu_title": "CPU",
+				"ram_title": "RAM",
 				"deleteServerButton": "Удалить сервер",
 				"sendCommandButton": "Отправить"
 			}
@@ -118,6 +124,8 @@ function setLanguage(locale){
 	document.getElementById("disconnectionModalDescription").textContent = lang.disconnectionModalDescription;
 	document.getElementById("disconnectionModalCloseButton").textContent = lang.disconnectionModalCloseButton;
 	document.getElementById("players_online").textContent = lang.players_online;
+	document.getElementById("cpu_title").textContent = lang.cpu_title;
+	document.getElementById("ram_title").textContent = lang.ram_title;
 	document.getElementById("deleteServerButton").textContent = lang.deleteServerButton;
 	document.getElementById("sendCommandButton").textContent = lang.sendCommandButton;
 }
