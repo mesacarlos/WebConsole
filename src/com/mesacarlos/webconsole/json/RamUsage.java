@@ -4,11 +4,11 @@ import com.google.gson.JsonObject;
 
 public class RamUsage implements JSONOutput {
 	private String message;
-	private int free;
-	private int used;
-	private int max;
+	private long free;
+	private long used;
+	private long max;
 
-	public RamUsage(String message, int free, int used, int max) {
+	public RamUsage(String message, long free, long used, long max) {
 		this.message = message;
 		this.free = free;
 		this.used = used;
@@ -29,7 +29,7 @@ public class RamUsage implements JSONOutput {
 	 * Free amount of RAM, in MB
 	 * @return
 	 */
-	public int getFree() {
+	public long getFree() {
 		return free;
 	}
 	
@@ -37,7 +37,7 @@ public class RamUsage implements JSONOutput {
 	 * Used amount of RAM, in MB
 	 * @return
 	 */
-	public int getUsed() {
+	public long getUsed() {
 		return used;
 	}
 	
@@ -45,7 +45,7 @@ public class RamUsage implements JSONOutput {
 	 * Max amount of RAM, in MB
 	 * @return
 	 */
-	public int getMax() {
+	public long getMax() {
 		return max;
 	}
 

@@ -34,7 +34,7 @@ function setLanguage(locale){
 				"disconnectionModalCloseButton": "Close",
 				"players_online": "Players Online",
 				"cpu_title": "CPU",
-				"ram_title": "RAM",
+				"ram_title": "RAM usage",
 				"deleteServerButton": "Delete server",
 				"sendCommandButton": "Send"
 			}
@@ -64,7 +64,7 @@ function setLanguage(locale){
 				"disconnectionModalCloseButton": "Cerrar",
 				"players_online": "Jugadores en línea",
 				"cpu_title": "CPU",
-				"ram_title": "RAM",
+				"ram_title": "RAM en uso",
 				"deleteServerButton": "Borrar servidor",
 				"sendCommandButton": "Enviar"
 			}
