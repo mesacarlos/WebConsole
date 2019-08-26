@@ -123,6 +123,8 @@ $("#commandInput").on('keydown', function (e) {
 			$("#commandInput").val(connectionManager.activeConnection.commands[commandHistoryIndex + 1]);
 			commandHistoryIndex = commandHistoryIndex + 1;
 		}
+	}else if(e.which == 9){ //Detect tab key
+		//TODO Suggest user from connectionManager.activeConnection.players;
 	}
 });
 

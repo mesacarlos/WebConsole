@@ -73,6 +73,7 @@ function onWebSocketsMessage(message){
 		case 1000:
 			//Players
 			writePlayerInfo(message.connectedPlayers, message.maxPlayers);
+			connectionManager.activeConnection.players = JSON.parse(message.players);
 			break;
 		case 1001:
 			//Cpu Usage

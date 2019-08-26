@@ -12,6 +12,7 @@ class WebConsoleConnector {
 		this.subscribers = []; //List of functions called when a new message arrive
 		this.messages = []; //All messages retrieved since connection start
 		this.commands = []; //EXEC Commands sent by user to this server
+		this.players = []; //Connected users.
 	}
 	
 	/**
@@ -31,7 +32,6 @@ class WebConsoleConnector {
 	*/
 	onOpen(evt){
 		//TODO Check que la version es correcta, y que es un WebSocket del plugin y no de otra cosa
-		//No es necesario notificar al usuario porque ya se recibe un console output de ello
 	}
 	
 	/**

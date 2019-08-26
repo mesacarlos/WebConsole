@@ -12,8 +12,8 @@ Dont worry about privacy or security: all data is stored in your browser offline
 * Colors supported, for both Windows and Linux hosts. (Colors are represented different in each platform).
 * Real-time connected players, machine CPU and server RAM usage information.
 * Capable of keep connected to more than one server to keep retrieving console log in the background for them.
-* English, Spanish and Russian (thanks to Stashenko) supported.
-* Free ,updated regularly, and many more!
+* English, Spanish, Russian (thanks to Stashenko) and Portuguese (thanks to AlexandreMuassab) supported.
+* Free, updated regularly, and many more!
 
 ![Screenshot](https://i.imgur.com/sN1sYju.png)
 
@@ -42,6 +42,9 @@ You can see a tutorial on how to activate SSL [in this link](https://github.com/
 1. Download web interface (client.zip) from [Releases](https://github.com/mesacarlos/WebConsole/releases).
 2. If you want, you can host it in a web server, or use it offline. That's up to you.
 3. To start adding servers, click on `Your servers`, and then `Add server`. Fill Server name, IP and WebConsole port (the one you placed into config.yml before), and you are ready to go. You will be prompted for password when connecting.
+
+## Check connected WebConsole clients
+You can use /WebConsole command to view how many clients are connected and their IP address. This is the only Minecraft command provided by this plugin. This command requires you to have `webconsole.webconsole` permission to execute it.
 
 
 ## Technical information
