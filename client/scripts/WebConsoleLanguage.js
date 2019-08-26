@@ -98,6 +98,36 @@ function setLanguage(locale){
 				"sendCommandButton": "Отправить"
 			}
 			break;
+		case "pt_BR": //Credit to AlexandreMuassab
+			lang = {
+				"home_link": "Inicio",
+				"home_header": "Selecione o seu servidor na aba acima.",
+				"home_description": "Use a barra de navegação para adicionar ou conectar-se entre os servidores.",
+				"server_dropdown": "Seu servidores",
+				"add_server": "Adicionar um novo servidor",
+				"lang_dropdown": "Idioma",
+				"addServerModalLongTitle": "Adicionar um novo servidor",
+				"addServerModalSvName": "Nome:",
+				"addServerModalSvIp": "IP:",
+				"addServerModalSvPort": "Porta(config.yml):",
+				"addServerModalSvSsl": "SSL do servidor está habilitado ?",
+				"addServerModalClose": "Fechar",
+				"saveAndConnectServerButton": "Salvar e conectar",
+				"passwordModalLongTitle": "Necessário uma senha",
+				"passwordModalLabel": "Senha:",
+				"passwordModalRememberLabel": "Deseja se lembrar desta senha ?",
+				"passwordModalCloseButton": "Fechar",
+				"passwordSendButton": "Logar",
+				"disconnectionModalLongTitle": "desconectado",
+				"disconnectionModalDescription": "Você foi desconectado, pode ser que o servidor foi fechado/reiniciado ou pode haver algum problema com a sua conexão.",
+				"disconnectionModalCloseButton": "Fechar",
+				"players_online": "Jogadores online",
+				"cpu_title": "Consumo de CPU",
+				"ram_title": "Consumo de RAM",
+				"deleteServerButton": "Remover este servidor",
+				"sendCommandButton": "Enviar"
+			}
+			break;
 		default:
 			console.error("No language set");
 	}
