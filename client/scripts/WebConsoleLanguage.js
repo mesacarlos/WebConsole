@@ -100,11 +100,11 @@ function setLanguage(locale){
 			break;
 		case "pt_BR": //Credit to AlexandreMuassab
 			lang = {
-				"home_link": "Inicio",
+				"home_link": "Principal",
 				"home_header": "Selecione o seu servidor na aba acima.",
 				"home_description": "Use a barra de navegação para adicionar ou conectar-se entre os servidores.",
-				"server_dropdown": "Seu servidores",
-				"add_server": "Adicionar um novo servidor",
+				"server_dropdown": "Servidores",
+				"add_server": "Adicionar um servidor",
 				"lang_dropdown": "Idioma",
 				"addServerModalLongTitle": "Adicionar um novo servidor",
 				"addServerModalSvName": "Nome:",
@@ -115,7 +115,7 @@ function setLanguage(locale){
 				"saveAndConnectServerButton": "Salvar e conectar",
 				"passwordModalLongTitle": "Necessário uma senha",
 				"passwordModalLabel": "Senha:",
-				"passwordModalRememberLabel": "Deseja se lembrar desta senha ?",
+				"passwordModalRememberLabel": "Deseja salvar esta senha ?",
 				"passwordModalCloseButton": "Fechar",
 				"passwordSendButton": "Logar",
 				"disconnectionModalLongTitle": "desconectado",
