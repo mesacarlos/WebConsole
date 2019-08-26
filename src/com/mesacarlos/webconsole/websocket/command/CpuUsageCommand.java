@@ -1,4 +1,4 @@
-package com.mesacarlos.webconsole.command;
+package com.mesacarlos.webconsole.websocket.command;
 
 import java.lang.management.ManagementFactory;
 
@@ -9,8 +9,8 @@ import javax.management.ObjectName;
 
 import org.java_websocket.WebSocket;
 
-import com.mesacarlos.webconsole.json.CpuUsage;
-import com.mesacarlos.webconsole.websockets.WSServer;
+import com.mesacarlos.webconsole.websocket.WSServer;
+import com.mesacarlos.webconsole.websocket.response.CpuUsage;
 
 public class CpuUsageCommand implements WSCommand {
 

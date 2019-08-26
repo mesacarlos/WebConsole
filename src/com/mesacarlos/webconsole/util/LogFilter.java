@@ -7,7 +7,7 @@ import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.Logger;
 import org.apache.logging.log4j.message.Message;
 
-import com.mesacarlos.webconsole.websockets.WSServer;
+import com.mesacarlos.webconsole.websocket.WSServer;
 
 public class LogFilter implements Filter{
 	private WSServer wsServer;

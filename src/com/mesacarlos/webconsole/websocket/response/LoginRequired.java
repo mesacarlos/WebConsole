@@ -1,17 +1,17 @@
-package com.mesacarlos.webconsole.json;
+package com.mesacarlos.webconsole.websocket.response;
 
 import com.google.gson.JsonObject;
 
-public class ConsoleOutput implements JSONOutput{
+public class LoginRequired implements JSONOutput{
 	private String message;
 	
-	public ConsoleOutput(String message) {
+	public LoginRequired(String message) {
 		this.message = message;
 	}
 	
 	@Override
 	public int getStatusCode() {
-		return 10;
+		return 401;
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public class ConsoleOutput implements JSONOutput{
 	public String toJSON() {
 		JsonObject object = new JsonObject();
 		object.addProperty("status", getStatusCode());
-		object.addProperty("statusDescription", "Console Output");
+		object.addProperty("statusDescription", "Login Required");
 		object.addProperty("message", getMessage());
 		return object.toString();
 	}

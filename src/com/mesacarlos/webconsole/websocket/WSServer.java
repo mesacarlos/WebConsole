@@ -1,4 +1,4 @@
-package com.mesacarlos.webconsole.websockets;
+package com.mesacarlos.webconsole.websocket;
 
 import java.net.InetSocketAddress;
 import java.util.Collection;
@@ -10,14 +10,14 @@ import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 
 import com.mesacarlos.webconsole.WebConsole;
-import com.mesacarlos.webconsole.command.CommandFactory;
-import com.mesacarlos.webconsole.command.WSCommand;
-import com.mesacarlos.webconsole.json.ConsoleOutput;
-import com.mesacarlos.webconsole.json.JSONOutput;
-import com.mesacarlos.webconsole.json.LoginRequired;
-import com.mesacarlos.webconsole.json.Processed;
-import com.mesacarlos.webconsole.json.UnknownCommand;
 import com.mesacarlos.webconsole.util.LoginManager;
+import com.mesacarlos.webconsole.websocket.command.CommandFactory;
+import com.mesacarlos.webconsole.websocket.command.WSCommand;
+import com.mesacarlos.webconsole.websocket.response.ConsoleOutput;
+import com.mesacarlos.webconsole.websocket.response.JSONOutput;
+import com.mesacarlos.webconsole.websocket.response.LoginRequired;
+import com.mesacarlos.webconsole.websocket.response.Processed;
+import com.mesacarlos.webconsole.websocket.response.UnknownCommand;
 
 public class WSServer extends WebSocketServer {
 	private HashMap<String, WSCommand> commands = CommandFactory.getCommandsHashMap();

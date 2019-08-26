@@ -11,9 +11,9 @@ Dont worry about privacy or security: all data is stored in your browser offline
 * Command history: Use up/down arrow keys to browse the command history, like in the real console.
 * Colors supported, for both Windows and Linux hosts. (Colors are represented different in each platform).
 * Real-time connected players, machine CPU and server RAM usage information.
+* Capable of keep connected to more than one server to keep retrieving console log in the background for them.
 * English, Spanish and Russian (thanks to Stashenko) supported.
-* Free and updated regularly.
-* And many more!
+* Free ,updated regularly, and many more!
 
 ![Screenshot](https://i.imgur.com/sN1sYju.png)
 

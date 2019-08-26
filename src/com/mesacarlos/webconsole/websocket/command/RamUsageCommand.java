@@ -1,9 +1,9 @@
-package com.mesacarlos.webconsole.command;
+package com.mesacarlos.webconsole.websocket.command;
 
 import org.java_websocket.WebSocket;
 
-import com.mesacarlos.webconsole.json.RamUsage;
-import com.mesacarlos.webconsole.websockets.WSServer;
+import com.mesacarlos.webconsole.websocket.WSServer;
+import com.mesacarlos.webconsole.websocket.response.RamUsage;
 
 public class RamUsageCommand implements WSCommand {
 

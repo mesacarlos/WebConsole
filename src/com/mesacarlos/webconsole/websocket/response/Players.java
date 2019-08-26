@@ -1,16 +1,21 @@
-package com.mesacarlos.webconsole.json;
+package com.mesacarlos.webconsole.websocket.response;
 
+import java.util.List;
+
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 public class Players implements JSONOutput{
 	private String message;
 	private int connectedPlayers;
 	private int maxPlayers;
+	private List<String> connectedPlayersList;
 	
-	public Players(String message, int connectedPlayers, int maxPlayers) {
+	public Players(String message, int connectedPlayers, int maxPlayers, List<String> connectedPlayersList) {
 		this.message = message;
 		this.connectedPlayers = connectedPlayers;
 		this.maxPlayers = maxPlayers;
+		this.connectedPlayersList = connectedPlayersList;
 	}
 	
 	@Override
@@ -38,6 +43,7 @@ public class Players implements JSONOutput{
 		object.addProperty("statusDescription", "Players");
 		object.addProperty("connectedPlayers", getConnectedPlayers());
 		object.addProperty("maxPlayers", getMaxPlayers());
+		object.addProperty("players", new Gson().toJson(connectedPlayersList));
 		object.addProperty("message", getMessage());
 		return object.toString();
 	}

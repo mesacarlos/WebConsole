@@ -2,10 +2,9 @@ package com.mesacarlos.webconsole.util;
 
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
-import java.util.List;
 
 public class LoginManager {
-	private List<InetSocketAddress> loggedInUsers = new ArrayList<InetSocketAddress>();
+	private ArrayList<InetSocketAddress> loggedInUsers = new ArrayList<InetSocketAddress>();
 	private static LoginManager instance;
 	
 	private LoginManager() {}
@@ -26,5 +25,9 @@ public class LoginManager {
 	
 	public boolean isLoggedIn(InetSocketAddress address) {
 		return loggedInUsers.contains(address);
+	}
+	
+	public ArrayList<InetSocketAddress> getLoggedInUsers() {
+		return loggedInUsers;
 	}
 }

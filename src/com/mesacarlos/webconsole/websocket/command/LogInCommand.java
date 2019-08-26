@@ -1,12 +1,12 @@
-package com.mesacarlos.webconsole.command;
+package com.mesacarlos.webconsole.websocket.command;
 
 import org.bukkit.Bukkit;
 import org.java_websocket.WebSocket;
 
-import com.mesacarlos.webconsole.json.LoginRequired;
-import com.mesacarlos.webconsole.json.Processed;
 import com.mesacarlos.webconsole.util.LoginManager;
-import com.mesacarlos.webconsole.websockets.WSServer;
+import com.mesacarlos.webconsole.websocket.WSServer;
+import com.mesacarlos.webconsole.websocket.response.LoginRequired;
+import com.mesacarlos.webconsole.websocket.response.Processed;
 
 public class LogInCommand implements WSCommand {
 

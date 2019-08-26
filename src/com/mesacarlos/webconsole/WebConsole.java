@@ -17,8 +17,9 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.java_websocket.server.DefaultSSLWebSocketServerFactory;
 
+import com.mesacarlos.webconsole.minecraft.WebConsoleCommand;
 import com.mesacarlos.webconsole.util.LogFilter;
-import com.mesacarlos.webconsole.websockets.WSServer;
+import com.mesacarlos.webconsole.websocket.WSServer;
 
 public class WebConsole extends JavaPlugin {
 	FileConfiguration config = this.getConfig();
@@ -31,15 +32,20 @@ public class WebConsole extends JavaPlugin {
 	public void onEnable() {
 		createConfig();
 		
+		//Start WebSocket Server
 		try {
 			startWS();
 		} catch (Exception e) {
-			Bukkit.getLogger().warning("Error occured while starting WebSockets Server.");
+			Bukkit.getLogger().warning("Error occured while starting WebSocket Server.");
 			e.printStackTrace();
 		}
-
+		
+		//This filter is used to read the whole console.
 		Filter f = new LogFilter(getWSServer());
 		((org.apache.logging.log4j.core.Logger) LogManager.getRootLogger()).addFilter(f);
+		
+		//Register /WebConsole command
+		getCommand("WebConsole").setExecutor(new WebConsoleCommand(this.getDescription().getVersion()));
 	}
 
 	@Override
