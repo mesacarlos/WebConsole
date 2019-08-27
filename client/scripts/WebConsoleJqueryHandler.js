@@ -9,8 +9,8 @@
 */
 $(document).ready(function() {
 	$("#serverContainer").hide();
-	updateServerList();
 	setLanguage(persistenceManager.getLanguage());
+	updateServerList();
 });
 
 /**
