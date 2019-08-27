@@ -132,6 +132,37 @@ function setLanguage(locale){
 				"sendCommandButton": "Enviar"
 			}
 			break;
+		case "zh_CN": //Credit to Neubulae
+			lang = {
+				"home_link": "首页",
+				"home_header": "请从菜单中选择一个服务器",
+				"home_description": "请使用导航栏以添加新服务器, 或连接至已设定服务器.",
+				"server_dropdown": "你的服务器",
+				"add_server": "添加服务器",
+				"noServersAdded": "没有添加服务器",
+				"lang_dropdown": "语言",
+				"addServerModalLongTitle": "添加一个新服务器",
+				"addServerModalSvName": "服务器名称:",
+				"addServerModalSvIp": "服务器IP地址:",
+				"addServerModalSvPort": "WebConsole端口:",
+				"addServerModalSvSsl": "服务器已开启SSL",
+				"addServerModalClose": "关闭",
+				"saveAndConnectServerButton": "保存并连接",
+				"passwordModalLongTitle": "需要密码",
+				"passwordModalLabel": "密码:",
+				"passwordModalRememberLabel": "记住密码",
+				"passwordModalCloseButton": "关闭",
+				"passwordSendButton": "登录",
+				"disconnectionModalLongTitle": "已断开",
+				"disconnectionModalDescription": "与服务器的通信中断, 可能是因为服务器停止运行. 已回到欢迎界面.",
+				"disconnectionModalCloseButton": "关闭",
+				"players_online": "在线人数",
+				"cpu_title": "CPU",
+				"ram_title": "内存使用量",
+				"deleteServerButton": "关闭服务器",
+				"sendCommandButton": "发送"
+			}
+			break;
 		default:
 			console.error("No language set");
 	}
@@ -141,6 +172,7 @@ function setLanguage(locale){
 	document.getElementById("home_description").textContent = lang.home_description;
 	document.getElementById("serversDropdown").textContent = lang.server_dropdown;
 	document.getElementById("add_server").textContent = lang.add_server;
+	document.getElementById("noServersAdded").textContent = lang.noServersAdded;
 	document.getElementById("lang_dropdown").textContent = lang.lang_dropdown;
 	document.getElementById("addServerModalLongTitle").textContent = lang.addServerModalLongTitle;
 	document.getElementById("addServerModalSvName").textContent = lang.addServerModalSvName;
