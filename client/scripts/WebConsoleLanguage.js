@@ -172,7 +172,6 @@ function setLanguage(locale){
 	document.getElementById("home_description").textContent = lang.home_description;
 	document.getElementById("serversDropdown").textContent = lang.server_dropdown;
 	document.getElementById("add_server").textContent = lang.add_server;
-	document.getElementById("noServersAdded").textContent = lang.noServersAdded;
 	document.getElementById("lang_dropdown").textContent = lang.lang_dropdown;
 	document.getElementById("addServerModalLongTitle").textContent = lang.addServerModalLongTitle;
 	document.getElementById("addServerModalSvName").textContent = lang.addServerModalSvName;

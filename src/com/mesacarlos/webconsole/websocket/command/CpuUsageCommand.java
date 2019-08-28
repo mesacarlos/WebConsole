@@ -9,6 +9,7 @@ import javax.management.ObjectName;
 
 import org.java_websocket.WebSocket;
 
+import com.mesacarlos.webconsole.util.Internationalization;
 import com.mesacarlos.webconsole.websocket.WSServer;
 import com.mesacarlos.webconsole.websocket.response.CpuUsage;
 
@@ -18,7 +19,7 @@ public class CpuUsageCommand implements WSCommand {
 	public void execute(WSServer wsServer, WebSocket conn, String params) {
 		try {
 			double usage = getProcessCpuLoad();
-			wsServer.sendToClient(conn, new CpuUsage("Usage is " + usage + "%", usage));
+			wsServer.sendToClient(conn, new CpuUsage(Internationalization.getPhrase("cpu-usage-message", usage), usage));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

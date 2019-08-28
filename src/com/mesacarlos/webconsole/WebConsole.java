@@ -18,6 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.java_websocket.server.DefaultSSLWebSocketServerFactory;
 
 import com.mesacarlos.webconsole.minecraft.WebConsoleCommand;
+import com.mesacarlos.webconsole.util.Internationalization;
 import com.mesacarlos.webconsole.util.LogFilter;
 import com.mesacarlos.webconsole.websocket.WSServer;
 
@@ -32,11 +33,14 @@ public class WebConsole extends JavaPlugin {
 	public void onEnable() {
 		createConfig();
 		
+		//Change language to user-specified language.
+		Internationalization.setCurrentLocale(config.getString("language"));
+		
 		//Start WebSocket Server
 		try {
 			startWS();
 		} catch (Exception e) {
-			Bukkit.getLogger().warning("Error occured while starting WebSocket Server.");
+			Bukkit.getLogger().warning(Internationalization.getPhrase("boot-error"));
 			e.printStackTrace();
 		}
 		
@@ -73,6 +77,9 @@ public class WebConsole extends JavaPlugin {
 		config.addDefault("host", "localhost");
 		config.addDefault("port", 8080);
 		config.addDefault("password", 1234);
+		
+		// Language config
+		config.addDefault("language", "en");
 
 		config.options().copyDefaults(true);
 		saveConfig();

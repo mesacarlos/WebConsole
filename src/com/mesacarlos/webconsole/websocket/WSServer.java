@@ -10,6 +10,7 @@ import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 
 import com.mesacarlos.webconsole.WebConsole;
+import com.mesacarlos.webconsole.util.Internationalization;
 import com.mesacarlos.webconsole.util.LoginManager;
 import com.mesacarlos.webconsole.websocket.command.CommandFactory;
 import com.mesacarlos.webconsole.websocket.command.WSCommand;
@@ -30,11 +31,13 @@ public class WSServer extends WebSocketServer {
 
 	@Override
 	public void onOpen(WebSocket conn, ClientHandshake handshake) {
-		if(LoginManager.getInstance().isLoggedIn(conn.getRemoteSocketAddress()))
-			sendToClient(conn, new Processed("Connected. Already logged in, welcome back!"));
-		else
-			sendToClient(conn, new LoginRequired("Connection started, waiting login"));
-		Bukkit.getLogger().info("[WebConsole] Connected and waiting login from " + conn.getRemoteSocketAddress());
+		if (LoginManager.getInstance().isLoggedIn(conn.getRemoteSocketAddress())) {
+			sendToClient(conn, new Processed(Internationalization.getPhrase("connection-resumed-message")));
+			Bukkit.getLogger().info(Internationalization.getPhrase("connection-resumed-console", conn.getRemoteSocketAddress()));
+		} else {
+			sendToClient(conn, new LoginRequired(Internationalization.getPhrase("connection-login-message")));
+			Bukkit.getLogger().info(Internationalization.getPhrase("connection-login-console", conn.getRemoteSocketAddress()));
+		}
 	}
 
 	@Override
@@ -49,16 +52,14 @@ public class WSServer extends WebSocketServer {
 		WSCommand cmd = commands.get(wsCommand);
 
 		if (cmd == null) {
-			//Command does not exist
-			sendToClient(conn, new UnknownCommand("Unknown command", message));
-			Bukkit.getLogger().info(
-					"[WebConsole] Signal '" + message + "' was not processed since is not valid. Is your plugin/web interface up to date?");
+			// Command does not exist
+			sendToClient(conn, new UnknownCommand(Internationalization.getPhrase("unknown-command-message"), message));
+			Bukkit.getLogger().info(Internationalization.getPhrase("unknown-command-console", message));
 		} else if (!LoginManager.getInstance().isLoggedIn(conn.getRemoteSocketAddress())
 				&& !wsCommand.equals("LOGIN")) {
-			//User is not authorised. DO NOTHING, IMPORTANT!
-			sendToClient(conn, new LoginRequired("Forbidden"));
-			Bukkit.getLogger().warning("[WebConsole] " + conn.getRemoteSocketAddress()
-					+ " tried to run '" + message + "' while not logged in!");
+			// User is not authorised. DO NOTHING, IMPORTANT!
+			sendToClient(conn, new LoginRequired(Internationalization.getPhrase("forbidden-message")));
+			Bukkit.getLogger().warning(Internationalization.getPhrase("forbidden-console", conn.getRemoteSocketAddress(), message));
 		} else {
 			cmd.execute(this, conn, wsCommandParams);
 		}
@@ -67,21 +68,19 @@ public class WSServer extends WebSocketServer {
 	@Override
 	public void onClose(WebSocket conn, int code, String reason, boolean remote) {
 		LoginManager.getInstance().logOut(conn.getRemoteSocketAddress());
-		Bukkit.getLogger()
-				.info("[WebConsole] Closed WS connection " + conn.getRemoteSocketAddress());
+		Bukkit.getLogger().info(Internationalization.getPhrase("closed-connection", conn.getRemoteSocketAddress()));
 	}
 
 	@Override
 	public void onError(WebSocket conn, Exception ex) {
-		Bukkit.getLogger()
-				.warning("[WebConsole] Error occured on connection " + conn.getRemoteSocketAddress() + ":" + ex);
+		Bukkit.getLogger().warning(Internationalization.getPhrase("error-on-connection", conn.getRemoteSocketAddress(), ex));
 	}
 
 	@Override
 	public void onStart() {
-		Bukkit.getLogger().info("[WebConsole] WebSocket Server started successfully");
+		Bukkit.getLogger().info(Internationalization.getPhrase("started-websocket"));
 	}
-	
+
 	/**
 	 * Returns main class
 	 * @return Main plugin class
@@ -89,7 +88,7 @@ public class WSServer extends WebSocketServer {
 	public WebConsole getMainClass() {
 		return plugin;
 	}
-	
+
 	/**
 	 * Sends the message to all connected AND logged-in users
 	 */
@@ -100,10 +99,10 @@ public class WSServer extends WebSocketServer {
 				sendToClient(connection, new ConsoleOutput(line));
 		}
 	}
-	
+
 	/**
 	 * Sends this JSONOutput to client
-	 * @param conn Connection to client
+	 * @param conn    Connection to client
 	 * @param content JSONOutput object
 	 */
 	public void sendToClient(WebSocket conn, JSONOutput content) {

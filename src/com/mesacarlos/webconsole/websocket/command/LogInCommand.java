@@ -3,6 +3,7 @@ package com.mesacarlos.webconsole.websocket.command;
 import org.bukkit.Bukkit;
 import org.java_websocket.WebSocket;
 
+import com.mesacarlos.webconsole.util.Internationalization;
 import com.mesacarlos.webconsole.util.LoginManager;
 import com.mesacarlos.webconsole.websocket.WSServer;
 import com.mesacarlos.webconsole.websocket.response.LoginRequired;
@@ -22,12 +23,12 @@ public class LogInCommand implements WSCommand {
 		if (receivedPassword.equals(password)) {
 			// Password is correct, logging in
 			LoginManager.getInstance().logIn(conn.getRemoteSocketAddress());
-			wsServer.sendToClient(conn, new Processed("Logged In", "LOGIN ********"));
-			Bukkit.getLogger().info("[WebConsole] Successfully logged in from " + conn.getRemoteSocketAddress());
+			wsServer.sendToClient(conn, new Processed(Internationalization.getPhrase("login-sucessful-message"), "LOGIN ********"));
+			Bukkit.getLogger().info(Internationalization.getPhrase("login-sucessful-console", conn.getRemoteSocketAddress()));
 		} else {
-			wsServer.sendToClient(conn, new LoginRequired("Incorrect password, try again"));
-			Bukkit.getLogger()
-					.info("[WebConsole] Password incorrect while login from " + conn.getRemoteSocketAddress());
+			// Password was incorrect
+			wsServer.sendToClient(conn, new LoginRequired(Internationalization.getPhrase("login-failed-message")));
+			Bukkit.getLogger().info(Internationalization.getPhrase("login-failed-console", conn.getRemoteSocketAddress()));
 		}
 	}
 

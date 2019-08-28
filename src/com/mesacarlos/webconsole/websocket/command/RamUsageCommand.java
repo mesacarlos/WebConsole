@@ -2,6 +2,7 @@ package com.mesacarlos.webconsole.websocket.command;
 
 import org.java_websocket.WebSocket;
 
+import com.mesacarlos.webconsole.util.Internationalization;
 import com.mesacarlos.webconsole.websocket.WSServer;
 import com.mesacarlos.webconsole.websocket.response.RamUsage;
 
@@ -16,7 +17,12 @@ public class RamUsageCommand implements WSCommand {
 		long used = max - free;
 		
 		wsServer.sendToClient(conn,
-				new RamUsage(free + " free, " + used + " used, " + max + " maximum memory", free, used, max));
+			new RamUsage(
+				Internationalization.getPhrase("ram-usage-message", free, used, max),
+				free,
+				used,
+				max
+			));
 	}
 
 }
