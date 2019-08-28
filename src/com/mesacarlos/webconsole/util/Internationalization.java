@@ -1,5 +1,6 @@
 package com.mesacarlos.webconsole.util;
 
+import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -30,6 +31,22 @@ public class Internationalization {
 	public static String getPhrase(String phrase, Object... params) {
 		String msg = messages.getString(phrase);
 		msg = MessageFormat.format(msg, params);
+		msg = correctEncoding(msg);
 		return msg;
 	}
+	
+	/**
+	 * Java i18n uses ISO-8859-1 internally, so we need to correct all characters to UTF-8
+	 * @param msg Message to correct
+	 * @return Message corrected
+	 */
+	private static String correctEncoding(String msg) {
+		try {
+			msg = new String(msg.getBytes("ISO-8859-1"), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return msg;
+	}
+	
 }
