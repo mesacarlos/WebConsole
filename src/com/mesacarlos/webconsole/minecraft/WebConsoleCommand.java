@@ -7,6 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
+import com.mesacarlos.webconsole.util.Internationalization;
 import com.mesacarlos.webconsole.util.LoginManager;
 
 public class WebConsoleCommand implements CommandExecutor {
@@ -20,13 +21,13 @@ public class WebConsoleCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		StringBuilder msg = new StringBuilder();
 
-		msg.append("WebConsole version " + version + ".\n");
+		msg.append(Internationalization.getPhrase("webconsole-version", version) + ".\n");
 		ArrayList<InetSocketAddress> connections = LoginManager.getInstance().getLoggedInUsers();
 		
 		if (connections.isEmpty()) {
-			msg.append("There are no logged in WebConsole connections now.");
+			msg.append(Internationalization.getPhrase("webconsole-no-connections"));
 		} else {
-			msg.append("Connected to WebConsole from:\n");
+			msg.append(Internationalization.getPhrase("webconsole-active-connections") + "\n");
 			for (int i = 0; i < connections.size(); i++) {
 				InetSocketAddress connection = connections.get(i);
 				msg.append(connection.toString());
