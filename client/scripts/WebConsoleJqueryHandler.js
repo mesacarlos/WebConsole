@@ -16,6 +16,7 @@ $(document).ready(function() {
 	if (location.protocol != 'https:'){
 		$("#addServerModalSslAdvice").hide();
 	}else{
+		$("#server-ssl").prop('checked', true);
 		$("#server-ssl").prop("disabled", true);
 	}
 });
