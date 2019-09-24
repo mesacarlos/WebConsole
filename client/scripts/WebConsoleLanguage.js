@@ -23,6 +23,7 @@ function setLanguage(locale){
 				"addServerModalSvIp": "Server IP:",
 				"addServerModalSvPort": "WebConsole port:",
 				"addServerModalSvSsl": "Server is SSL enabled",
+				"addServerModalSslAdvice": "SSL is required for HTTPS client connections",
 				"addServerModalClose": "Close",
 				"saveAndConnectServerButton": "Save and connect",
 				"passwordModalLongTitle": "Password required",
@@ -54,6 +55,7 @@ function setLanguage(locale){
 				"addServerModalSvIp": "IP del servidor:",
 				"addServerModalSvPort": "Puerto WebConsole:",
 				"addServerModalSvSsl": "SSL está activado",
+				"addServerModalSslAdvice": "Te estás conectando al cliente por HTTPS, por tanto SSL es obligatorio",
 				"addServerModalClose": "Cerrar",
 				"saveAndConnectServerButton": "Guardar y conectar",
 				"passwordModalLongTitle": "Se necesita contraseña",
@@ -85,6 +87,7 @@ function setLanguage(locale){
 				"addServerModalSvIp": "IP сервера:",
 				"addServerModalSvPort": "Порт WebConsole:",
 				"addServerModalSvSsl": "Сервер с поддержкой SSL",
+				"addServerModalSslAdvice": "",
 				"addServerModalClose": "Закрыть",
 				"saveAndConnectServerButton": "Сохранить и подключить",
 				"passwordModalLongTitle": "Требуется пароль",
@@ -115,6 +118,7 @@ function setLanguage(locale){
 				"addServerModalSvIp": "IP:",
 				"addServerModalSvPort": "Porta(config.yml):",
 				"addServerModalSvSsl": "SSL do servidor está habilitado ?",
+				"addServerModalSslAdvice": "",
 				"addServerModalClose": "Fechar",
 				"saveAndConnectServerButton": "Salvar e conectar",
 				"passwordModalLongTitle": "Necessário uma senha",
@@ -146,6 +150,7 @@ function setLanguage(locale){
 				"addServerModalSvIp": "服务器IP地址:",
 				"addServerModalSvPort": "WebConsole端口:",
 				"addServerModalSvSsl": "服务器已开启SSL",
+				"addServerModalSslAdvice": "",
 				"addServerModalClose": "关闭",
 				"saveAndConnectServerButton": "保存并连接",
 				"passwordModalLongTitle": "需要密码",
@@ -178,6 +183,7 @@ function setLanguage(locale){
 	document.getElementById("addServerModalSvIp").textContent = lang.addServerModalSvIp;
 	document.getElementById("addServerModalSvPort").textContent = lang.addServerModalSvPort;
 	document.getElementById("addServerModalSvSsl").textContent = lang.addServerModalSvSsl;
+	document.getElementById("addServerModalSslAdvice").textContent = lang.addServerModalSslAdvice;
 	document.getElementById("addServerModalClose").textContent = lang.addServerModalClose;
 	document.getElementById("saveAndConnectServerButton").textContent = lang.saveAndConnectServerButton;
 	document.getElementById("passwordModalLongTitle").textContent = lang.passwordModalLongTitle;

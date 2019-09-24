@@ -11,6 +11,13 @@ $(document).ready(function() {
 	$("#serverContainer").hide();
 	setLanguage(persistenceManager.getLanguage());
 	updateServerList();
+
+	//Check SSL host
+	if (location.protocol != 'https:'){
+		$("#addServerModalSslAdvice").hide();
+	}else{
+		$("#server-ssl").prop("disabled", true);
+	}
 });
 
 /**
