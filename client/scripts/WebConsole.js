@@ -233,7 +233,7 @@ function updateServerList(){
 	//Add all servers
 	var servers = persistenceManager.getAllServers();
 	for(var i = 0; i < servers.length; i++){
-		$('#ServerListDropDown').append('<a class="dropdown-item servermenuitem" href="#" onclick="openServer(\'' + servers[i].serverName + '\')">' + servers[i].serverName + '</a>');
+		$('#ServerListDropDown').append('<a class="dropdown-item servermenuitem" href="#" onclick="openServer(\'' + servers[i].serverName + '\')">' + servers[i].serverName.replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/'/g,"").replace(/"/g,"") + '</a>');
 	}
 	
 	//Show a "no servers" message when no servers are added

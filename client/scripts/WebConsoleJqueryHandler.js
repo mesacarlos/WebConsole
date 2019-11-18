@@ -19,6 +19,14 @@ $(document).ready(function() {
 		$("#server-ssl").prop('checked', true);
 		$("#server-ssl").prop("disabled", true);
 	}
+
+	//Remove servers from persistence with invalid names. See v1.4-rev2 for details
+	var servers = persistenceManager.getAllServers();
+	for(var i = 0; i < servers.length; i++){
+		if(servers[i].serverName.includes("\'") || servers[i].serverName.includes("\"") || servers[i].serverName.includes("<") || servers[i].serverName.includes(">")){
+			persistenceManager.deleteServer(servers[i].serverName);
+		}
+	}
 });
 
 /**
@@ -26,7 +34,7 @@ $(document).ready(function() {
 */
 $("#saveAndConnectServerButton").click(function() {
 	//Save server
-	var name = $("#server-name").val();
+	var name = $("#server-name").val().replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/'/g,"").replace(/"/g,"");
 	var wcIp = $("#server-ip").val();
 	var wcPort = $("#server-port").val();
 	var wcSsl = $("#server-ssl").prop('checked');
