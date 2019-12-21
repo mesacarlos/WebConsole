@@ -103,7 +103,7 @@ function writeToWebConsole(msg){
 	var isScrolledDown = document.getElementById("consoleTextArea").scrollHeight - document.getElementById("consoleTextArea").scrollTop - 40 == $("#consoleTextArea").height();
 	
 	//Write to div, replacing < to &lt; (to avoid XSS) and replacing new line to br.
-	msg = msg.replace(/</g, "<");
+	msg = msg.replace(/</g, "&lt;");
 	msg = msg.replace(/(?:\r\n|\r|\n)/g, "<br>");
 	
 	//Color filter for Windows (thanks to SuperPykkon)
