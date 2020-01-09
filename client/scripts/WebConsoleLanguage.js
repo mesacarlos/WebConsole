@@ -169,6 +169,38 @@ function setLanguage(locale){
 				"sendCommandButton": "发送"
 			}
 			break;
+		case "fr_FR":
+			lang = {
+				"home_link": "Page d'accueil",
+				"home_header": "Sélectionnez un serveur dans le menu",
+				"home_description": "Utilisez la barre de navigation pour ajouter un nouveau serveur ou connectez-vous à un autre précédemment ajouté.",
+				"server_dropdown": "Vos serveurs",
+				"add_server": "Ajouter un serveur",
+				"noServersAdded": "Aucun serveur ajouté",
+				"lang_dropdown": "Langue",
+				"addServerModalLongTitle": "Ajouter un nouveau serveur",
+				"addServerModalSvName": "Nom du serveur:",
+				"addServerModalSvIp": "Serveur IP:",
+				"addServerModalSvPort": "WebConsole port:",
+				"addServerModalSvSsl": "SSL est activé",
+				"addServerModalSslAdvice": "SSL est requis si vous vous connectez à partir d'un client HTTPS",
+				"addServerModalClose": "Fermer",
+				"saveAndConnectServerButton": "Enregistrez et connectez",
+				"passwordModalLongTitle": "Mot de passe requis",
+				"passwordModalLabel": "Mot de passe:",
+				"passwordModalRememberLabel": "Se souvenir du mot de passe",
+				"passwordModalCloseButton": "Fermer",
+				"passwordSendButton": "S'identifier",
+				"disconnectionModalLongTitle": "Débranché",
+				"disconnectionModalDescription": "La connexion a été perdue avec le serveur auquel vous étiez connecté, probablement en raison d'un arrêt du serveur. Revenu à l'écran d'accueil.",
+				"disconnectionModalCloseButton": "Fermer",
+				"players_online": "Joueurs en ligne",
+				"cpu_title": "Utilisation de la CPU",
+				"ram_title": "Utilisation de la RAM",
+				"deleteServerButton": "Supprimer le serveur",
+				"sendCommandButton": "Envoyer"
+			}
+			break;
 		default:
 			console.error("No language set");
 	}
