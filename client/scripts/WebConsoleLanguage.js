@@ -97,6 +97,7 @@ function setLanguage(locale){
 				"passwordSendButton": "Войти",
 				"disconnectionModalLongTitle": "Отключение!",
 				"disconnectionModalDescription": "Соединение с сервером, к которому вы подключены, потеряно.",
+				"disconnectionModalCloseButton": "Закрыть",
 				"players_online": "Игроки",
 				"cpu_title": "CPU",
 				"ram_title": "RAM",

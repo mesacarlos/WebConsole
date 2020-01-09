@@ -3,7 +3,7 @@
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/mesacarlos/WebConsole)](https://github.com/mesacarlos/WebConsole/releases/latest)
 ![GitHub All Releases](https://img.shields.io/github/downloads/mesacarlos/WebConsole/total?label=total%20downloads)
 
-WebConsole is a Spigot plugin for Minecraft 1.8-1.14 that enables you to view your server console and manage your server from anywhere. It creates a WebSocket server in the background used by the web interface to send commands, receive your console log and manage your server.
+WebConsole is a Spigot plugin for Minecraft 1.8-1.15 that enables you to view your server console and manage your server from anywhere. It creates a WebSocket server in the background used by the web interface to send commands, receive your console log and manage your server.
 
 Dont worry about privacy or security: all data is stored in your browser offline and your PC will connect directly to your minecraft server. No intermediary web servers, just you and your MC server.
 
@@ -12,7 +12,7 @@ Dont worry about privacy or security: all data is stored in your browser offline
 * Colors supported, for both Windows and Linux hosts. (Colors are represented different in each platform).
 * Real-time connected players, machine CPU and server RAM usage information.
 * Capable of keeping active connections to more than one server to keep retrieving console log in the background for them all.
-* English, Spanish, Russian (thanks to Stashenko), Portuguese (thanks to AlexandreMuassab and Connect500BR) and Chinese (thanks to Neubulae and OPhantomO) supported.
+* English, Spanish, Russian (thanks to Stashenko), Portuguese (thanks to AlexandreMuassab and Connect500BR), French (thanks to pickatchou999) and Chinese (thanks to Neubulae and OPhantomO) supported.
 * Free, updated regularly, and many more!
 
 ![Screenshot](https://i.imgur.com/sN1sYju.png)

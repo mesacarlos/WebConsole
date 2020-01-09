@@ -18,7 +18,7 @@ var commandHistoryIndex = -1; //Saves current command history index. -1 when not
 * Prepare and show server to user
 */
 function openServer(serverName){
-	//Hide welcome div if user is in welcome page
+	//Hide welcome div if user is not in welcome page
 	$("#welcomeContainer").hide();
 	$("#serverContainer").show();
 	
