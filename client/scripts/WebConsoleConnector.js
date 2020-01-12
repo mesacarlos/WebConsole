@@ -2,7 +2,7 @@
  WebConsole Connector for WebConsole
  Used to connect to WebSocketsServer
  https://github.com/mesacarlos
- 2019 Carlos Mesa under MIT License.
+ 2019-2020 Carlos Mesa under MIT License.
 */
 class WebConsoleConnector {
 	

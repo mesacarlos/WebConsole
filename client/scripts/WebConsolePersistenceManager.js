@@ -2,7 +2,7 @@
  WebConsole Persistence Manager for WebConsole
  Used to save your servers into your browser
  https://github.com/mesacarlos
- 2019 Carlos Mesa under MIT License.
+ 2019-2020 Carlos Mesa under MIT License.
 */
 class WebConsolePersistenceManager{
 	

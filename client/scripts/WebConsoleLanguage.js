@@ -2,7 +2,7 @@
  WebConsole Language Manager for WebConsole
  Used to save your preferred language into your browser
  https://github.com/mesacarlos
- 2019 Carlos Mesa under MIT License.
+ 2019-2020 Carlos Mesa under MIT License.
 */
 function setLanguage(locale){
 	//Save to persistence
@@ -11,10 +11,10 @@ function setLanguage(locale){
 	switch(locale){
 		case "en_US":
 			lang = {
-				"home_link": "Home",
+				"navbarHomeLink": "Home",
 				"home_header": "Select a server from the menu",
 				"home_description": "Use the navigation bar to add a new Minecraft Server or connect to a previously added one.",
-				"server_dropdown": "Your servers",
+				"serversDropdown": "Your servers",
 				"add_server": "Add Server",
 				"noServersAdded": "No servers added",
 				"lang_dropdown": "Language",
@@ -43,10 +43,10 @@ function setLanguage(locale){
 			break;
 		case "es_ES":
 			lang = {
-				"home_link": "Inicio",
+				"navbarHomeLink": "Inicio",
 				"home_header": "Selecciona un servidor del menú",
 				"home_description": "Usa la barra superior para añadir un nuevo servidor de Minecraft o para conectarte a un servidor añadido previamente.",
-				"server_dropdown": "Tus servidores",
+				"serversDropdown": "Tus servidores",
 				"add_server": "Añadir Server",
 				"noServersAdded": "Ningun servidor guardado",
 				"lang_dropdown": "Idioma",
@@ -75,10 +75,10 @@ function setLanguage(locale){
 			break;
 		case "ru_RU": //Credit to Stashenko
 			lang = {
-				"home_link": "Главная",
+				"navbarHomeLink": "Главная",
 				"home_header": "Выберите сервер из меню",
 				"home_description": "Используйте панель навигации, чтобы добавить новый сервер Minecraft или подключиться к ранее добавленному.",
-				"server_dropdown": "Ваши серверы",
+				"serversDropdown": "Ваши серверы",
 				"add_server": "Добавить сервер",
 				"noServersAdded": "Серверы не добавлены",
 				"lang_dropdown": "Язык",
@@ -107,10 +107,10 @@ function setLanguage(locale){
 			break;
 		case "pt_BR": //Credit to AlexandreMuassab
 			lang = {
-				"home_link": "Principal",
+				"navbarHomeLink": "Principal",
 				"home_header": "Selecione o seu servidor na aba acima.",
 				"home_description": "Use a barra de navegação para adicionar ou conectar-se entre os servidores.",
-				"server_dropdown": "Servidores",
+				"serversDropdown": "Servidores",
 				"add_server": "Adicionar um servidor",
 				"noServersAdded": "Nenhum servidor adicionado",
 				"lang_dropdown": "Idioma",
@@ -139,10 +139,10 @@ function setLanguage(locale){
 			break;
 		case "zh_CN": //Credit to Neubulae
 			lang = {
-				"home_link": "首页",
+				"navbarHomeLink": "首页",
 				"home_header": "请从菜单中选择一个服务器",
 				"home_description": "请使用导航栏以添加新服务器, 或连接至已设定服务器.",
-				"server_dropdown": "你的服务器",
+				"serversDropdown": "你的服务器",
 				"add_server": "添加服务器",
 				"noServersAdded": "没有添加服务器",
 				"lang_dropdown": "语言",
@@ -171,10 +171,10 @@ function setLanguage(locale){
 			break;
 		case "fr_FR":
 			lang = {
-				"home_link": "Page d'accueil",
+				"navbarHomeLink": "Page d'accueil",
 				"home_header": "Sélectionnez un serveur dans le menu",
 				"home_description": "Utilisez la barre de navigation pour ajouter un nouveau serveur ou connectez-vous à un autre précédemment ajouté.",
-				"server_dropdown": "Vos serveurs",
+				"serversDropdown": "Vos serveurs",
 				"add_server": "Ajouter un serveur",
 				"noServersAdded": "Aucun serveur ajouté",
 				"lang_dropdown": "Langue",
@@ -204,32 +204,41 @@ function setLanguage(locale){
 		default:
 			console.error("No language set");
 	}
-	//Set navbar phrases
-	document.getElementById("navbarHomeLink").textContent = lang.home_link;
-	document.getElementById("home_header").textContent = lang.home_header;
-	document.getElementById("home_description").textContent = lang.home_description;
-	document.getElementById("serversDropdown").textContent = lang.server_dropdown;
-	document.getElementById("add_server").textContent = lang.add_server;
-	document.getElementById("lang_dropdown").textContent = lang.lang_dropdown;
-	document.getElementById("addServerModalLongTitle").textContent = lang.addServerModalLongTitle;
-	document.getElementById("addServerModalSvName").textContent = lang.addServerModalSvName;
-	document.getElementById("addServerModalSvIp").textContent = lang.addServerModalSvIp;
-	document.getElementById("addServerModalSvPort").textContent = lang.addServerModalSvPort;
-	document.getElementById("addServerModalSvSsl").textContent = lang.addServerModalSvSsl;
-	document.getElementById("addServerModalSslAdvice").textContent = lang.addServerModalSslAdvice;
-	document.getElementById("addServerModalClose").textContent = lang.addServerModalClose;
-	document.getElementById("saveAndConnectServerButton").textContent = lang.saveAndConnectServerButton;
-	document.getElementById("passwordModalLongTitle").textContent = lang.passwordModalLongTitle;
-	document.getElementById("passwordModalLabel").textContent = lang.passwordModalLabel;
-	document.getElementById("passwordModalRememberLabel").textContent = lang.passwordModalRememberLabel;
-	document.getElementById("passwordModalCloseButton").textContent = lang.passwordModalCloseButton;
-	document.getElementById("passwordSendButton").textContent = lang.passwordSendButton;
-	document.getElementById("disconnectionModalLongTitle").textContent = lang.disconnectionModalLongTitle;
-	document.getElementById("disconnectionModalDescription").textContent = lang.disconnectionModalDescription;
-	document.getElementById("disconnectionModalCloseButton").textContent = lang.disconnectionModalCloseButton;
-	document.getElementById("players_online").textContent = lang.players_online;
-	document.getElementById("cpu_title").textContent = lang.cpu_title;
-	document.getElementById("ram_title").textContent = lang.ram_title;
-	document.getElementById("deleteServerButton").textContent = lang.deleteServerButton;
-	document.getElementById("sendCommandButton").textContent = lang.sendCommandButton;
+
+	//Set phrases
+	jQuery.each(lang, (key, value) =>{
+		try{
+			document.getElementById(key).textContent = value;
+		}catch(err){
+			console.error("Cannot translate " + key + " (" + value + ")")
+		}
+	});
+
+	// document.getElementById("navbarHomeLink").textContent = lang.navbarHomeLink;
+	// document.getElementById("home_header").textContent = lang.home_header;
+	// document.getElementById("home_description").textContent = lang.home_description;
+	// document.getElementById("serversDropdown").textContent = lang.serversDropdown;
+	// document.getElementById("add_server").textContent = lang.add_server;
+	// document.getElementById("lang_dropdown").textContent = lang.lang_dropdown;
+	// document.getElementById("addServerModalLongTitle").textContent = lang.addServerModalLongTitle;
+	// document.getElementById("addServerModalSvName").textContent = lang.addServerModalSvName;
+	// document.getElementById("addServerModalSvIp").textContent = lang.addServerModalSvIp;
+	// document.getElementById("addServerModalSvPort").textContent = lang.addServerModalSvPort;
+	// document.getElementById("addServerModalSvSsl").textContent = lang.addServerModalSvSsl;
+	// document.getElementById("addServerModalSslAdvice").textContent = lang.addServerModalSslAdvice;
+	// document.getElementById("addServerModalClose").textContent = lang.addServerModalClose;
+	// document.getElementById("saveAndConnectServerButton").textContent = lang.saveAndConnectServerButton;
+	// document.getElementById("passwordModalLongTitle").textContent = lang.passwordModalLongTitle;
+	// document.getElementById("passwordModalLabel").textContent = lang.passwordModalLabel;
+	// document.getElementById("passwordModalRememberLabel").textContent = lang.passwordModalRememberLabel;
+	// document.getElementById("passwordModalCloseButton").textContent = lang.passwordModalCloseButton;
+	// document.getElementById("passwordSendButton").textContent = lang.passwordSendButton;
+	// document.getElementById("disconnectionModalLongTitle").textContent = lang.disconnectionModalLongTitle;
+	// document.getElementById("disconnectionModalDescription").textContent = lang.disconnectionModalDescription;
+	// document.getElementById("disconnectionModalCloseButton").textContent = lang.disconnectionModalCloseButton;
+	// document.getElementById("players_online").textContent = lang.players_online;
+	// document.getElementById("cpu_title").textContent = lang.cpu_title;
+	// document.getElementById("ram_title").textContent = lang.ram_title;
+	// document.getElementById("deleteServerButton").textContent = lang.deleteServerButton;
+	// document.getElementById("sendCommandButton").textContent = lang.sendCommandButton;
 }
