@@ -201,6 +201,38 @@ function setLanguage(locale){
 				"sendCommandButton": "Envoyer"
 			}
 			break;
+		case "cs_CZ":
+			lang = {
+				"navbarHomeLink": "Domov",
+				"home_header": "Vyberte server z nabídky",
+				"home_description": "Pomocí navigačního panelu přidejte nový server Minecraft nebo se připojte k dříve přidanému.",
+				"serversDropdown": "Vaše servery",
+				"add_server": "Přidat server",
+				"noServersAdded": "Nebyly přidány žádné servery",
+				"lang_dropdown": "Jazyk",
+				"addServerModalLongTitle": "Přidejte nový server",
+				"addServerModalSvName": "Název serveru:",
+				"addServerModalSvIp": "IP serveru:",
+				"addServerModalSvPort": "WebConsole port:",
+				"addServerModalSvSsl": "SSL je povoleno na straně serveru",
+				"addServerModalSslAdvice": "Pro připojení klienta HTTPS je vyžadován protokol SSL",
+				"addServerModalClose": "Zavřít",
+				"saveAndConnectServerButton": "Uložte a připojte se",
+				"passwordModalLongTitle": "Je vyžadováno heslo",
+				"passwordModalLabel": "Heslo:",
+				"passwordModalRememberLabel": "Pamatuj si heslo",
+				"passwordModalCloseButton": "Zavřít",
+				"passwordSendButton": "Přihlásit se",
+				"disconnectionModalLongTitle": "Odpojeno",
+				"disconnectionModalDescription": "Připojení se ztratilo se serverem, ke kterému jste byli připojeni, pravděpodobně způsobené zastavením serveru. Vrátil se zpět na uvítací obrazovku.",
+				"disconnectionModalCloseButton": "Zavřít",
+				"players_online": "Hráči online",
+				"cpu_title": "CPU",
+				"ram_title": "Využití RAM",
+				"deleteServerButton": "Smazat server",
+				"sendCommandButton": "Poslat"
+			}
+			break;
 		default:
 			console.error("No language set");
 	}
