@@ -150,6 +150,10 @@ function writeToWebConsole(msg){
 	msg = msg.replace(/§o/g, "<span style='font-style: italic;'>"); //&o
 	
 	msg = msg.replace(/§r/g, "</span>");  //&r
+
+	//Append datetime if enabled
+	if(persistenceManager.getSetting("dateTimePrefix"))
+		msg = "[" + new Date().toLocaleString() + "] " + msg;
 	
 	$("#consoleTextArea").append(msg + "<br>");
 	

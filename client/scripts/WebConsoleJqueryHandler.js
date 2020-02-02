@@ -9,6 +9,7 @@
 */
 $(document).ready(function() {
 	$("#serverContainer").hide();
+	persistenceManager.initializeSettings();
 	setLanguage(persistenceManager.getLanguage());
 	updateServerList();
 
@@ -111,7 +112,7 @@ $("#sendCommandButton").click(function() {
 /**
 * Enter or arrow down/up key on command input
 */
-$("#commandInput").on('keydown', function (e) {
+$("#commandInput").on('keyup', function (e) {
 	if(e.which === 13){ //Detect enter key
 		//Disable textbox to prevent multiple submit
 		$(this).attr("disabled", "disabled");
@@ -142,6 +143,7 @@ $("#commandInput").on('keydown', function (e) {
 	}else if(e.which == 9){ //Detect tab key
 		//TODO Suggest user from connectionManager.activeConnection.players;
 	}
+
 });
 
 /**
@@ -180,3 +182,18 @@ $("#navbarHomeLink").click(function() {
 	backToHomepage();
 });
 
+/**
+* On Settings link clicked
+*/
+$("#settingsLink").click(function() {
+	//Update modal switches and boxes with saved settings
+	$("#showDateSettingsSwitch").prop("checked", persistenceManager.getSetting("dateTimePrefix"));
+});
+
+/**
+* On showDateSettingsSwitch switched
+*/
+$("#showDateSettingsSwitch").click(function() {
+	//Update modal switches and boxes with saved settings
+	persistenceManager.setSetting("dateTimePrefix", $("#showDateSettingsSwitch").is(":checked"));
+});

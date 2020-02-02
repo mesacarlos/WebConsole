@@ -134,6 +134,54 @@ class WebConsolePersistenceManager{
 		//Save to WebStorage
 		window.localStorage.WebConsole = JSON.stringify(storageObj);
 	}
+
+	/**
+	* Create settings object if not defined or populate with new options if updating
+	*/
+	initializeSettings(){
+		this.initializeLocalStorage();
+
+		//Create settings object
+		var currentSettings = JSON.parse(window.localStorage.WebConsole).settings;
+		if (typeof currentSettings === 'undefined') {
+			currentSettings = new Object();
+		}
+
+		var settings = {
+			dateTimePrefix : new Setting("dateTimePrefix", true)
+		}
+
+		//Set settings
+		jQuery.each(settings, (key, settingObj) =>{
+			if(!currentSettings.hasOwnProperty(settingObj.name))
+				currentSettings[settingObj.name] = settingObj.defaultValue;
+		});
+
+		//Save all
+		var storageObj = JSON.parse(window.localStorage.WebConsole);
+		storageObj.settings = currentSettings;
+		window.localStorage.WebConsole = JSON.stringify(storageObj);
+	}
+
+	/**
+	* Update setting value
+	*/
+	setSetting(name, value){
+		var currentSettings = JSON.parse(window.localStorage.WebConsole).settings;
+		currentSettings[name] = value;
+
+		//Save all
+		var storageObj = JSON.parse(window.localStorage.WebConsole);
+		storageObj.settings = currentSettings;
+		window.localStorage.WebConsole = JSON.stringify(storageObj);
+	}
+
+	/**
+	* Get setting value
+	*/
+	getSetting(name){
+		return JSON.parse(window.localStorage.WebConsole).settings[name];
+	}
 	
 }
 
@@ -145,5 +193,12 @@ class WSServer{
 	
 	setPassword(pwd){
 		this.serverPassword = pwd;
+	}
+}
+
+class Setting{
+	constructor(name, defaultValue){
+		this.name = name;
+		this.defaultValue = defaultValue;
 	}
 }
