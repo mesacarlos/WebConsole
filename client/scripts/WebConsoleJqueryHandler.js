@@ -183,6 +183,13 @@ $("#navbarHomeLink").click(function() {
 });
 
 /**
+* On DisconnectedModal, back to welcome screen clicked
+*/
+$("#disconnectionModalWelcomeScreenButton").click(function() {
+	backToHomepage();
+});
+
+/**
 * On Settings link clicked
 */
 $("#settingsLink").click(function() {

@@ -25,6 +25,8 @@ function openServer(serverName){
 	//Change server name and related info
 	$("#serverTitle").text(serverName);
 	$("#consoleTextArea").text("");
+	$("#commandInput").prop("disabled", false);
+	$("#sendCommandButton").prop("disabled", false);
 	
 	//New server, new variables:
 	autoPasswordCompleted = false;
@@ -199,7 +201,9 @@ function writeRamInfo(free, used, total){
 */
 function closedConnection(serverName){
 	if(connectionManager.activeConnection.serverName == serverName){
-		backToHomepage();
+		//Disable command input and button
+		$("#commandInput").prop("disabled", true);
+		$("#sendCommandButton").prop("disabled", true);
 		
 		//Inform user
 		$('#disconnectionModal').modal('show');
