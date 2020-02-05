@@ -10,8 +10,6 @@ class WebConsolePersistenceManager{
 	* Saves or updates server into WebStorage
 	*/
 	saveServer(serverObject){
-		this.initializeLocalStorage();
-		
 		//Check if server exists
 		var i;
 		var found = false;
@@ -36,8 +34,6 @@ class WebConsolePersistenceManager{
 	* Delete server from saved servers
 	*/
 	deleteServer(serverName){
-		this.initializeLocalStorage();
-		
 		//Find server
 		var i;
 		var index = -1;
@@ -61,8 +57,6 @@ class WebConsolePersistenceManager{
 	* Get server details as object
 	*/
 	getServer(serverName){
-		this.initializeLocalStorage();
-		
 		var i;
 		var servers = this.getAllServers();
 		for (i = 0; i < servers.length; i++) { 
@@ -76,8 +70,6 @@ class WebConsolePersistenceManager{
 	* Get all servers
 	*/
 	getAllServers(){
-		this.initializeLocalStorage();
-		
 		var storageObj = JSON.parse(window.localStorage.WebConsole);
 		return storageObj.servers;
 	}
@@ -86,8 +78,6 @@ class WebConsolePersistenceManager{
 	 * Save language for this client
 	 */
 	setLanguage(lang){
-		this.initializeLocalStorage();
-
 		//Retrieve saved data
 		var storageObj = JSON.parse(window.localStorage.WebConsole);
 		storageObj.language = lang;
@@ -100,8 +90,6 @@ class WebConsolePersistenceManager{
 	 * Get saved language for this client
 	 */
 	getLanguage(){
-		this.initializeLocalStorage();
-		
 		var storageObj = JSON.parse(window.localStorage.WebConsole);
 		if(!storageObj.language)
 			return "en_US";
