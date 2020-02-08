@@ -208,7 +208,7 @@ function closedConnection(serverName){
 		//Inform user
 		$('#disconnectionModal').modal('show');
 	}
-	//connectionManager.deleteConnection(serverName);    #Commented because if activeConnection is null then servers cannot be deleted when disconnected
+	connectionManager.deleteConnection(serverName, true);
 }
 
 /**
