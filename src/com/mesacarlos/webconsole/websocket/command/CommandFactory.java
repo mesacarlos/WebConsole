@@ -11,6 +11,7 @@ public class CommandFactory {
 		commands.put("PLAYERS", new PlayersCommand());
 		commands.put("CPUUSAGE", new CpuUsageCommand());
 		commands.put("RAMUSAGE", new RamUsageCommand());
+		commands.put("READLOGFILE", new ReadLogFileCommand());
 		return commands;
 	}
 }

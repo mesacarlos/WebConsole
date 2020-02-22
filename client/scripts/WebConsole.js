@@ -155,7 +155,7 @@ function writeToWebConsole(msg){
 
 	//Append datetime if enabled
 	if(persistenceManager.getSetting("dateTimePrefix"))
-		msg = "[" + new Date().toLocaleString() + "] " + msg;
+		msg = "[" + new Date().toLocaleTimeString() + "] " + msg;
 	
 	$("#consoleTextArea").append(msg + "<br>");
 	
