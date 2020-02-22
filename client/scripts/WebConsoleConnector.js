@@ -13,6 +13,7 @@ class WebConsoleConnector {
 		this.messages = []; //All messages retrieved since connection start
 		this.commands = []; //EXEC Commands sent by user to this server
 		this.players = []; //Connected users.
+		this.isLogged = false; //Is logged in with valid pasword or not
 	}
 	
 	/**

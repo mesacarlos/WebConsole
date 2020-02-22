@@ -57,6 +57,11 @@ function onWebSocketsMessage(message){
 		case 200:
 			//Processed
 			writeToWebConsole(message.message);
+			if(connectionManager.activeConnection.isLogged === false){
+				connectionManager.activeConnection.isLogged = true;
+				if(persistenceManager.getSetting("retrieveLogFile") === true)
+					connectionManager.askForLogs();
+			}
 			break;
 		case 400:
 			//Unknown Command
@@ -155,7 +160,7 @@ function writeToWebConsole(msg){
 
 	//Append datetime if enabled
 	if(persistenceManager.getSetting("dateTimePrefix"))
-		msg = "[" + new Date().toLocaleString() + "] " + msg;
+		msg = "[" + new Date().toLocaleTimeString() + "] " + msg;
 	
 	$("#consoleTextArea").append(msg + "<br>");
 	

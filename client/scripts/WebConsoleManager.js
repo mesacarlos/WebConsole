@@ -79,5 +79,12 @@ class WebConsoleManager {
 		this.activeConnection.sendToServer("CPUUSAGE");
 		this.activeConnection.sendToServer("RAMUSAGE");
 	}
+
+	/**
+	* Asks server for full latest.log
+	*/
+	askForLogs(){
+		this.activeConnection.sendToServer("READLOGFILE");
+	}
 	
 }
