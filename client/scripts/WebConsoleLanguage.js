@@ -38,6 +38,7 @@ function setLanguage(locale){
 				"settingsLink": "Settings",
 				"settingsModalLongTitle": "WebConsole Settings",
 				"showDateSettingsSwitchLabel": "Show date and time on each console line",
+				"readLogFileSwitchLabel": "Retrieve full log file from server after login",
 				"settingsModalCloseButton": "Done",
 				"players_online": "Players Online",
 				"cpu_title": "CPU",
@@ -75,6 +76,7 @@ function setLanguage(locale){
 				"settingsLink": "Configuración",
 				"settingsModalLongTitle": "Configuración de WebConsole",
 				"showDateSettingsSwitchLabel": "Mostrar fecha y hora en cada linea de consola",
+				"readLogFileSwitchLabel": "Leer log completo al iniciar sesión",
 				"settingsModalCloseButton": "Hecho",
 				"players_online": "Jugadores en línea",
 				"cpu_title": "CPU",
@@ -112,6 +114,7 @@ function setLanguage(locale){
 				"settingsLink": "настройки",
 				"settingsModalLongTitle": "настройки WebConsole",
 				"showDateSettingsSwitchLabel": "Показать дату и время в каждой строке консоли",
+				"readLogFileSwitchLabel": "Получить полный файл журнала с сервера после входа в систему",
 				"settingsModalCloseButton": "Выполнено",
 				"players_online": "Игроки",
 				"cpu_title": "CPU",
@@ -149,6 +152,7 @@ function setLanguage(locale){
 				"settingsLink": "Configurações",
 				"settingsModalLongTitle": "Configurações do WebConsole",
 				"showDateSettingsSwitchLabel": "Mostrar data e hora em cada linha do console",
+				"readLogFileSwitchLabel": "Recuperar arquivo de log completo do servidor após o login",
 				"settingsModalCloseButton": "Feito",
 				"players_online": "Jogadores online",
 				"cpu_title": "Consumo de CPU",
@@ -186,6 +190,7 @@ function setLanguage(locale){
 				"settingsLink": "设定值",
 				"settingsModalLongTitle": "WebConsole 设定值",
 				"showDateSettingsSwitchLabel": "在每个控制台行上显示日期和时间",
+				"readLogFileSwitchLabel": "登录后从服务器检索完整的日志文件",
 				"settingsModalCloseButton": "完成",
 				"players_online": "在线人数",
 				"cpu_title": "CPU",
@@ -223,6 +228,7 @@ function setLanguage(locale){
 				"settingsLink": "Réglages",
 				"settingsModalLongTitle": "Réglages de WebConsole",
 				"showDateSettingsSwitchLabel": "Afficher la date et l'heure sur chaque ligne de console",
+				"readLogFileSwitchLabel": "Récupérer le fichier journal complet du serveur après la connexion",
 				"settingsModalCloseButton": "Terminé",
 				"players_online": "Joueurs en ligne",
 				"cpu_title": "Utilisation de la CPU",
@@ -260,6 +266,7 @@ function setLanguage(locale){
 				"settingsLink": "Nastavení",
 				"settingsModalLongTitle": "Nastavení WebConsole",
 				"showDateSettingsSwitchLabel": "Zobrazit datum a čas na každé řádce konzoly",
+				"readLogFileSwitchLabel": "Po přihlášení načtěte úplný soubor protokolu ze serveru",
 				"settingsModalCloseButton": "Hotovo",
 				"players_online": "Počet hráčů online",
 				"cpu_title": "CPU",
@@ -281,31 +288,4 @@ function setLanguage(locale){
 		}
 	});
 
-	// document.getElementById("navbarHomeLink").textContent = lang.navbarHomeLink;
-	// document.getElementById("home_header").textContent = lang.home_header;
-	// document.getElementById("home_description").textContent = lang.home_description;
-	// document.getElementById("serversDropdown").textContent = lang.serversDropdown;
-	// document.getElementById("add_server").textContent = lang.add_server;
-	// document.getElementById("lang_dropdown").textContent = lang.lang_dropdown;
-	// document.getElementById("addServerModalLongTitle").textContent = lang.addServerModalLongTitle;
-	// document.getElementById("addServerModalSvName").textContent = lang.addServerModalSvName;
-	// document.getElementById("addServerModalSvIp").textContent = lang.addServerModalSvIp;
-	// document.getElementById("addServerModalSvPort").textContent = lang.addServerModalSvPort;
-	// document.getElementById("addServerModalSvSsl").textContent = lang.addServerModalSvSsl;
-	// document.getElementById("addServerModalSslAdvice").textContent = lang.addServerModalSslAdvice;
-	// document.getElementById("addServerModalClose").textContent = lang.addServerModalClose;
-	// document.getElementById("saveAndConnectServerButton").textContent = lang.saveAndConnectServerButton;
-	// document.getElementById("passwordModalLongTitle").textContent = lang.passwordModalLongTitle;
-	// document.getElementById("passwordModalLabel").textContent = lang.passwordModalLabel;
-	// document.getElementById("passwordModalRememberLabel").textContent = lang.passwordModalRememberLabel;
-	// document.getElementById("passwordModalCloseButton").textContent = lang.passwordModalCloseButton;
-	// document.getElementById("passwordSendButton").textContent = lang.passwordSendButton;
-	// document.getElementById("disconnectionModalLongTitle").textContent = lang.disconnectionModalLongTitle;
-	// document.getElementById("disconnectionModalDescription").textContent = lang.disconnectionModalDescription;
-	// document.getElementById("disconnectionModalCloseButton").textContent = lang.disconnectionModalCloseButton;
-	// document.getElementById("players_online").textContent = lang.players_online;
-	// document.getElementById("cpu_title").textContent = lang.cpu_title;
-	// document.getElementById("ram_title").textContent = lang.ram_title;
-	// document.getElementById("deleteServerButton").textContent = lang.deleteServerButton;
-	// document.getElementById("sendCommandButton").textContent = lang.sendCommandButton;
 }

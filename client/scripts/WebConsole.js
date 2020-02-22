@@ -57,6 +57,10 @@ function onWebSocketsMessage(message){
 		case 200:
 			//Processed
 			writeToWebConsole(message.message);
+			if(connectionManager.activeConnection.isLogged === false){
+				connectionManager.activeConnection.isLogged = true;
+				connectionManager.askForLogs();
+			}
 			break;
 		case 400:
 			//Unknown Command

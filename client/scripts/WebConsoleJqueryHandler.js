@@ -195,6 +195,7 @@ $("#disconnectionModalWelcomeScreenButton").click(function() {
 $("#settingsLink").click(function() {
 	//Update modal switches and boxes with saved settings
 	$("#showDateSettingsSwitch").prop("checked", persistenceManager.getSetting("dateTimePrefix"));
+	$("#readLogFileSwitch").prop("checked", persistenceManager.getSetting("retrieveLogFile"));
 });
 
 /**
@@ -203,4 +204,12 @@ $("#settingsLink").click(function() {
 $("#showDateSettingsSwitch").click(function() {
 	//Update modal switches and boxes with saved settings
 	persistenceManager.setSetting("dateTimePrefix", $("#showDateSettingsSwitch").is(":checked"));
+});
+
+/**
+* On readLogFileSwitch switched
+*/
+$("#readLogFileSwitch").click(function() {
+	//Update modal switches and boxes with saved settings
+	persistenceManager.setSetting("retrieveLogFile", $("#readLogFileSwitch").is(":checked"));
 });

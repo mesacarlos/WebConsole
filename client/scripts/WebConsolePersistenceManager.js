@@ -135,8 +135,10 @@ class WebConsolePersistenceManager{
 			currentSettings = new Object();
 		}
 
+		//Setting array initialization. If you need to add more settings, add them here. Any object is valid as a value (not only bool)
 		var settings = {
-			dateTimePrefix : new Setting("dateTimePrefix", true)
+			dateTimePrefix : new Setting("dateTimePrefix", true),
+			retrieveLogFile : new Setting("retrieveLogFile", true) 
 		}
 
 		//Set settings
