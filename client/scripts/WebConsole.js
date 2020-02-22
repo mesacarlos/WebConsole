@@ -59,7 +59,8 @@ function onWebSocketsMessage(message){
 			writeToWebConsole(message.message);
 			if(connectionManager.activeConnection.isLogged === false){
 				connectionManager.activeConnection.isLogged = true;
-				connectionManager.askForLogs();
+				if(persistenceManager.getSetting("retrieveLogFile") === true)
+					connectionManager.askForLogs();
 			}
 			break;
 		case 400:
