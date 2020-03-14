@@ -21,7 +21,12 @@ public class ReadLogFileCommand implements WSCommand{
 		try {
 			 lines = Files.readAllLines(Paths.get("logs/latest.log"), StandardCharsets.UTF_8);
 		} catch (IOException e) {
-			e.printStackTrace();
+			try {
+				lines = Files.readAllLines(Paths.get("logs/latest.log"), StandardCharsets.ISO_8859_1);
+			}catch(IOException ex) {
+				ex.printStackTrace();
+			}
+			
 		}
 		
 		if(lines == null) {
