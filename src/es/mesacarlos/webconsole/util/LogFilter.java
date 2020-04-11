@@ -1,4 +1,4 @@
-package com.mesacarlos.webconsole.util;
+package es.mesacarlos.webconsole.util;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Marker;
@@ -7,7 +7,7 @@ import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.Logger;
 import org.apache.logging.log4j.message.Message;
 
-import com.mesacarlos.webconsole.websocket.WSServer;
+import es.mesacarlos.webconsole.websocket.WSServer;
 
 public class LogFilter implements Filter{
 	private WSServer wsServer;

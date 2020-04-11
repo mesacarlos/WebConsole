@@ -1,4 +1,4 @@
-package com.mesacarlos.webconsole;
+package es.mesacarlos.webconsole;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,10 +17,10 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.java_websocket.server.DefaultSSLWebSocketServerFactory;
 
-import com.mesacarlos.webconsole.minecraft.WebConsoleCommand;
-import com.mesacarlos.webconsole.util.Internationalization;
-import com.mesacarlos.webconsole.util.LogFilter;
-import com.mesacarlos.webconsole.websocket.WSServer;
+import es.mesacarlos.webconsole.minecraft.WebConsoleCommand;
+import es.mesacarlos.webconsole.util.Internationalization;
+import es.mesacarlos.webconsole.util.LogFilter;
+import es.mesacarlos.webconsole.websocket.WSServer;
 
 public class WebConsole extends JavaPlugin {
 	FileConfiguration config = this.getConfig();

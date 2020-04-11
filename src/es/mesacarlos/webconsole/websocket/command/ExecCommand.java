@@ -1,4 +1,4 @@
-package com.mesacarlos.webconsole.websocket.command;
+package es.mesacarlos.webconsole.websocket.command;
 
 import java.util.concurrent.ExecutionException;
 
@@ -6,8 +6,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.java_websocket.WebSocket;
 
-import com.mesacarlos.webconsole.util.Internationalization;
-import com.mesacarlos.webconsole.websocket.WSServer;
+import es.mesacarlos.webconsole.util.Internationalization;
+import es.mesacarlos.webconsole.websocket.WSServer;
 
 public class ExecCommand implements WSCommand {
 

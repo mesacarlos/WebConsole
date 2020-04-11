@@ -1,4 +1,4 @@
-package com.mesacarlos.webconsole.minecraft;
+package es.mesacarlos.webconsole.minecraft;
 
 import java.net.InetSocketAddress;
 import java.util.ArrayList;
@@ -7,8 +7,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-import com.mesacarlos.webconsole.util.Internationalization;
-import com.mesacarlos.webconsole.util.LoginManager;
+import es.mesacarlos.webconsole.util.Internationalization;
+import es.mesacarlos.webconsole.util.LoginManager;
 
 public class WebConsoleCommand implements CommandExecutor {
 	private String version;

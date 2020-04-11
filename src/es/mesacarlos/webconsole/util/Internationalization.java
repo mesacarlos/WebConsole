@@ -1,4 +1,4 @@
-package com.mesacarlos.webconsole.util;
+package es.mesacarlos.webconsole.util;
 
 import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;

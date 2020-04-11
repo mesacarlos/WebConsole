@@ -1,4 +1,4 @@
-package com.mesacarlos.webconsole.websocket.response;
+package es.mesacarlos.webconsole.websocket.response;
 
 public interface JSONOutput {
 	/**

@@ -1,4 +1,4 @@
-package com.mesacarlos.webconsole.util;
+package es.mesacarlos.webconsole.util;
 
 import java.net.InetSocketAddress;
 import java.util.ArrayList;

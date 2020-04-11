@@ -1,4 +1,4 @@
-package com.mesacarlos.webconsole.websocket;
+package es.mesacarlos.webconsole.websocket;
 
 import java.net.InetSocketAddress;
 import java.util.Collection;
@@ -9,16 +9,16 @@ import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 
-import com.mesacarlos.webconsole.WebConsole;
-import com.mesacarlos.webconsole.util.Internationalization;
-import com.mesacarlos.webconsole.util.LoginManager;
-import com.mesacarlos.webconsole.websocket.command.CommandFactory;
-import com.mesacarlos.webconsole.websocket.command.WSCommand;
-import com.mesacarlos.webconsole.websocket.response.ConsoleOutput;
-import com.mesacarlos.webconsole.websocket.response.JSONOutput;
-import com.mesacarlos.webconsole.websocket.response.LoginRequired;
-import com.mesacarlos.webconsole.websocket.response.Processed;
-import com.mesacarlos.webconsole.websocket.response.UnknownCommand;
+import es.mesacarlos.webconsole.WebConsole;
+import es.mesacarlos.webconsole.util.Internationalization;
+import es.mesacarlos.webconsole.util.LoginManager;
+import es.mesacarlos.webconsole.websocket.command.CommandFactory;
+import es.mesacarlos.webconsole.websocket.command.WSCommand;
+import es.mesacarlos.webconsole.websocket.response.ConsoleOutput;
+import es.mesacarlos.webconsole.websocket.response.JSONOutput;
+import es.mesacarlos.webconsole.websocket.response.LoginRequired;
+import es.mesacarlos.webconsole.websocket.response.Processed;
+import es.mesacarlos.webconsole.websocket.response.UnknownCommand;
 
 public class WSServer extends WebSocketServer {
 	private HashMap<String, WSCommand> commands = CommandFactory.getCommandsHashMap();
