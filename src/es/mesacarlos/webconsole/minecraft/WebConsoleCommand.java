@@ -21,7 +21,7 @@ public class WebConsoleCommand implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		StringBuilder msg = new StringBuilder();
 
-		msg.append(Internationalization.getPhrase("webconsole-version", version) + ".\n");
+		msg.append(Internationalization.getPhrase("webconsole-version", version) + "\n");
 		ArrayList<InetSocketAddress> connections = LoginManager.getInstance().getLoggedInUsers();
 		
 		if (connections.isEmpty()) {

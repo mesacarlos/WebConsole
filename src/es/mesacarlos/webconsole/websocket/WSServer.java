@@ -12,7 +12,7 @@ import org.java_websocket.server.WebSocketServer;
 import es.mesacarlos.webconsole.WebConsole;
 import es.mesacarlos.webconsole.util.Internationalization;
 import es.mesacarlos.webconsole.util.LoginManager;
-import es.mesacarlos.webconsole.websocket.command.CommandFactory;
+import es.mesacarlos.webconsole.websocket.command.WSCommandFactory;
 import es.mesacarlos.webconsole.websocket.command.WSCommand;
 import es.mesacarlos.webconsole.websocket.response.ConsoleOutput;
 import es.mesacarlos.webconsole.websocket.response.JSONOutput;
@@ -21,7 +21,7 @@ import es.mesacarlos.webconsole.websocket.response.Processed;
 import es.mesacarlos.webconsole.websocket.response.UnknownCommand;
 
 public class WSServer extends WebSocketServer {
-	private HashMap<String, WSCommand> commands = CommandFactory.getCommandsHashMap();
+	private HashMap<String, WSCommand> commands = WSCommandFactory.getCommandsHashMap();
 	private WebConsole plugin;
 
 	public WSServer(WebConsole plugin, InetSocketAddress address) {

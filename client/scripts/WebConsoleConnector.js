@@ -40,6 +40,7 @@ class WebConsoleConnector {
 	*/
 	onClose(evt){
 		closedConnection(this.serverName);
+		//console.log("EVENTO: " + evt.detail);
 	}
 	
 	/**
