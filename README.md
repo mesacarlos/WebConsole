@@ -34,7 +34,13 @@ Dont worry about privacy or security: all data is stored in your browser offline
 > password: yourPasswordGoesHere  
 > language: en  
 
-Fill `host`, `port` and `password` values. They are, respectively, your server IP, a port where to run this plugin (cannot be the port you are using for Minecraft) and the login password. Password will be asked every time you connect to WebConsole.
+Fill `host`, `port` and `password` values. They are:
+
+`host`: If you are in a VPS or dedicated server (or you have a full public IP allocated for your device) type your public IP. If you are at your home (and you dont have a public IP assigned to your device) type your private IP, it should be something like 192.168.xx.xx.
+
+`port`: A port where to run this plugin (cannot be the port you are using for Minecraft).
+
+`password`: The login password. Password will be asked every time you connect to WebConsole.
 
 Also, you can modify `language` to view console and command messages in your preferred language. Valid languages are English (`en`), Spanish (`es`), Portuguese (`pt`), Russian (`ru`), French (`fr`), Czech (`cs`) and Chinese (`zh`). **IMPORTANT: There is a known issue with Microsoft Windows cmd that shows weird characters when using a language different than English. If you are using Windows to host your server, check [this wiki page](https://github.com/mesacarlos/WebConsole/wiki/Show-local-characters-in-Windows-Console) to solve the problem**.
 

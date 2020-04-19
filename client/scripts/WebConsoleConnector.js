@@ -40,7 +40,7 @@ class WebConsoleConnector {
 	*/
 	onClose(evt){
 		closedConnection(this.serverName);
-		//console.log("EVENTO: " + evt.detail);
+		console.log("Closed reason: " + evt.reason); //No reason provided (using chrome at least)
 	}
 	
 	/**
