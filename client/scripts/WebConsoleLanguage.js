@@ -275,7 +275,7 @@ function setLanguage(locale){
 				"sendCommandButton": "Odeslat"
 			}
 			break;
-		case "it_IT":
+		case "it_IT": //Credit to AlexZap
 			lang = {
 				"navbarHomeLink": "Home",
 				"home_header": "Seleziona un server dal menù",
