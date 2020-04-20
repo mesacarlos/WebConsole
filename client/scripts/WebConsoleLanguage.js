@@ -275,6 +275,44 @@ function setLanguage(locale){
 				"sendCommandButton": "Odeslat"
 			}
 			break;
+		case "it_IT":
+			lang = {
+				"navbarHomeLink": "Home",
+				"home_header": "Seleziona un server dal menù",
+				"home_description": "Usa la barra di navigazione per connetterti al server o clicca sul menù a tendina sovrastante.",
+				"serversDropdown": "I tuoi server",
+				"add_server": "Aggiungi un Server",
+				"noServersAdded": "Nessun server aggiunto",
+				"lang_dropdown": "Lingua",
+				"addServerModalLongTitle": "Aaggiungi un nuovo server",
+				"addServerModalSvName": "Nome server:",
+				"addServerModalSvIp": "IP server:",
+				"addServerModalSvPort": "Porta WebConsole:",
+				"addServerModalSvSsl": "Il server è abilitato a SSL",
+				"addServerModalSslAdvice": "L'SSL e richiesto in caso di connessioni HTTPS",
+				"addServerModalClose": "Chiudi",
+				"saveAndConnectServerButton": "Salva e connettiti",
+				"passwordModalLongTitle": "Password richiesta",
+				"passwordModalLabel": "Password:",
+				"passwordModalRememberLabel": "Ricorda la mia password",
+				"passwordModalCloseButton": "Chiudi",
+				"passwordSendButton": "Login",
+				"disconnectionModalLongTitle": "Disconnesso",
+				"disconnectionModalDescription": "La connessione è stata persa al server al quale eri connesso, probabilmente il server e stato fermato con il comando stop.",
+				"disconnectionModalCloseButton": "Chiudi",
+				"disconnectionModalWelcomeScreenButton": "Torna alla Home",
+				"settingsLink": "Impostazioni",
+				"settingsModalLongTitle": "Impostazioni WebConsole",
+				"showDateSettingsSwitchLabel": "Mostra la data e l'ora per ogni linea della console",
+				"readLogFileSwitchLabel": "Mostra l'intero file log dopo il login",
+				"settingsModalCloseButton": "Conferma",
+				"players_online": "Giocatori online",
+				"cpu_title": "Utilizzo CPU",
+				"ram_title": "Utilizzo RAM",
+				"deleteServerButton": "Cancella il server",
+				"sendCommandButton": "Invio"
+			}
+			break;
 		default:
 			console.error("No language set");
 	}
