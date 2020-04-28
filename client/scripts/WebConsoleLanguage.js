@@ -313,6 +313,44 @@ function setLanguage(locale){
 				"sendCommandButton": "Invio"
 			}
 			break;
+		case "nl_NL": //Credit to Twockx
+				lang = {
+					"navbarHomeLink": "Homepagina",
+					"home_header": "Selecteer een server van het menu",
+					"home_description": "Gebruik de navigatiebalk om een nieuwe Minecraft-server toe te voegen of maak verbinding met een eerder toegevoegde server.",
+					"serversDropdown": "Uw servers",
+					"add_server": "Voeg server toe",
+					"noServersAdded": "Geen servers toegevoegd",
+					"lang_dropdown": "Taal",
+					"addServerModalLongTitle": "Voeg een nieuwe server toe",
+					"addServerModalSvName": "Server naam:",
+					"addServerModalSvIp": "Server IP:",
+					"addServerModalSvPort": "WebConsole poort:",
+					"addServerModalSvSsl": "Server SSL is ingeschakeld",
+					"addServerModalSslAdvice": "SSL is vereist voor HTTPS-clientverbindingen",
+					"addServerModalClose": "Sluiten",
+					"saveAndConnectServerButton": "Opslaan en verbinden",
+					"passwordModalLongTitle": "Wachtwoord vereist",
+					"passwordModalLabel": "Wachtwoord:",
+					"passwordModalRememberLabel": "Onthoud wachtwoord",
+					"passwordModalCloseButton": "Sluiten",
+					"passwordSendButton": "Log in",
+					"disconnectionModalLongTitle": "Verbinding verbroken",
+					"disconnectionModalDescription": "De verbinding met de server waarmee u was verbonden is verbroken, waarschijnlijk is dit veroorzaakt door een serverstop.",
+					"disconnectionModalCloseButton": "Sluiten",
+					"disconnectionModalWelcomeScreenButton": "Terug naar homepagina",
+					"settingsLink": "Instellingen",
+					"settingsModalLongTitle": "WebConsole Instellingen",
+					"showDateSettingsSwitchLabel": "Toon tijd op elke consolelijn",
+					"readLogFileSwitchLabel": "Haal het volledige logbestand op van de server na inloggen",
+					"settingsModalCloseButton": "Klaar",
+					"players_online": "Spelers online",
+					"cpu_title": "CPU",
+					"ram_title": "RAM gebruik",
+					"deleteServerButton": "Verwijder server",
+					"sendCommandButton": "Stuur"
+				}
+				break;
 		default:
 			console.error("No language set");
 	}

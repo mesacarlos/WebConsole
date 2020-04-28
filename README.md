@@ -42,7 +42,7 @@ Fill `host`, `port` and `password` values. They are:
 
 `password`: The login password. Password will be asked every time you connect to WebConsole.
 
-Also, you can modify `language` to view console and command messages in your preferred language. Valid languages are English (`en`), Spanish (`es`), Portuguese (`pt`), Russian (`ru`), French (`fr`), Czech (`cs`) and Chinese (`zh`). **IMPORTANT: There is a known issue with Microsoft Windows cmd that shows weird characters when using a language different than English. If you are using Windows to host your server, check [this wiki page](https://github.com/mesacarlos/WebConsole/wiki/Show-local-characters-in-Windows-Console) to solve the problem**.
+Also, you can modify `language` to view console and command messages in your preferred language. Valid languages are English (`en`), Spanish (`es`), Chinese (`zh`), Czech (`cs`), Dutch (`nl`), French (`fr`), Italian (`it`), Portuguese (`pt`) and Russian (`ru`). **IMPORTANT: There is a known issue with Microsoft Windows cmd that shows weird characters when using a language different than English. If you are using Windows to host your server, check [this wiki page](https://github.com/mesacarlos/WebConsole/wiki/Show-local-characters-in-Windows-Console) to solve the problem**.
 
 You can see a tutorial on how to activate SSL [in this link](https://github.com/mesacarlos/WebConsole/wiki/SSL-Configuration). SSL **is not** required for WebConsole to work, you can still use it without encription, unless you are hosting your client in a HTTPS server, in this case is mandatory to enable SSL in all your servers due to web browsers restrictions.
 
