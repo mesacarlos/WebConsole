@@ -13,7 +13,7 @@ Dont worry about privacy or security: all data is stored in your browser offline
 * Colors supported, for both Windows and Linux hosts. (Colors are represented different in each platform).
 * Real-time connected players, machine CPU and server RAM usage information.
 * Capable of keeping active connections to more than one server to keep retrieving console log in the background for them all.
-* English, Spanish, Russian (thanks to Stashenko), Portuguese (thanks to AlexandreMuassab and Connect500BR), French (thanks to pickatchou999), Italian (thanks to AlexZap), Czech (thanks to Tada) and Chinese (thanks to Neubulae and OPhantomO) supported.
+* English, Spanish, Chinese (thanks to Neubulae and OPhantomO), Czech (thanks to Tada), Dutch (thanks to Twockx), French (thanks to pickatchou999), Italian (thanks to AlexZap), Portuguese (thanks to AlexandreMuassab and Connect500BR) and Russian (thanks to Stashenko) supported.
 * Free, updated regularly, and many more!
 
 ![Screenshot](https://i.imgur.com/sN1sYju.png)
