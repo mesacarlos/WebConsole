@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.java_websocket.WebSocket;
+import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 
@@ -106,7 +107,12 @@ public class WSServer extends WebSocketServer {
 	 * @param content JSONOutput object
 	 */
 	public void sendToClient(WebSocket conn, JSONOutput content) {
-		conn.send(content.toJSON());
+		try {
+			conn.send(content.toJSON());
+		}catch(WebsocketNotConnectedException e) {
+			Bukkit.getLogger().warning("Tried to send message to a disconnected client.");
+		}
+		
 	}
 
 }

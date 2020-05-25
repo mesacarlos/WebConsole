@@ -15,18 +15,35 @@ public class LoginManager {
 		return instance;
 	}
 	
+	/**
+	 * Logs user in
+	 * @param address User to login
+	 */
 	public void logIn(InetSocketAddress address) {
 		loggedInUsers.add(address);
 	}
 	
+	/**
+	 * Logs user out
+	 * @param address User to logout
+	 */
 	public void logOut(InetSocketAddress address) {
 		loggedInUsers.remove(address);
 	}
 	
+	/**
+	 * Check if user is logged in
+	 * @param address User to check
+	 * @return true if user is logged in, false otherwise
+	 */
 	public boolean isLoggedIn(InetSocketAddress address) {
 		return loggedInUsers.contains(address);
 	}
 	
+	/**
+	 * Retrieve the full logged-in user list
+	 * @return list of logged in users
+	 */
 	public ArrayList<InetSocketAddress> getLoggedInUsers() {
 		return loggedInUsers;
 	}
