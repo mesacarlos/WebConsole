@@ -52,7 +52,7 @@ function onWebSocketsMessage(message){
 	switch (message.status) {
 		case 10:
 			//Console Output
-			writeToWebConsole(message.message);
+			writeToWebConsole(message.message, message.time);
 			break;
 		case 200:
 			//Processed
@@ -106,7 +106,7 @@ function onWebSocketsMessage(message){
 /**
 * Write to console
 */
-function writeToWebConsole(msg){
+function writeToWebConsole(msg, time){
 	var isScrolledDown = document.getElementById("consoleTextArea").scrollHeight - document.getElementById("consoleTextArea").scrollTop - 40 == $("#consoleTextArea").height();
 	
 	//Write to div, replacing < to &lt; (to avoid XSS) and replacing new line to br.
@@ -159,8 +159,15 @@ function writeToWebConsole(msg){
 	msg = msg.replace(/§r/g, "</span>");  //&r
 
 	//Append datetime if enabled
-	if(persistenceManager.getSetting("dateTimePrefix"))
-		msg = "[" + new Date().toLocaleTimeString() + "] " + msg;
+	if(persistenceManager.getSetting("dateTimePrefix")){
+		if(typeof time !== 'undefined' && time !== null) //if time is present and not null
+			msg = "[" + time + "] " + msg;
+		else if(typeof time !== 'undefined' && time === null) //if time is present and null
+			; //no time (is already printed)
+		else
+			msg = "[" + new Date().toLocaleTimeString() + "] " + msg;
+	}
+		
 	
 	$("#consoleTextArea").append(msg + "<br>");
 	

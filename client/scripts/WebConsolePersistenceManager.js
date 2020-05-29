@@ -174,21 +174,3 @@ class WebConsolePersistenceManager{
 	}
 	
 }
-
-class WSServer{
-	constructor(serverName, serverURI){
-		this.serverName = serverName;
-		this.serverURI = serverURI;
-	}
-	
-	setPassword(pwd){
-		this.serverPassword = pwd;
-	}
-}
-
-class Setting{
-	constructor(name, defaultValue){
-		this.name = name;
-		this.defaultValue = defaultValue;
-	}
-}

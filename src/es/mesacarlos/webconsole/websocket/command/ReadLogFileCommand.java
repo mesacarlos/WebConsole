@@ -35,7 +35,7 @@ public class ReadLogFileCommand implements WSCommand{
 		}
 		
 		for(String line : lines)
-			wsServer.sendToClient(conn, new ConsoleOutput(line));
+			wsServer.sendToClient(conn, new ConsoleOutput(line, null));
 	}
 
 }

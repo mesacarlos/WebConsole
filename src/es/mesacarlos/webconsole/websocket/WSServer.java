@@ -11,6 +11,7 @@ import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 
 import es.mesacarlos.webconsole.WebConsole;
+import es.mesacarlos.webconsole.util.DateTimeUtils;
 import es.mesacarlos.webconsole.util.Internationalization;
 import es.mesacarlos.webconsole.util.LoginManager;
 import es.mesacarlos.webconsole.websocket.command.WSCommandFactory;
@@ -97,7 +98,7 @@ public class WSServer extends WebSocketServer {
 		Collection<WebSocket> connections = getConnections();
 		for (WebSocket connection : connections) {
 			if (LoginManager.getInstance().isLoggedIn(connection.getRemoteSocketAddress()))
-				sendToClient(connection, new ConsoleOutput(line));
+				sendToClient(connection, new ConsoleOutput(line, DateTimeUtils.getTimeAsString()));
 		}
 	}
 
