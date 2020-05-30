@@ -49,4 +49,19 @@ public class Internationalization {
 		return msg;
 	}
 	
+	/**
+	 * getPhrase() method expects all params to be ISO-8859-1.
+	 * This method will be used when a UTF-8 String is given and you need to use it as a parameter for the above mentioned function.
+	 * 
+	 * @return The same String encoded ISO-8859-1
+	 */
+	public static String utf8ToIso(String msg) {
+		try {
+			msg = new String(msg.getBytes("UTF-8"), "ISO-8859-1");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		return msg;
+	}
+	
 }

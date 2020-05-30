@@ -74,7 +74,7 @@ public class WebConsole extends JavaPlugin {
 		config.addDefault("KeyPassword", "keypassword");
 		
 		// Connection config variables
-		config.addDefault("host", "localhost");
+		config.addDefault("host", "0.0.0.0");
 		config.addDefault("port", 8080);
 		config.addDefault("password", 1234);
 		

@@ -111,7 +111,7 @@ public class WSServer extends WebSocketServer {
 		try {
 			conn.send(content.toJSON());
 		}catch(WebsocketNotConnectedException e) {
-			Bukkit.getLogger().warning("Tried to send message to a disconnected client.");
+			Bukkit.getLogger().warning(Internationalization.getPhrase("error-disconnected-client"));
 		}
 		
 	}

@@ -14,7 +14,7 @@ public class ExecCommand implements WSCommand {
 	@Override
 	public void execute(WSServer wsServer, WebSocket conn, String command) {
 
-		Bukkit.getLogger().info(Internationalization.getPhrase("cmd-executed-console", conn.getRemoteSocketAddress(), command));
+		Bukkit.getLogger().info(Internationalization.getPhrase("cmd-executed-console", conn.getRemoteSocketAddress(), Internationalization.utf8ToIso(command)));
 		ConsoleCommandSender sender = Bukkit.getServer().getConsoleSender();
 
 		try {
