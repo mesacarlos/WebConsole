@@ -49,6 +49,12 @@ You can see a tutorial on how to activate SSL [in this link](https://github.com/
 
 ## Using web interface
 
+### Use Hosted:
+
+Simple visit out [Hosted Webconsole](https://webconsole.imfast.io). We use the latest version. 
+
+### Self Install:
+
 1. Download web interface (client.zip) from [Releases](https://github.com/mesacarlos/WebConsole/releases).
 2. If you want, you can host it in a web server, or use it offline. That's up to you.
 3. To start adding servers, click on `Your servers`, and then `Add server`. Fill Server name, IP and WebConsole port (the one you placed into config.yml before), and you are ready to go. You will be prompted for password when connecting.
