@@ -51,7 +51,7 @@ You can see a tutorial on how to activate SSL [in this link](https://github.com/
 
 ### Use Hosted:
 
-Simple visit out [Hosted Webconsole](https://webconsole.imfast.io). We use the latest version. 
+Simple visit out [Hosted Webconsole](https://webconsole.onrender.com/). We use the latest version. 
 
 ### Self Install:
 
