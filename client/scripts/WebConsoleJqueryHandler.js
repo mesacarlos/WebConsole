@@ -19,7 +19,7 @@ $(document).ready(function() {
 		$("#server-ssl").prop('checked', true);
 		$("#server-ssl").prop("disabled", true);
 	}
-
+        setLanguage(persistenceManager.getLanguage());
 	//Remove servers from persistence with invalid names. See v1.4-rev2 for details
 	var servers = persistenceManager.getAllServers();
 	for(var i = 0; i < servers.length; i++){
