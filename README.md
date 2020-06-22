@@ -9,6 +9,7 @@ WebConsole is a Spigot plugin for Minecraft 1.8-1.15+ that enables you to view y
 Dont worry about privacy or security: all data is stored in your browser offline and your PC will connect directly to your minecraft server. No intermediary web servers, just you and your MC server.
 
 #### Additional features:
+* Multiuser system and View-only user mode: Users with the role "Viewer" can only read console, CPU and RAM usage. Users with role "Admin" can also run commands on the server. Useful if you want your friends to watch the server console but deny them from typing commands and ruining your server.
 * Command history: Use up/down arrow keys to browse the command history, like in the real console.
 * Colors supported, for both Windows and Linux hosts. (Colors are represented different in each platform).
 * Real-time connected players, machine CPU and server RAM usage information.
@@ -24,27 +25,36 @@ Dont worry about privacy or security: all data is stored in your browser offline
 1. Download plugin from [Releases](https://github.com/mesacarlos/WebConsole/releases).
 2. Open and close your server to generate the config.yml file and open it. You will see something like the following:
 
-> useSSL: false  
-> StoreType: JKS  
-> KeyStore: plugins/WebConsole/keystore.jks  
-> StorePassword: storepassword  
-> KeyPassword: keypassword  
-> host: localhost  
-> port: 8080  
-> password: yourPasswordGoesHere  
-> language: en  
+    useSSL: false  
+    StoreType: JKS  
+    KeyStore: plugins/WebConsole/keystore.jks  
+    StorePassword: storepassword  
+    KeyPassword: keypassword  
+    host: 0.0.0.0  
+    port: 8080  
+    language: en  
+    passwords:  
+    &nbsp;&nbsp;&nbsp;admin:  
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user1: mySecurePassword  
+    &nbsp;&nbsp;&nbsp;viewer: {}  
 
-Fill `host`, `port` and `password` values. They are:
 
-`host`: If you are in a VPS or dedicated server (or you have a full public IP allocated for your device) type your public IP. If you are at your home (and you dont have a public IP assigned to your device) type your private IP, it should be something like 192.168.xx.xx.
+
+A explanation of the `host`, `port`, `language` and `passwords` fields follows:
+
+`host`: Leaving it as 0.0.0.0 will do the trick. If you want to listen to a network interface exclusively: If you are in a VPS or dedicated server (or you have a full public IP allocated for your device) type your public IP. If you are at your home (and you dont have a public IP assigned to your device) type your private IP, it should be something like 192.168.xx.xx.
 
 `port`: A port where to run this plugin (cannot be the port you are using for Minecraft).
 
-`password`: The login password. Password will be asked every time you connect to WebConsole.
+You can modify `language` to view console and command messages in your preferred language. Valid languages are English (`en`), Spanish (`es`), Chinese (`zh`), Czech (`cs`), Deutsch (`de`), Dutch (`nl`), French (`fr`), Italian (`it`), Portuguese (`pt`) and Russian (`ru`). **IMPORTANT: There is a known issue with Microsoft Windows cmd that shows weird characters when using a language different than English. If you are using Windows to host your server, check [this wiki page](https://github.com/mesacarlos/WebConsole/wiki/Show-local-characters-in-Windows-Console) to solve the problem**.
 
-Also, you can modify `language` to view console and command messages in your preferred language. Valid languages are English (`en`), Spanish (`es`), Chinese (`zh`), Czech (`cs`), Deutsch (`de`), Dutch (`nl`), French (`fr`), Italian (`it`), Portuguese (`pt`) and Russian (`ru`). **IMPORTANT: There is a known issue with Microsoft Windows cmd that shows weird characters when using a language different than English. If you are using Windows to host your server, check [this wiki page](https://github.com/mesacarlos/WebConsole/wiki/Show-local-characters-in-Windows-Console) to solve the problem**.
+From version 2.0 you can now create more than one user and set them as admin (Permission for both reading console and executing commands) or viewer (Permission for only reading console and CPU and RAM usage). This is configured using the `passwords` section:
+- If you want to create a admin user, type below `admin:` a row like `user: password` replacing user with your desired username and password with your password.
+- You can create as many admins as you want repeating this step.
+- By default, a user called user1 with password mySecurePassword is created, please replace or remove it as it is only served as an example.
+- If you want to create a view-only user, remove the `{}` after `viewer: ` and do the same process as for admin users below `viewer: `.
 
-You can see a tutorial on how to activate SSL [in this link](https://github.com/mesacarlos/WebConsole/wiki/SSL-Configuration). SSL **is not** required for WebConsole to work, you can still use it without encription, unless you are hosting your client in a HTTPS server, in this case is mandatory to enable SSL in all your servers due to web browsers restrictions.
+The rest of the fields are used for SSL configuration. You can see a tutorial on how to activate SSL [in this link](https://github.com/mesacarlos/WebConsole/wiki/SSL-Configuration). SSL **is not** required for WebConsole to work, you can still use it without encription, unless you are hosting your client in a HTTPS server, in this case is mandatory to enable SSL in all your servers due to web browsers restrictions.
 
 
 ## Using web interface
