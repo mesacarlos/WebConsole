@@ -13,6 +13,7 @@ import javax.net.ssl.TrustManagerFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Filter;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.java_websocket.server.DefaultSSLWebSocketServerFactory;
@@ -76,11 +77,17 @@ public class WebConsole extends JavaPlugin {
 		// Connection config variables
 		config.addDefault("host", "0.0.0.0");
 		config.addDefault("port", 8080);
-		config.addDefault("password", 1234);
 		
 		// Language config
 		config.addDefault("language", "en");
-
+		
+		if(config.getConfigurationSection("passwords") == null) {
+			ConfigurationSection passwordsSection = config.createSection("passwords");
+			ConfigurationSection adminPasswordSection = passwordsSection.createSection("admin");
+			adminPasswordSection.addDefault("user1", "mySecurePassword");
+			passwordsSection.createSection("viewer");
+		}
+		
 		config.options().copyDefaults(true);
 		saveConfig();
 	}

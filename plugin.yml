@@ -1,7 +1,7 @@
 name: WebConsole
 main: es.mesacarlos.webconsole.WebConsole
 api-version: 1.13
-version: 1.6
+version: 2.0
 description: WebSockets-based web console
 author: Carlos Mesa
 commands:
