@@ -55,8 +55,20 @@ function onWebSocketsMessage(message){
 			writeToWebConsole(message.message, message.time);
 			break;
 		case 200:
-			//Processed
+			//LoggedIn
 			writeToWebConsole(message.message);
+
+			//Show user and permissions
+			$("#loggedUsernameLabel").text(message.username);
+			$("#loggedUserTypeLabel").text(message.as);
+
+			//Disable command bar if user is viewer
+			if(message.as.toLowerCase() == "viewer"){
+				$("#commandInput").prop("disabled", true);
+				$("#sendCommandButton").prop("disabled", true);
+			}
+
+			//Read log file if enabled
 			if(connectionManager.activeConnection.isLogged === false){
 				connectionManager.activeConnection.isLogged = true;
 				if(persistenceManager.getSetting("retrieveLogFile") === true)

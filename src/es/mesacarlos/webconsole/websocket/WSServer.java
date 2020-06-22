@@ -19,7 +19,7 @@ import es.mesacarlos.webconsole.websocket.command.WSCommand;
 import es.mesacarlos.webconsole.websocket.response.ConsoleOutput;
 import es.mesacarlos.webconsole.websocket.response.JSONOutput;
 import es.mesacarlos.webconsole.websocket.response.LoginRequired;
-import es.mesacarlos.webconsole.websocket.response.Processed;
+import es.mesacarlos.webconsole.websocket.response.LoggedIn;
 import es.mesacarlos.webconsole.websocket.response.UnknownCommand;
 
 public class WSServer extends WebSocketServer {
@@ -34,7 +34,7 @@ public class WSServer extends WebSocketServer {
 	@Override
 	public void onOpen(WebSocket conn, ClientHandshake handshake) {
 		if (LoginManager.getInstance().isLoggedIn(conn.getRemoteSocketAddress())) {
-			sendToClient(conn, new Processed(Internationalization.getPhrase("connection-resumed-message")));
+			sendToClient(conn, new LoggedIn(Internationalization.getPhrase("connection-resumed-message")));
 			Bukkit.getLogger().info(Internationalization.getPhrase("connection-resumed-console", conn.getRemoteSocketAddress()));
 		} else {
 			sendToClient(conn, new LoginRequired(Internationalization.getPhrase("connection-login-message")));

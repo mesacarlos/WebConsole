@@ -4,12 +4,13 @@ import org.bukkit.Bukkit;
 import org.java_websocket.WebSocket;
 
 import es.mesacarlos.webconsole.auth.LoginManager;
+import es.mesacarlos.webconsole.auth.PasswordManager;
 import es.mesacarlos.webconsole.auth.User;
 import es.mesacarlos.webconsole.auth.UserType;
 import es.mesacarlos.webconsole.util.Internationalization;
 import es.mesacarlos.webconsole.websocket.WSServer;
 import es.mesacarlos.webconsole.websocket.response.LoginRequired;
-import es.mesacarlos.webconsole.websocket.response.Processed;
+import es.mesacarlos.webconsole.websocket.response.LoggedIn;
 
 public class LogInCommand implements WSCommand {
 	
@@ -20,12 +21,12 @@ public class LogInCommand implements WSCommand {
 			return;
 		
 		//Check user type and login is password is valid
-		switch(LoginManager.getInstance().isValidUser(password)) {
+		switch(PasswordManager.isValidUser(password)) {
 			case ADMIN:
-				login(wsServer, conn, LoginManager.getInstance().isValidAdminPassword(password), UserType.ADMIN);
+				login(wsServer, conn, PasswordManager.isValidAdminPassword(password), UserType.ADMIN);
 				break;
 			case VIEWER:
-				login(wsServer, conn, LoginManager.getInstance().isValidViewerPassword(password), UserType.VIEWER);
+				login(wsServer, conn, PasswordManager.isValidViewerPassword(password), UserType.VIEWER);
 				break;
 			case UNKNOWN:
 				wsServer.sendToClient(conn, new LoginRequired(Internationalization.getPhrase("login-failed-message")));
@@ -43,7 +44,7 @@ public class LogInCommand implements WSCommand {
 		User user = new User(conn.getRemoteSocketAddress(), username, as);
 		LoginManager.getInstance().logIn(user);
 		
-		wsServer.sendToClient(conn, new Processed(Internationalization.getPhrase("login-sucessful-message"), "LOGIN ********"));
+		wsServer.sendToClient(conn, new LoggedIn(Internationalization.getPhrase("login-sucessful-message"), "LOGIN ********", user.getUsername(), user.getUserType()));
 		Bukkit.getLogger().info(Internationalization.getPhrase("login-sucessful-console", user.toString()));
 	}
 

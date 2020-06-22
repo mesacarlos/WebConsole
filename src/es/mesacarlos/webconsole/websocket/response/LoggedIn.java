@@ -2,17 +2,23 @@ package es.mesacarlos.webconsole.websocket.response;
 
 import com.google.gson.JsonObject;
 
-public class Processed implements JSONOutput{
+import es.mesacarlos.webconsole.auth.UserType;
+
+public class LoggedIn implements JSONOutput{
 	private String message;
 	private String respondsTo;
+	private String username;
+	private UserType as;
 	
-	public Processed(String message) {
+	public LoggedIn(String message) {
 		this.message = message;
 	}
 	
-	public Processed(String message, String respondsTo) {
+	public LoggedIn(String message, String respondsTo, String username, UserType as) {
 		this.message = message;
 		this.respondsTo = respondsTo;
+		this.username = username;
+		this.as = as;
 	}
 	
 	@Override
@@ -33,12 +39,28 @@ public class Processed implements JSONOutput{
 		return respondsTo;
 	}
 	
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public String getAs() {
+		switch(as) {
+			case ADMIN:
+				return "ADMIN";
+			default:
+				return "VIEWER"; //This is not a security hole bc its just informative...
+		}
+	}
+
 	@Override
 	public String toJSON() {
 		JsonObject object = new JsonObject();
 		object.addProperty("status", getStatusCode());
-		object.addProperty("statusDescription", "Processed");
+		object.addProperty("statusDescription", "LoggedIn");
 		object.addProperty("respondsTo", getRespondsTo());
+		object.addProperty("username", getUsername());
+		object.addProperty("as", getAs());
 		object.addProperty("message", getMessage());
 		return object.toString();
 	}

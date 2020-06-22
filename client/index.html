@@ -111,9 +111,19 @@
 						</div>
 					</div>
 					<div class="col-sm-3 mb-2">
-						<button type="button" class="btn btn-danger" id="deleteServerButton">Delete server</button>
+						<div class="card">
+							<div class="card-body">
+								<p class="card-text">
+									<span id="user_title">Logged as</span>
+									<span id="loggedUsernameLabel"></span>
+									(<span id="loggedUserTypeLabel"></span>)
+								</p>
+								<button type="button" class="btn btn-danger btn-sm" id="deleteServerButton">Delete server</button>
+							</div>
+						</div>
 					</div>
 				</div>
+				
 				<div class="card mb-2">
 					<div class="card-body overflow-auto text-light bg-dark console" id="consoleTextArea"></div>
 				</div>
