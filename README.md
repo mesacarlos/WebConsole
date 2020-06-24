@@ -52,7 +52,7 @@ From version 2.0 you can now create more than one user and set them as admin (Pe
 - If you want to create a admin user, type below `admin:` a row like `user: password` replacing user with your desired username and password with your password.
 - You can create as many admins as you want repeating this step.
 - By default, a user called user1 with password mySecurePassword is created, please replace or remove it as it is only served as an example.
-- If you want to create a view-only user, remove the `{}` after `viewer: ` and do the same process as for admin users below `viewer: `.
+- If you want to create a view-only user, remove the `{}` after `viewer: ` and do the same process as for admin users below `viewer: `. You can also create as many viewers as needed.
 
 The rest of the fields are used for SSL configuration. You can see a tutorial on how to activate SSL [in this link](https://github.com/mesacarlos/WebConsole/wiki/SSL-Configuration). SSL **is not** required for WebConsole to work, you can still use it without encription, unless you are hosting your client in a HTTPS server, in this case is mandatory to enable SSL in all your servers due to web browsers restrictions.
 
