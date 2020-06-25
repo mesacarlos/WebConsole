@@ -28,10 +28,6 @@ public class LogInCommand implements WSCommand {
 			case VIEWER:
 				login(wsServer, conn, PasswordManager.isValidViewerPassword(password), UserType.VIEWER);
 				break;
-			case UNKNOWN:
-				wsServer.sendToClient(conn, new LoginRequired(Internationalization.getPhrase("login-failed-message")));
-				Bukkit.getLogger().info(Internationalization.getPhrase("login-failed-console", conn.getRemoteSocketAddress()));
-				break;
 			default:
 				wsServer.sendToClient(conn, new LoginRequired(Internationalization.getPhrase("login-failed-message")));
 				Bukkit.getLogger().info(Internationalization.getPhrase("login-failed-console", conn.getRemoteSocketAddress()));

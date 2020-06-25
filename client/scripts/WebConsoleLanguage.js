@@ -43,6 +43,7 @@ function setLanguage(locale){
 				"players_online": "Players Online",
 				"cpu_title": "CPU",
 				"ram_title": "RAM usage",
+				"user_title": "Logged as",
 				"deleteServerButton": "Delete server",
 				"sendCommandButton": "Send"
 			}
@@ -81,6 +82,7 @@ function setLanguage(locale){
 				"players_online": "Jugadores en línea",
 				"cpu_title": "CPU",
 				"ram_title": "RAM en uso",
+				"user_title": "Iniciado sesion como",
 				"deleteServerButton": "Borrar servidor",
 				"sendCommandButton": "Enviar"
 			}
@@ -119,6 +121,7 @@ function setLanguage(locale){
 				"players_online": "Игроки",
 				"cpu_title": "CPU",
 				"ram_title": "RAM",
+				"user_title": "Вы вошли как",
 				"deleteServerButton": "Удалить сервер",
 				"sendCommandButton": "Отправить"
 			}
@@ -157,6 +160,7 @@ function setLanguage(locale){
 				"players_online": "Jogadores online",
 				"cpu_title": "Consumo de CPU",
 				"ram_title": "Consumo de RAM",
+				"user_title": "Logado como",
 				"deleteServerButton": "Remover este servidor",
 				"sendCommandButton": "Enviar"
 			}
@@ -195,6 +199,7 @@ function setLanguage(locale){
 				"players_online": "在线人数",
 				"cpu_title": "CPU",
 				"ram_title": "内存使用量",
+				"user_title": "登录为",
 				"deleteServerButton": "关闭服务器",
 				"sendCommandButton": "发送"
 			}
@@ -233,6 +238,7 @@ function setLanguage(locale){
 				"players_online": "Joueurs en ligne",
 				"cpu_title": "Utilisation de la CPU",
 				"ram_title": "Utilisation de la RAM",
+				"user_title": "Connecté en tant que",
 				"deleteServerButton": "Supprimer le serveur",
 				"sendCommandButton": "Envoyer"
 			}
@@ -271,6 +277,7 @@ function setLanguage(locale){
 				"players_online": "Počet hráčů online",
 				"cpu_title": "CPU",
 				"ram_title": "Využití RAM",
+				"user_title": "Přihlášen jako",
 				"deleteServerButton": "Odstranit server",
 				"sendCommandButton": "Odeslat"
 			}
@@ -309,6 +316,7 @@ function setLanguage(locale){
 				"players_online": "Giocatori online",
 				"cpu_title": "Utilizzo CPU",
 				"ram_title": "Utilizzo RAM",
+				"user_title": "Collegato come",
 				"deleteServerButton": "Cancella il server",
 				"sendCommandButton": "Invio"
 			}
@@ -347,6 +355,7 @@ function setLanguage(locale){
 				"players_online": "Spelers online",
 				"cpu_title": "CPU",
 				"ram_title": "RAM gebruik",
+				"user_title": "Aangemeld als",
 				"deleteServerButton": "Verwijder server",
 				"sendCommandButton": "Stuur"
 			}
@@ -385,6 +394,7 @@ function setLanguage(locale){
 				"players_online": "Spieler Online",
 				"cpu_title": "CPU",
 				"ram_title": "RAM",
+				"user_title": "Angemeldet als",
 				"deleteServerButton": "Server entfernen",
 				"sendCommandButton": "Senden"
 			}
