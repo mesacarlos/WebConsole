@@ -23,10 +23,10 @@ public class LogInCommand implements WSCommand {
 		//Check user type and login is password is valid
 		switch(PasswordManager.isValidUser(password)) {
 			case ADMIN:
-				login(wsServer, conn, PasswordManager.isValidAdminPassword(password), UserType.ADMIN);
+				login(wsServer, conn, PasswordManager.getAdminUsernameFromPassword(password), UserType.ADMIN);
 				break;
 			case VIEWER:
-				login(wsServer, conn, PasswordManager.isValidViewerPassword(password), UserType.VIEWER);
+				login(wsServer, conn, PasswordManager.getViewerUsernameFromPassword(password), UserType.VIEWER);
 				break;
 			default:
 				wsServer.sendToClient(conn, new LoginRequired(Internationalization.getPhrase("login-failed-message")));

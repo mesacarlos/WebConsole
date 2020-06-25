@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.java_websocket.WebSocket;
 
+import es.mesacarlos.webconsole.WebConsole;
 import es.mesacarlos.webconsole.auth.LoginManager;
 import es.mesacarlos.webconsole.auth.User;
 import es.mesacarlos.webconsole.auth.UserType;
@@ -25,11 +26,11 @@ public class ExecCommand implements WSCommand {
 		
 		Bukkit.getLogger().info(Internationalization.getPhrase("cmd-executed-console", conn.getRemoteSocketAddress(), Internationalization.utf8ToIso(command)));
 		ConsoleCommandSender sender = Bukkit.getServer().getConsoleSender();
-
+		WebConsole plugin = (WebConsole) Bukkit.getPluginManager().getPlugin("WebConsole");
 		try {
 			@SuppressWarnings("unused")
 			boolean success = Bukkit.getScheduler()
-					.callSyncMethod(wsServer.getMainClass(), () -> Bukkit.dispatchCommand(sender, command)).get();
+					.callSyncMethod(plugin, () -> Bukkit.dispatchCommand(sender, command)).get();
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
 		}

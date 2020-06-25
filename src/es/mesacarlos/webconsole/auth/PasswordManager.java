@@ -1,10 +1,7 @@
 package es.mesacarlos.webconsole.auth;
 
-import java.util.Map;
-
-import org.bukkit.Bukkit;
-
-import es.mesacarlos.webconsole.WebConsole;
+import es.mesacarlos.webconsole.config.ConfigManager;
+import es.mesacarlos.webconsole.config.UserData;
 
 public class PasswordManager {
 	
@@ -15,12 +12,12 @@ public class PasswordManager {
 	 */
 	public static UserType isValidUser(String password) {
 		//Check if is an admin
-		String username = isValidAdminPassword(password);
+		String username = getAdminUsernameFromPassword(password);
 		if(username != null)
 			return UserType.ADMIN;
 		
 		//Check if is a viewer
-		username = isValidViewerPassword(password);
+		username = getViewerUsernameFromPassword(password);
 		if(username != null)
 			return UserType.VIEWER;
 		
@@ -33,15 +30,10 @@ public class PasswordManager {
 	 * @param password Provided password
 	 * @return Name of the user if password corresponds to a valid admin, null if is a viewer or an invalid password
 	 */
-	public static String isValidAdminPassword(String password) {
-		WebConsole plugin = (WebConsole)Bukkit.getPluginManager().getPlugin("WebConsole");
-		Map<String, Object> passwords = plugin.getConfig().getConfigurationSection("passwords").getConfigurationSection("admin").getValues(false);
-		
-		for(Map.Entry<String, Object> entry : passwords.entrySet()) {
-			String pwd = (String)entry.getValue();
-			if(pwd.equals(password))
-				return entry.getKey();
-		}
+	public static String getAdminUsernameFromPassword(String password) {
+		for(UserData ud : ConfigManager.getInstance().getAdmins())
+			if(ud.getPassword().equals(password))
+				return ud.getUsername();
 		return null;
 	}
 	
@@ -50,15 +42,10 @@ public class PasswordManager {
 	 * @param password Provided password
 	 * @return Name of the user if password corresponds to a valid viewer, null if is a admin or invalid password
 	 */
-	public static String isValidViewerPassword(String password) {
-		WebConsole plugin = (WebConsole)Bukkit.getPluginManager().getPlugin("WebConsole");
-		Map<String, Object> passwords = plugin.getConfig().getConfigurationSection("passwords").getConfigurationSection("viewer").getValues(false);
-		
-		for(Map.Entry<String, Object> entry : passwords.entrySet()) {
-			String pwd = (String)entry.getValue();
-			if(pwd.equals(password))
-				return entry.getKey();
-		}
+	public static String getViewerUsernameFromPassword(String password) {
+		for(UserData ud : ConfigManager.getInstance().getViewers())
+			if(ud.getPassword().equals(password))
+				return ud.getUsername();
 		return null;
 	}
 	

@@ -3,7 +3,6 @@ package es.mesacarlos.webconsole;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.security.KeyStore;
 
 import javax.net.ssl.KeyManagerFactory;
@@ -13,29 +12,24 @@ import javax.net.ssl.TrustManagerFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Filter;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.java_websocket.server.DefaultSSLWebSocketServerFactory;
 
+import es.mesacarlos.webconsole.config.ConfigManager;
 import es.mesacarlos.webconsole.minecraft.WebConsoleCommand;
 import es.mesacarlos.webconsole.util.Internationalization;
 import es.mesacarlos.webconsole.util.LogFilter;
 import es.mesacarlos.webconsole.websocket.WSServer;
 
 public class WebConsole extends JavaPlugin {
-	FileConfiguration config = this.getConfig();
-
 	// Websocket server and thread
 	private WSServer server;
 	private Thread wsThread;
 
 	@Override
 	public void onEnable() {
-		createConfig();
-		
 		//Change language to user-specified language.
-		Internationalization.setCurrentLocale(config.getString("language"));
+		Internationalization.setCurrentLocale(ConfigManager.getInstance().getLanguage());
 		
 		//Start WebSocket Server
 		try {
@@ -64,47 +58,18 @@ public class WebConsole extends JavaPlugin {
 	}
 
 	/**
-	 * Creates configuration file
-	 */
-	private void createConfig() {
-		// SSL variables
-		config.addDefault("useSSL", false);
-		config.addDefault("StoreType", "JKS");
-		config.addDefault("KeyStore", "plugins/WebConsole/keystore.jks");
-		config.addDefault("StorePassword", "storepassword");
-		config.addDefault("KeyPassword", "keypassword");
-		
-		// Connection config variables
-		config.addDefault("host", "0.0.0.0");
-		config.addDefault("port", 8080);
-		
-		// Language config
-		config.addDefault("language", "en");
-		
-		if(config.getConfigurationSection("passwords") == null) {
-			ConfigurationSection passwordsSection = config.createSection("passwords");
-			ConfigurationSection adminPasswordSection = passwordsSection.createSection("admin");
-			adminPasswordSection.addDefault("user1", "mySecurePassword");
-			passwordsSection.createSection("viewer");
-		}
-		
-		config.options().copyDefaults(true);
-		saveConfig();
-	}
-
-	/**
 	 * Start WebSocket server
 	 */
 	private void startWS() throws Exception {
 		// Create WebSocket server
-		server = new WSServer(this, new InetSocketAddress(config.getString("host"), config.getInt("port")));
+		server = new WSServer(ConfigManager.getInstance().getSocketAdress());
 		
-		if(config.getBoolean("useSSL")) {
+		if(ConfigManager.getInstance().isSslEnabled()) {
 			// Configure SSL
-			String STORETYPE = config.getString("StoreType");
-			String KEYSTORE = config.getString("KeyStore");
-			String STOREPASSWORD = config.getString("StorePassword");
-			String KEYPASSWORD = config.getString("KeyPassword");
+			String STORETYPE = ConfigManager.getInstance().getStoreType();
+			String KEYSTORE = ConfigManager.getInstance().getKeyStore();
+			String STOREPASSWORD = ConfigManager.getInstance().getStorePassword();
+			String KEYPASSWORD = ConfigManager.getInstance().getKeyPassword();
 			
 			KeyStore ks = KeyStore.getInstance(STORETYPE);
 			File kf = new File(KEYSTORE);
@@ -133,6 +98,6 @@ public class WebConsole extends JavaPlugin {
 	}
 
 	public WSServer getWSServer() {
-		return (WSServer) server;
+		return server;
 	}
 }

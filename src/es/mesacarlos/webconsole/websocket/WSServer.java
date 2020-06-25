@@ -10,7 +10,6 @@ import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 
-import es.mesacarlos.webconsole.WebConsole;
 import es.mesacarlos.webconsole.auth.LoginManager;
 import es.mesacarlos.webconsole.util.DateTimeUtils;
 import es.mesacarlos.webconsole.util.Internationalization;
@@ -24,11 +23,9 @@ import es.mesacarlos.webconsole.websocket.response.UnknownCommand;
 
 public class WSServer extends WebSocketServer {
 	private HashMap<String, WSCommand> commands = WSCommandFactory.getCommandsHashMap();
-	private WebConsole plugin;
 
-	public WSServer(WebConsole plugin, InetSocketAddress address) {
+	public WSServer(InetSocketAddress address) {
 		super(address);
-		this.plugin = plugin;
 	}
 
 	@Override
@@ -81,14 +78,6 @@ public class WSServer extends WebSocketServer {
 	@Override
 	public void onStart() {
 		Bukkit.getLogger().info(Internationalization.getPhrase("started-websocket"));
-	}
-
-	/**
-	 * Returns main class
-	 * @return Main plugin class
-	 */
-	public WebConsole getMainClass() {
-		return plugin;
 	}
 
 	/**
