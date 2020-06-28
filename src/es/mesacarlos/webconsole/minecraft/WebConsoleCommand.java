@@ -7,7 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 import es.mesacarlos.webconsole.auth.LoginManager;
-import es.mesacarlos.webconsole.auth.User;
+import es.mesacarlos.webconsole.auth.ConnectedUser;
 import es.mesacarlos.webconsole.util.Internationalization;
 
 public class WebConsoleCommand implements CommandExecutor {
@@ -22,14 +22,14 @@ public class WebConsoleCommand implements CommandExecutor {
 		StringBuilder msg = new StringBuilder();
 
 		msg.append(Internationalization.getPhrase("webconsole-version", version) + "\n");
-		ArrayList<User> users = LoginManager.getInstance().getLoggedInUsers();
+		ArrayList<ConnectedUser> users = LoginManager.getInstance().getLoggedInUsers();
 		
 		if (users.isEmpty()) {
 			msg.append(Internationalization.getPhrase("webconsole-no-connections"));
 		} else {
 			msg.append(Internationalization.getPhrase("webconsole-active-connections") + "\n");
 			for (int i = 0; i < users.size(); i++) {
-				User user = users.get(i);
+				ConnectedUser user = users.get(i);
 				msg.append(user.toString());
 				if(i+1 < users.size())
 					msg.append("\n");

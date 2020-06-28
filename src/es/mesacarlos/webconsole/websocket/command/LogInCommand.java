@@ -4,9 +4,9 @@ import org.bukkit.Bukkit;
 import org.java_websocket.WebSocket;
 
 import es.mesacarlos.webconsole.auth.LoginManager;
-import es.mesacarlos.webconsole.auth.PasswordManager;
-import es.mesacarlos.webconsole.auth.User;
-import es.mesacarlos.webconsole.auth.UserType;
+import es.mesacarlos.webconsole.auth.ConnectedUser;
+import es.mesacarlos.webconsole.config.ConfigManager;
+import es.mesacarlos.webconsole.config.UserData;
 import es.mesacarlos.webconsole.util.Internationalization;
 import es.mesacarlos.webconsole.websocket.WSServer;
 import es.mesacarlos.webconsole.websocket.response.LoginRequired;
@@ -20,28 +20,19 @@ public class LogInCommand implements WSCommand {
 		if (LoginManager.getInstance().isLoggedIn(conn.getRemoteSocketAddress()))
 			return;
 		
-		//Check user type and login is password is valid
-		switch(PasswordManager.isValidUser(password)) {
-			case ADMIN:
-				login(wsServer, conn, PasswordManager.getAdminUsernameFromPassword(password), UserType.ADMIN);
-				break;
-			case VIEWER:
-				login(wsServer, conn, PasswordManager.getViewerUsernameFromPassword(password), UserType.VIEWER);
-				break;
-			default:
-				wsServer.sendToClient(conn, new LoginRequired(Internationalization.getPhrase("login-failed-message")));
-				Bukkit.getLogger().info(Internationalization.getPhrase("login-failed-console", conn.getRemoteSocketAddress()));
-				break;
+		//Check if user exists
+		for(UserData ud : ConfigManager.getInstance().getAllUsers()) {
+			if(ud.getPassword().equals(password)) {
+				ConnectedUser user = new ConnectedUser(conn.getRemoteSocketAddress(), ud.getUsername(), ud.getUserType());
+				LoginManager.getInstance().logIn(user);
+				
+				wsServer.sendToClient(conn, new LoggedIn(Internationalization.getPhrase("login-sucessful-message"), "LOGIN ********", user.getUsername(), user.getUserType()));
+				Bukkit.getLogger().info(Internationalization.getPhrase("login-sucessful-console", user.toString()));
+				return;
+			}
 		}
-		
-	}
-	
-	private void login(WSServer wsServer, WebSocket conn, String username, UserType as) {
-		User user = new User(conn.getRemoteSocketAddress(), username, as);
-		LoginManager.getInstance().logIn(user);
-		
-		wsServer.sendToClient(conn, new LoggedIn(Internationalization.getPhrase("login-sucessful-message"), "LOGIN ********", user.getUsername(), user.getUserType()));
-		Bukkit.getLogger().info(Internationalization.getPhrase("login-sucessful-console", user.toString()));
+		wsServer.sendToClient(conn, new LoginRequired(Internationalization.getPhrase("login-failed-message")));
+		Bukkit.getLogger().info(Internationalization.getPhrase("login-failed-console", conn.getRemoteSocketAddress()));
 	}
 
 }

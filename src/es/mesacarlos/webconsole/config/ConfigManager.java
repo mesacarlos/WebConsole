@@ -95,12 +95,12 @@ public class ConfigManager {
 	 * Get all admins as a UserData list
 	 * @return list of admin users
 	 */
-	public List<UserData> getAdmins() {
+	private List<UserData> getAdmins() {
 		Map<String, Object> passwords = plugin.getConfig().getConfigurationSection("passwords").getConfigurationSection("admin").getValues(false);
 		List<UserData> adminUsers = new ArrayList<UserData>();
 		
 		for(Map.Entry<String, Object> entry : passwords.entrySet())
-			adminUsers.add(new UserData(entry.getKey(), entry.getValue().toString()));
+			adminUsers.add(new UserData(entry.getKey(), entry.getValue().toString(), UserType.ADMIN));
 		
 		return adminUsers;
 	}
@@ -109,14 +109,24 @@ public class ConfigManager {
 	 * Get all viewers as a UserData list
 	 * @return list of viewer users
 	 */
-	public List<UserData> getViewers() {
+	private List<UserData> getViewers() {
 		Map<String, Object> passwords = plugin.getConfig().getConfigurationSection("passwords").getConfigurationSection("viewer").getValues(false);
 		List<UserData> viewerUsers = new ArrayList<UserData>();
 		
 		for(Map.Entry<String, Object> entry : passwords.entrySet())
-			viewerUsers.add(new UserData(entry.getKey(), entry.getValue().toString()));
+			viewerUsers.add(new UserData(entry.getKey(), entry.getValue().toString(), UserType.VIEWER));
 		
 		return viewerUsers;
+	}
+	
+	/**
+	 * Get all registered users
+	 * @return All Admin and Viewer users inside config.yml
+	 */
+	public List<UserData> getAllUsers(){
+		List<UserData> users = getAdmins();
+		users.addAll(getViewers());
+		return users;
 	}
 	
 }

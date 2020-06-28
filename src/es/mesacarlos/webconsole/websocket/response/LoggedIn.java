@@ -2,7 +2,7 @@ package es.mesacarlos.webconsole.websocket.response;
 
 import com.google.gson.JsonObject;
 
-import es.mesacarlos.webconsole.auth.UserType;
+import es.mesacarlos.webconsole.config.UserType;
 
 public class LoggedIn implements JSONOutput{
 	private String message;

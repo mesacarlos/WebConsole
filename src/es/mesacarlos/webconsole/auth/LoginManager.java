@@ -4,7 +4,7 @@ import java.net.InetSocketAddress;
 import java.util.ArrayList;
 
 public class LoginManager {
-	private ArrayList<User> loggedInUsers = new ArrayList<User>();
+	private ArrayList<ConnectedUser> loggedInUsers = new ArrayList<ConnectedUser>();
 	private static LoginManager instance;
 	
 	private LoginManager() {}
@@ -19,7 +19,7 @@ public class LoginManager {
 	 * Logs user in
 	 * @param user User to login
 	 */
-	public void logIn(User user) {
+	public void logIn(ConnectedUser user) {
 		loggedInUsers.add(user);
 	}
 	
@@ -28,7 +28,7 @@ public class LoginManager {
 	 * @param address User to logout
 	 */
 	public void logOut(InetSocketAddress address) {
-		for(User user : loggedInUsers)
+		for(ConnectedUser user : loggedInUsers)
 			if(user.getSocketAddress().equals(address))
 				loggedInUsers.remove(user);
 	}
@@ -38,8 +38,8 @@ public class LoginManager {
 	 * @param address socket of the user
 	 * @return User object, null if no user logged in from that address
 	 */
-	public User getUser(InetSocketAddress address) {
-		for(User user : loggedInUsers)
+	public ConnectedUser getUser(InetSocketAddress address) {
+		for(ConnectedUser user : loggedInUsers)
 			if(user.getSocketAddress().equals(address))
 				return user;
 		return null;
@@ -51,7 +51,7 @@ public class LoginManager {
 	 * @return true if user is logged in, false otherwise
 	 */
 	public boolean isLoggedIn(InetSocketAddress address) {
-		for(User user : loggedInUsers)
+		for(ConnectedUser user : loggedInUsers)
 			if(user.getSocketAddress().equals(address))
 				return true;
 		return false;
@@ -61,7 +61,7 @@ public class LoginManager {
 	 * Retrieve the full logged-in user list
 	 * @return list of logged in users
 	 */
-	public ArrayList<User> getLoggedInUsers() {
+	public ArrayList<ConnectedUser> getLoggedInUsers() {
 		return loggedInUsers;
 	}
 	
