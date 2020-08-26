@@ -48,6 +48,45 @@ function setLanguage(locale){
 				"sendCommandButton": "Send"
 			}
 			break;
+		case "ko_KR":
+			lang = {
+				"navbarHomeLink": "메인",
+				"home_header": "메뉴에서 서버를 선택해 주세요",
+				"home_description": "새 서버를 추가하거나 전에 추가한 서버에 연결하려면 네비게이션 바를 사용하세요.",
+				"serversDropdown": "서버 목록",
+				"add_server": "서버 추가하기",
+				"noServersAdded": "서버 없음",
+				"lang_dropdown": "언어",
+				"addServerModalLongTitle": "서버 추가",
+				"addServerModalSvName": "서버 이름:",
+				"addServerModalSvIp": "서버 주소:",
+				"addServerModalSvPort": "WebConsole 포트:",
+				"addServerModalSvSsl": "서버가 SSL을 사용합니다",
+				"addServerModalSslAdvice": "SSL은 HTTPS 연결을 위해 필요합니다",
+				"addServerModalClose": "닫기",
+				"saveAndConnectServerButton": "저장하고 연결하기",
+				"passwordModalLongTitle": "비밀번호 필요",
+				"passwordModalLabel": "비밀번호:",
+				"passwordModalRememberLabel": "비밀번호 기억",
+				"passwordModalCloseButton": "닫기",
+				"passwordSendButton": "로그인",
+				"disconnectionModalLongTitle": "연결 끊김",
+				"disconnectionModalDescription": "연결되어 있던 서버에서 연결이 끊겼습니다. 아마 서버가 닫힌 것 같습니다.",
+				"disconnectionModalCloseButton": "닫기",
+				"disconnectionModalWelcomeScreenButton": "메인으로 돌아가기",
+				"settingsLink": "설정",
+				"settingsModalLongTitle": "WebConsole 설정",
+				"showDateSettingsSwitchLabel": "모든 줄에 시각 표시하기",
+				"readLogFileSwitchLabel": "로그인 후 전체 로그 파일 읽기",
+				"settingsModalCloseButton": "완료",
+				"players_online": "온라인인 플레이어",
+				"cpu_title": "CPU",
+				"ram_title": "RAM 사용량",
+				"user_title": "로그인된 사용자:",
+				"deleteServerButton": "서버 삭제하기",
+				"sendCommandButton": "전송"
+			}
+			break;
 		case "es_ES":
 			lang = {
 				"navbarHomeLink": "Inicio",
