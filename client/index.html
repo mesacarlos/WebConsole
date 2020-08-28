@@ -218,8 +218,12 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body" id="disconnectionModalDescription">
-						Connection was lost with the server you were connected to, probably caused by a server stop.
+					<div class="modal-body">
+						<span id="disconnectionModalDescription">Connection was lost with the server. This can be caused by:</span>
+						<ul>
+							<li id="disconnectionModalsub1">Server was closed intentionally.</li>
+							<li id="disconnectionModalsub2">Port is not opened on your host. In this case, troubleshoot using <a href="https://www.yougetsignal.com/tools/open-ports/">this tool</a> and recheck your firewall or router.</li>
+						</ul>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-primary" data-dismiss="modal" id="disconnectionModalCloseButton">Close</button>
