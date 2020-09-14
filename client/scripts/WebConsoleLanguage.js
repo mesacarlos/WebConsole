@@ -460,6 +460,47 @@ function setLanguage(locale){
 				"sendCommandButton": "Senden"
 			}
 			break;
+		case "tr_TR": //Credit to acarnd03
+			lang = {
+				"navbarHomeLink": "Ev",
+				"home_header": "Menüden bir sunucu seçin",
+				"home_description": "Yeni bir Minecraft Sunucusu eklemek veya önceden eklenmiş bir sunucuya bağlanmak için gezinme çubuğunu kullanın.",
+				"serversDropdown": "Sunucularınız",
+				"add_server": "Sunucu ekle",
+				"noServersAdded": "Sunucu eklenmedi",
+				"lang_dropdown": "Dil",
+				"addServerModalLongTitle": "Yeni bir sunucu ekleyin",
+				"addServerModalSvName": "Sunucu adı:",
+				"addServerModalSvIp": "Sunucu IP'si:",
+				"addServerModalSvPort": "WebConsole bağlantı noktası:",
+				"addServerModalSvSsl": "Sunucu SSL etkin",
+				"addServerModalSslAdvice": "HTTPS istemci bağlantıları için SSL gereklidir",
+				"addServerModalClose": "Kapat",
+				"saveAndConnectServerButton": "Kaydet ve bağlan",
+				"passwordModalLongTitle": "şifre gerekli",
+				"passwordModalLabel": "Parola:",
+				"passwordModalRememberLabel": "Şifre hatırlamak",
+				"passwordModalCloseButton": "Kapat",
+				"passwordSendButton": "Oturum aç",
+				"disconnectionModalLongTitle": "Bağlantı kesildi",
+				"disconnectionModalDescription": "Sunucuyla bağlantı kesildi. Bunun nedeni şunlar olabilir:",
+				"disconnectionModalsub1": "Sunucu kasıtlı olarak kapatıldı.",
+				"disconnectionModalsub2": "Ana makinenizde bağlantı noktası açılmadı. Bu durumda, bir bağlantı noktası denetleyicisi kullanarak sorunu giderin ve güvenlik duvarınızı veya yönlendiricinizi yeniden kontrol edin.",
+				"disconnectionModalCloseButton": "Kapat",
+				"disconnectionModalWelcomeScreenButton": "Karşılama sayfasına geri dön",
+				"settingsLink": "Ayarlar",
+				"settingsModalLongTitle": "WebConsole Ayarları",
+				"showDateSettingsSwitchLabel": "Her konsol hattında zamanı göster",
+				"readLogFileSwitchLabel": "Giriş yaptıktan sonra tam günlük dosyasını sunucudan alın",
+				"settingsModalCloseButton": "Bitti",
+				"players_online": "Çevrimiçi Oyuncular",
+				"cpu_title": "CPU",
+				"ram_title": "RAM kullanımı",
+				"user_title": "Olarak günlüğe kaydedildi",
+				"deleteServerButton": "Sunucuyu silin",
+				"sendCommandButton": "Gönder"
+			}
+			break;
 		default:
 			console.error("No language set");
 	}
