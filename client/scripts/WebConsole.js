@@ -24,7 +24,7 @@ function openServer(serverName){
 	
 	//Change server name and related info
 	$("#serverTitle").text(serverName);
-	$("#consoleTextArea").text("");
+	$("#consoleTextArea").text("Connecting...");
 	$("#commandInput").prop("disabled", false);
 	$("#sendCommandButton").prop("disabled", false);
 	

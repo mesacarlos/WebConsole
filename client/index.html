@@ -149,10 +149,13 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<form>
+						<form id="addServerForm">
 							<div class="form-group">
 								<label for="server-name" class="col-form-label" id="addServerModalSvName">Server name:</label>
 								<input type="text" class="form-control" id="server-name" required>
+								<div class="invalid-feedback" id="serverNameInvalidFeedback">
+									Please provide a valid servername.
+								</div>
 							</div>
 							<div class="form-group">
 								<label for="server-ip" class="col-form-label" id="addServerModalSvIp">Server IP:</label>
@@ -160,7 +163,7 @@
 							</div>
 							<div class="form-group">
 								<label for="server-port" class="col-form-label" id="addServerModalSvPort">Server port:</label>
-								<input type="number" class="form-control" id="server-port" placeholder="8080" required>
+								<input type="number" class="form-control" id="server-port" placeholder="8080" min="1" max="65535" required>
 							</div>
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" id="server-ssl">
@@ -171,7 +174,7 @@
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-dismiss="modal" id="addServerModalClose">Close</button>
-						<button type="button" class="btn btn-primary" data-dismiss="modal" id="saveAndConnectServerButton">Save and connect</button>
+						<button type="button" class="btn btn-primary" id="saveAndConnectServerButton">Save and connect</button>
 					</div>
 				</div>
 			</div>

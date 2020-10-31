@@ -34,6 +34,13 @@ $(document).ready(function() {
 * Add server modal button click
 */
 $("#saveAndConnectServerButton").click(function() {
+	//Validate form data
+	var addServerForm = document.getElementById("addServerForm");
+	if(!addServerForm.checkValidity()){
+		addServerForm.classList.add('was-validated');
+		return;
+	}
+	
 	//Save server
 	var name = $("#server-name").val().replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/'/g,"").replace(/"/g,"");
 	var wcIp = $("#server-ip").val();
@@ -46,7 +53,11 @@ $("#saveAndConnectServerButton").click(function() {
 		uri = "ws://" + wcIp + ":" + wcPort;
 	}
 	persistenceManager.saveServer(new WSServer(name, uri));
-	
+
+	//Close modal
+	addServerForm.classList.remove('was-validated');
+	$("#addServerModal").modal('hide');
+
 	//Empty all modal values
 	$("#server-name").val("");
 	$("#server-ip").val("");
