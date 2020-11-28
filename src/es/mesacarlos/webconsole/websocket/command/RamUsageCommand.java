@@ -14,7 +14,7 @@ public class RamUsageCommand implements WSCommand {
 		
 		long free = r.freeMemory() / 1024 / 1024;
 		long max = r.maxMemory() / 1024 / 1024;
-		long used = max - free;
+		long used = r.totalMemory() / 1024 / 1024 - free;
 		
 		wsServer.sendToClient(conn,
 			new RamUsage(
