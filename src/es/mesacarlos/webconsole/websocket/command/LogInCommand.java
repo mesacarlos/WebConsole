@@ -1,5 +1,7 @@
 package es.mesacarlos.webconsole.websocket.command;
 
+import java.util.UUID;
+
 import org.bukkit.Bukkit;
 import org.java_websocket.WebSocket;
 
@@ -17,16 +19,16 @@ public class LogInCommand implements WSCommand {
 	@Override
 	public void execute(WSServer wsServer, WebSocket conn, String password) {
 		// If user is logged in, then return.
-		if (LoginManager.getInstance().isLoggedIn(conn.getRemoteSocketAddress()))
+		if (LoginManager.getInstance().isSocketConnected(conn.getRemoteSocketAddress()))
 			return;
 		
 		//Check if user exists
 		for(UserData ud : ConfigManager.getInstance().getAllUsers()) {
 			if(ud.getPassword().equals(password)) {
-				ConnectedUser user = new ConnectedUser(conn.getRemoteSocketAddress(), ud.getUsername(), ud.getUserType());
+				ConnectedUser user = new ConnectedUser(conn.getRemoteSocketAddress(), ud.getUsername(), UUID.randomUUID().toString(), ud.getUserType());
 				LoginManager.getInstance().logIn(user);
 				
-				wsServer.sendToClient(conn, new LoggedIn(Internationalization.getPhrase("login-sucessful-message"), "LOGIN ********", user.getUsername(), user.getUserType()));
+				wsServer.sendToClient(conn, new LoggedIn(Internationalization.getPhrase("login-sucessful-message"), "LOGIN ********", user.getUsername(), user.getUserType(), user.getToken()));
 				Bukkit.getLogger().info(Internationalization.getPhrase("login-sucessful-console", user.toString()));
 				return;
 			}

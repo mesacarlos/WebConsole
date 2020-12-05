@@ -9,6 +9,7 @@ class WebConsoleConnector {
 	constructor(serverName, serverURI) {
 		this.serverName = serverName;
 		this.serverURI = serverURI;
+		this.token;
 		this.subscribers = []; //List of functions called when a new message arrive
 		this.messages = []; //All messages retrieved since connection start
 		this.commands = []; //EXEC Commands sent by user to this server
@@ -32,7 +33,7 @@ class WebConsoleConnector {
 	* Internal function
 	*/
 	onOpen(evt){
-		//TODO Check que la version es correcta, y que es un WebSocket del plugin y no de otra cosa
+		//TODO Check version is correct, and this websocket server is a WebConsole WebSocket
 	}
 	
 	/**
@@ -48,6 +49,11 @@ class WebConsoleConnector {
 	*/
 	onMessage(evt){
 		var obj = JSON.parse(evt.data);
+
+
+		if(obj.status === 200) //If is a LoggedIn response, save our token
+			this.token = obj.token;
+		
 		this.notify(obj); //Notify all subscribers
 		this.messages.push(obj);
 	}
@@ -63,7 +69,7 @@ class WebConsoleConnector {
 	* Sends a WebSocket command to Server
 	*/
 	sendToServer(message){
-		this.websocket.send(message);
+		this.websocket.send(JSON.stringify(message));
 	}
 	
 	/**

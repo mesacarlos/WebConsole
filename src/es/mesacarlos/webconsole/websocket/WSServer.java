@@ -13,6 +13,7 @@ import org.java_websocket.server.WebSocketServer;
 import es.mesacarlos.webconsole.auth.LoginManager;
 import es.mesacarlos.webconsole.util.DateTimeUtils;
 import es.mesacarlos.webconsole.util.Internationalization;
+import es.mesacarlos.webconsole.util.JsonUtils;
 import es.mesacarlos.webconsole.websocket.command.WSCommandFactory;
 import es.mesacarlos.webconsole.websocket.command.WSCommand;
 import es.mesacarlos.webconsole.websocket.response.ConsoleOutput;
@@ -30,7 +31,7 @@ public class WSServer extends WebSocketServer {
 
 	@Override
 	public void onOpen(WebSocket conn, ClientHandshake handshake) {
-		if (LoginManager.getInstance().isLoggedIn(conn.getRemoteSocketAddress())) {
+		if (LoginManager.getInstance().isSocketConnected(conn.getRemoteSocketAddress())) {
 			sendToClient(conn, new LoggedIn(Internationalization.getPhrase("connection-resumed-message")));
 			Bukkit.getLogger().info(Internationalization.getPhrase("connection-resumed-console", conn.getRemoteSocketAddress()));
 		} else {
@@ -41,11 +42,15 @@ public class WSServer extends WebSocketServer {
 
 	@Override
 	public void onMessage(WebSocket conn, String message) {
+		if(!JsonUtils.containsStringProperty(message, "command") //Contains a command
+				|| ( !JsonUtils.containsStringProperty(message, "token") && !JsonUtils.getStringProperty(message, JsonUtils.COMMAND_PROPERTY).equals("LOGIN")) //Contains a token or it is a login command
+			)
+			return;
+		
 		// Get command and params
-		String wsCommand = message.split(" ")[0];
-		String wsCommandParams = "";
-		if (message.contains(" "))
-			wsCommandParams = message.split(" ", 2)[1];
+		String wsCommand = JsonUtils.getStringProperty(message, JsonUtils.COMMAND_PROPERTY);
+		String wsToken = JsonUtils.getStringProperty(message, JsonUtils.TOKEN_PROPERTY);
+		String wsCommandParams = JsonUtils.getStringProperty(message, JsonUtils.PARAMS_PROPERTY);
 
 		// Run command
 		WSCommand cmd = commands.get(wsCommand);
@@ -54,8 +59,8 @@ public class WSServer extends WebSocketServer {
 			// Command does not exist
 			sendToClient(conn, new UnknownCommand(Internationalization.getPhrase("unknown-command-message"), message));
 			Bukkit.getLogger().info(Internationalization.getPhrase("unknown-command-console", message));
-		} else if (!LoginManager.getInstance().isLoggedIn(conn.getRemoteSocketAddress())
-				&& !wsCommand.equals("LOGIN")) {
+		} else if (!wsCommand.equals("LOGIN")
+				&& !LoginManager.getInstance().isLoggedIn(conn.getRemoteSocketAddress(), wsToken)) {
 			// User is not authorised. DO NOTHING, IMPORTANT!
 			sendToClient(conn, new LoginRequired(Internationalization.getPhrase("forbidden-message")));
 			Bukkit.getLogger().warning(Internationalization.getPhrase("forbidden-console", conn.getRemoteSocketAddress(), message));
@@ -86,7 +91,7 @@ public class WSServer extends WebSocketServer {
 	public void onNewConsoleLinePrinted(String line) {
 		Collection<WebSocket> connections = getConnections();
 		for (WebSocket connection : connections) {
-			if (LoginManager.getInstance().isLoggedIn(connection.getRemoteSocketAddress()))
+			if (LoginManager.getInstance().isSocketConnected(connection.getRemoteSocketAddress()))
 				sendToClient(connection, new ConsoleOutput(line, DateTimeUtils.getTimeAsString()));
 		}
 	}

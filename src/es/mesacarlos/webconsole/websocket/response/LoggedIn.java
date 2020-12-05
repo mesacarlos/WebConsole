@@ -9,16 +9,18 @@ public class LoggedIn implements JSONOutput{
 	private String respondsTo;
 	private String username;
 	private UserType as;
+	private String token;
 	
 	public LoggedIn(String message) {
 		this.message = message;
 	}
 	
-	public LoggedIn(String message, String respondsTo, String username, UserType as) {
+	public LoggedIn(String message, String respondsTo, String username, UserType as, String token) {
 		this.message = message;
 		this.respondsTo = respondsTo;
 		this.username = username;
 		this.as = as;
+		this.token = token;
 	}
 	
 	@Override
@@ -52,7 +54,11 @@ public class LoggedIn implements JSONOutput{
 				return "VIEWER"; //This is not a security hole bc its just informative...
 		}
 	}
-
+	
+	private String getToken() {
+		return token;
+	}
+	
 	@Override
 	public String toJSON() {
 		JsonObject object = new JsonObject();
@@ -61,6 +67,7 @@ public class LoggedIn implements JSONOutput{
 		object.addProperty("respondsTo", getRespondsTo());
 		object.addProperty("username", getUsername());
 		object.addProperty("as", getAs());
+		object.addProperty("token", getToken());
 		object.addProperty("message", getMessage());
 		return object.toString();
 	}

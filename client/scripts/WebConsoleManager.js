@@ -60,14 +60,22 @@ class WebConsoleManager {
 	* Send password to server
 	*/
 	sendPassword(pwd){
-		this.activeConnection.sendToServer("LOGIN " + pwd);
+		this.activeConnection.sendToServer({
+			command: "LOGIN",
+			params: pwd
+		});
 	}
 	
 	/**
 	* Send console command to server
 	*/
 	sendConsoleCmd(cmd){
-		this.activeConnection.sendToServer("EXEC " + cmd);
+		this.activeConnection.sendToServer({
+			command: "EXEC",
+			token: this.activeConnection.token,
+			params: cmd
+		});
+
 		this.activeConnection.commands.push(cmd);
 	}
 	
@@ -75,16 +83,30 @@ class WebConsoleManager {
 	* Asks server for CPU, RAM and players info
 	*/
 	askForInfo(){
-		this.activeConnection.sendToServer("PLAYERS");
-		this.activeConnection.sendToServer("CPUUSAGE");
-		this.activeConnection.sendToServer("RAMUSAGE");
+		this.activeConnection.sendToServer({
+			command: "PLAYERS",
+			token: this.activeConnection.token,
+		});
+
+		this.activeConnection.sendToServer({
+			command: "CPUUSAGE",
+			token: this.activeConnection.token,
+		});
+
+		this.activeConnection.sendToServer({
+			command: "RAMUSAGE",
+			token: this.activeConnection.token,
+		});
 	}
 
 	/**
 	* Asks server for full latest.log
 	*/
 	askForLogs(){
-		this.activeConnection.sendToServer("READLOGFILE");
+		this.activeConnection.sendToServer({
+			command: "READLOGFILE",
+			token: this.activeConnection.token,
+		});
 	}
 	
 }

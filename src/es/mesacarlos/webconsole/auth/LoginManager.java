@@ -46,11 +46,23 @@ public class LoginManager {
 	}
 	
 	/**
-	 * Check if user is logged in
+	 * Check if user is logged in. It checks that both the socket adress and the user token corresponds to a logged in user.
 	 * @param address User to check
 	 * @return true if user is logged in, false otherwise
 	 */
-	public boolean isLoggedIn(InetSocketAddress address) {
+	public boolean isLoggedIn(InetSocketAddress address, String token) {
+		for(ConnectedUser user : loggedInUsers)
+			if(user.getSocketAddress().equals(address) && user.getToken().equals(token))
+				return true;
+		return false;
+	}
+	
+	/**
+	 * Check if an user is logged in from a given socket address
+	 * @param address User to check
+	 * @return true if user is logged in, false otherwise
+	 */
+	public boolean isSocketConnected(InetSocketAddress address) {
 		for(ConnectedUser user : loggedInUsers)
 			if(user.getSocketAddress().equals(address))
 				return true;
