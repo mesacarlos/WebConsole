@@ -42,7 +42,7 @@ Don't worry about privacy or security: all data is stored in your browser locall
 
 A explanation of the `host`, `port`, `language` and `passwords` fields follows:
 
-`host`: Leaving it as 0.0.0.0 will do the trick. If you experience issues , you can change this value to your device IP. If you are in a VPS or dedicated server (or you have a full public IP allocated for your device) type your public IP. If you are at your home (and you dont have a public IP assigned to your device) type your private IP, it is probably something like 192.168.xx.xx.
+`host`: Leaving it as 0.0.0.0 will do the trick. If you experience issues , you can change this value to your device IP. If you are in a VPS or dedicated server (or you have a full public IP allocated for your device) type your public IP. If you are at your home (and you don't have a public IP assigned to your device) type your private IP, it is probably something like 192.168.xx.xx.
 
 `port`: A port where to run this plugin (cannot be the port you are using for Minecraft).
 
@@ -54,7 +54,7 @@ From version 2.0 you can now create more than one user and set them as admin (Pe
 - You can create as many admins as you want repeating this step.
 - If you want to create a view-only user, remove the `{}` after `viewer: ` and do the same process as for admin users below `viewer: `. You can also create as many viewers as needed.
 
-The rest of the fields are used for SSL configuration. You can see a tutorial on how to activate SSL [in this link](https://github.com/mesacarlos/WebConsole/wiki/SSL-Configuration). SSL **is not** required for WebConsole to work, you can still use it without encription, unless you are hosting your client in a HTTPS server, in this case is mandatory to enable SSL in all your servers due to web browsers restrictions.
+The rest of the fields are used for SSL configuration. You can learn how to activate SSL [here](https://github.com/mesacarlos/WebConsole/wiki/SSL-Configuration). SSL **is not** required for WebConsole to work, you can still use it without encription, unless you are hosting your client in a HTTPS server, in this case is mandatory to enable SSL in all your servers due to web browsers restrictions.
 
 
 ## Using web interface
