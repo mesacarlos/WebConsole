@@ -52,7 +52,7 @@ public class WebConsole extends JavaPlugin {
 		try {
 			server.stop();
 			wsThread = null;
-		} catch (IOException | InterruptedException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

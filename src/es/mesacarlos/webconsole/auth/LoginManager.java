@@ -28,7 +28,7 @@ public class LoginManager {
 	 * @param address User to logout
 	 */
 	public void logOut(InetSocketAddress address) {
-		for(ConnectedUser user : loggedInUsers)
+		for(ConnectedUser user : loggedInUsers.toArray(new ConnectedUser[loggedInUsers.size()]))
 			if(user.getSocketAddress().equals(address))
 				loggedInUsers.remove(user);
 	}

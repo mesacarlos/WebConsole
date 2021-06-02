@@ -15,7 +15,7 @@ Don't worry about privacy or security: all data is stored in your browser locall
 * Real-time connected players, machine CPU and server RAM usage information.
 * Capable of keeping active connections to more than one server to keep retrieving console log in the background for them all.
 * English, Spanish, Chinese (thanks to Neubulae and OPhantomO), Czech (thanks to Tada), Deutsch (thanks to NoNamePro0), Dutch (thanks to Twockx), French (thanks to pickatchou999), Italian (thanks to AlexZap), Korean (thanks to XxPKBxX), Portuguese (thanks to AlexandreMuassab and Connect500BR), Russian (thanks to Stashenko) and Turkish (thanks to acarnd03) supported.
-* Free, updated regularly, and many more!
+* Free!
 
 ![Screenshot](https://i.imgur.com/sN1sYju.png)
 

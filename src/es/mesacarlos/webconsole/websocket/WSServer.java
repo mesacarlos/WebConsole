@@ -105,6 +105,7 @@ public class WSServer extends WebSocketServer {
 		try {
 			conn.send(content.toJSON());
 		}catch(WebsocketNotConnectedException e) {
+			LoginManager.getInstance().logOut(conn.getRemoteSocketAddress());
 			Bukkit.getLogger().warning(Internationalization.getPhrase("error-disconnected-client"));
 		}
 		
