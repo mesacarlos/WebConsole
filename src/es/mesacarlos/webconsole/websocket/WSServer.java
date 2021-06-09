@@ -27,6 +27,7 @@ public class WSServer extends WebSocketServer {
 
 	public WSServer(InetSocketAddress address) {
 		super(address);
+		setReuseAddr(true);
 	}
 
 	@Override
