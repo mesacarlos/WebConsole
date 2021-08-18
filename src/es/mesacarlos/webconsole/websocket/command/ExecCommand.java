@@ -37,12 +37,23 @@ public class ExecCommand implements WSCommand {
 					break;
 				}
 
+				String[] splitCommand = command.split(" ");
+
 				for (String whitelistedCommand : ud.getWhitelistedCommands()) {
-					if (command.toLowerCase().startsWith(whitelistedCommand)) {
+					String[] splitWhitelistedCommand = whitelistedCommand.split(" ");
 
-						if (!ud.isWhitelistActsAsBlacklist()) allowCommand = true; //cmd is whitelisted.
+					for (int x = 0; x < splitWhitelistedCommand.length; x ++) {
 
-						break;
+						if (!ud.isWhitelistActsAsBlacklist()) {
+
+							if (splitCommand[x].equalsIgnoreCase(splitWhitelistedCommand[x])) { //cmd is whitelisted.
+								allowCommand = true;
+								continue;
+							}
+
+							allowCommand = false;
+							break;
+						}
 					}
 				}
 
