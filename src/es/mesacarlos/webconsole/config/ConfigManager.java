@@ -1,9 +1,7 @@
 package es.mesacarlos.webconsole.config;
 
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
@@ -47,7 +45,12 @@ public class ConfigManager {
 		if(config.getConfigurationSection("passwords") == null) {
 			ConfigurationSection passwordsSection = config.createSection("passwords");
 			ConfigurationSection adminPasswordSection = passwordsSection.createSection("admin");
-			adminPasswordSection.addDefault("user1", "mySecurePassword");
+			ConfigurationSection individualAdminPasswordSection = adminPasswordSection.createSection("user1");
+			individualAdminPasswordSection.addDefault("password", "mySecurePassword");
+			ConfigurationSection commandWhitelist = individualAdminPasswordSection.createSection("commandWhitelist");
+			commandWhitelist.addDefault("enabled", false);
+			commandWhitelist.addDefault("commandWhitelistActsAsBlacklist", false);
+			commandWhitelist.addDefault("whitelist", Arrays.asList("whisper", "gamemode survival"));
 			passwordsSection.createSection("viewer");
 		}
 		
@@ -96,11 +99,19 @@ public class ConfigManager {
 	 * @return list of admin users
 	 */
 	private List<UserData> getAdmins() {
-		Map<String, Object> passwords = plugin.getConfig().getConfigurationSection("passwords").getConfigurationSection("admin").getValues(false);
-		List<UserData> adminUsers = new ArrayList<UserData>();
+		Set<String> adminConfig = plugin.getConfig().getConfigurationSection("passwords").getConfigurationSection("admin").getKeys(false);
+
+		List<UserData> adminUsers = new ArrayList<>();
 		
-		for(Map.Entry<String, Object> entry : passwords.entrySet())
-			adminUsers.add(new UserData(entry.getKey(), entry.getValue().toString(), UserType.ADMIN));
+		for(String username : adminConfig) {
+			adminUsers.add(new UserData(
+					username,
+					plugin.getConfig().getString("passwords.admin." + username + ".password"),
+					UserType.ADMIN,
+					plugin.getConfig().getBoolean("passwords.admin." + username + ".commandWhitelist.enabled"),
+					plugin.getConfig().getBoolean("passwords.admin." + username + ".commandWhitelist.commandWhitelistActsAsBlacklist"),
+					plugin.getConfig().getStringList("passwords.admin." + username + ".commandWhitelist.whitelist")));
+		}
 		
 		return adminUsers;
 	}
@@ -111,10 +122,10 @@ public class ConfigManager {
 	 */
 	private List<UserData> getViewers() {
 		Map<String, Object> passwords = plugin.getConfig().getConfigurationSection("passwords").getConfigurationSection("viewer").getValues(false);
-		List<UserData> viewerUsers = new ArrayList<UserData>();
+		List<UserData> viewerUsers = new ArrayList<>();
 		
 		for(Map.Entry<String, Object> entry : passwords.entrySet())
-			viewerUsers.add(new UserData(entry.getKey(), entry.getValue().toString(), UserType.VIEWER));
+			viewerUsers.add(new UserData(entry.getKey(), entry.getValue().toString(), UserType.VIEWER, false, false, new ArrayList<>()));
 		
 		return viewerUsers;
 	}
