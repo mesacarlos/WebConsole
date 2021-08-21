@@ -9,7 +9,7 @@ WebConsole is a Spigot plugin for Minecraft 1.8-1.16+ that allows you to view yo
 Don't worry about privacy or security: all data is stored in your browser locally and your PC will connect directly to your minecraft server. No intermediary web servers, just you and your MC server.
 
 #### Additional features:
-* Multiuser system and View-only user mode: You can create multiple users and set their role to "Admin" or "Viewer". Users with the role "Viewer" can only read console, CPU and RAM usage. Users with role "Admin" can also run commands on the server. Useful if you want your friends to watch the server console but deny them from typing commands and ruining your server.
+* Multiuser system and View-only user mode: You can create multiple users and set their role to "Admin" or "Viewer". Users with the role "Viewer" can only read console, CPU and RAM usage. Users with role "Admin" can also run commands on the server. Useful if you want your friends to watch the server console but deny them from typing commands and ruining your server. Also, you can whitelist or blacklist some commands.
 * Command history: Use up/down arrow keys to browse the command history, like in the real console.
 * Colors supported, for both Windows and Linux hosts. (Colors are represented different in each platform).
 * Real-time connected players, machine CPU and server RAM usage information.
@@ -35,7 +35,14 @@ Don't worry about privacy or security: all data is stored in your browser locall
     language: en  
     passwords:  
     &nbsp;&nbsp;&nbsp;admin:  
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user1: mySecurePassword  
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;user1:  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;password: mySecurePassword  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commandWhitelist:  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled: true  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;commandWhitelistActsAsBlacklist: false  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;whitelist:  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- whisper  
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- gamemode survival  
     &nbsp;&nbsp;&nbsp;viewer: {}  
 
 
@@ -53,6 +60,7 @@ From version 2.0 you can now create more than one user and set them as admin (Pe
 - If you want to create a admin user, type below `admin:` a row like `user: password` replacing user with your desired username and password with your password.
 - You can create as many admins as you want repeating this step.
 - If you want to create a view-only user, remove the `{}` after `viewer: ` and do the same process as for admin users below `viewer: `. You can also create as many viewers as needed.
+- For all your admin users, you can enable a whitelist of commands under the commandWhitelist section of your user.
 
 The rest of the fields are used for SSL configuration. You can learn how to activate SSL [here](https://github.com/mesacarlos/WebConsole/wiki/SSL-Configuration). SSL **is not** required for WebConsole to work, you can still use it without encription, unless you are hosting your client in a HTTPS server, in this case is mandatory to enable SSL in all your servers due to web browsers restrictions.
 
