@@ -1,9 +1,7 @@
 package es.mesacarlos.webconsole.config;
 
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
@@ -44,11 +42,44 @@ public class ConfigManager {
 		// Language config
 		config.addDefault("language", "en");
 		
-		if(config.getConfigurationSection("passwords") == null) {
-			ConfigurationSection passwordsSection = config.createSection("passwords");
-			ConfigurationSection adminPasswordSection = passwordsSection.createSection("admin");
-			adminPasswordSection.addDefault("user1", "mySecurePassword");
-			passwordsSection.createSection("viewer");
+		//Create passwords section if it does not exist
+		ConfigurationSection passwordsSection = config.getConfigurationSection("passwords");
+		if(passwordsSection == null) {
+			passwordsSection = config.createSection("passwords");
+		}
+		
+		//Create passwords.admin section if it does not exist
+		ConfigurationSection adminPasswordSection = passwordsSection.getConfigurationSection("admin");
+		if(adminPasswordSection == null) {
+			adminPasswordSection = passwordsSection.createSection("admin");
+			adminPasswordSection.createSection("user1");
+		}
+		
+		//For each admin user, create the password value and the commandWhitelist section if it does not exist
+		Set<String> adminUsersSections = adminPasswordSection.getKeys(false);
+		for (String adminUserSectionName : adminUsersSections) {
+			ConfigurationSection userSection = adminPasswordSection.getConfigurationSection(adminUserSectionName);
+			if(userSection == null) {
+				//If userSection is null, that means that the config file is prior to v2.2. We need to update the file to v2.2 by replacing the "user:password" value to a new section for each user.
+				String userPasswordFromOldConfig = adminPasswordSection.getString(adminUserSectionName);
+				userSection = adminPasswordSection.createSection(adminUserSectionName);
+				userSection.set("password", userPasswordFromOldConfig);
+			}
+			userSection.addDefault("password", "mySecurePassword");
+			
+			ConfigurationSection commandWhitelist = userSection.getConfigurationSection("commandWhitelist");
+			if(commandWhitelist == null) {
+				commandWhitelist = userSection.createSection("commandWhitelist");
+				commandWhitelist.addDefault("enabled", false);
+				commandWhitelist.addDefault("commandWhitelistActsAsBlacklist", false);
+				commandWhitelist.addDefault("whitelist", Arrays.asList("whisper", "gamemode survival"));
+			}
+		}
+		
+		//Create passwords.viewer section if it does not exist
+		ConfigurationSection viewerPasswordSection = passwordsSection.getConfigurationSection("viewer");
+		if(viewerPasswordSection == null) {
+			viewerPasswordSection = passwordsSection.createSection("viewer");
 		}
 		
 		config.options().copyDefaults(true);
@@ -96,11 +127,19 @@ public class ConfigManager {
 	 * @return list of admin users
 	 */
 	private List<UserData> getAdmins() {
-		Map<String, Object> passwords = plugin.getConfig().getConfigurationSection("passwords").getConfigurationSection("admin").getValues(false);
-		List<UserData> adminUsers = new ArrayList<UserData>();
+		Set<String> adminConfig = plugin.getConfig().getConfigurationSection("passwords").getConfigurationSection("admin").getKeys(false);
+
+		List<UserData> adminUsers = new ArrayList<>();
 		
-		for(Map.Entry<String, Object> entry : passwords.entrySet())
-			adminUsers.add(new UserData(entry.getKey(), entry.getValue().toString(), UserType.ADMIN));
+		for(String username : adminConfig) {
+			adminUsers.add(new UserData(
+					username,
+					plugin.getConfig().getString("passwords.admin." + username + ".password"),
+					UserType.ADMIN,
+					plugin.getConfig().getBoolean("passwords.admin." + username + ".commandWhitelist.enabled"),
+					plugin.getConfig().getBoolean("passwords.admin." + username + ".commandWhitelist.commandWhitelistActsAsBlacklist"),
+					plugin.getConfig().getStringList("passwords.admin." + username + ".commandWhitelist.whitelist")));
+		}
 		
 		return adminUsers;
 	}
@@ -111,10 +150,10 @@ public class ConfigManager {
 	 */
 	private List<UserData> getViewers() {
 		Map<String, Object> passwords = plugin.getConfig().getConfigurationSection("passwords").getConfigurationSection("viewer").getValues(false);
-		List<UserData> viewerUsers = new ArrayList<UserData>();
+		List<UserData> viewerUsers = new ArrayList<>();
 		
 		for(Map.Entry<String, Object> entry : passwords.entrySet())
-			viewerUsers.add(new UserData(entry.getKey(), entry.getValue().toString(), UserType.VIEWER));
+			viewerUsers.add(new UserData(entry.getKey(), entry.getValue().toString(), UserType.VIEWER, false, false, new ArrayList<>()));
 		
 		return viewerUsers;
 	}
