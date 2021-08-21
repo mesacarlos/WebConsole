@@ -42,17 +42,52 @@ public class ConfigManager {
 		// Language config
 		config.addDefault("language", "en");
 		
-		if(config.getConfigurationSection("passwords") == null) {
-			ConfigurationSection passwordsSection = config.createSection("passwords");
-			ConfigurationSection adminPasswordSection = passwordsSection.createSection("admin");
-			ConfigurationSection individualAdminPasswordSection = adminPasswordSection.createSection("user1");
-			individualAdminPasswordSection.addDefault("password", "mySecurePassword");
-			ConfigurationSection commandWhitelist = individualAdminPasswordSection.createSection("commandWhitelist");
-			commandWhitelist.addDefault("enabled", false);
-			commandWhitelist.addDefault("commandWhitelistActsAsBlacklist", false);
-			commandWhitelist.addDefault("whitelist", Arrays.asList("whisper", "gamemode survival"));
-			passwordsSection.createSection("viewer");
+		//Create passwords section if it does not exist
+		ConfigurationSection passwordsSection = config.getConfigurationSection("passwords");
+		if(passwordsSection == null) {
+			passwordsSection = config.createSection("passwords");
 		}
+		
+		//Create passwords.admin section if it does not exist
+		ConfigurationSection adminPasswordSection = passwordsSection.getConfigurationSection("admin");
+		if(adminPasswordSection == null) {
+			adminPasswordSection = passwordsSection.createSection("admin");
+			adminPasswordSection.createSection("user1");
+		}
+		
+		//For each admin user, create the password value and the commandWhitelist section if it does not exist
+		Set<String> adminUsersSections = adminPasswordSection.getKeys(false);
+		for (String adminUserSectionName : adminUsersSections) {
+			ConfigurationSection userSection = adminPasswordSection.getConfigurationSection(adminUserSectionName);
+			if(userSection == null) {
+				//If userSection is null, that means that the config file is prior to v2.2. We need to update the file to v2.2 by replacing the "user:password" value to a new section for each user.
+				String userPasswordFromOldConfig = adminPasswordSection.getString(adminUserSectionName);
+				userSection = adminPasswordSection.createSection(adminUserSectionName);
+				userSection.set("password", userPasswordFromOldConfig);
+			}
+			userSection.addDefault("password", "mySecurePassword");
+			
+			ConfigurationSection commandWhitelist = userSection.getConfigurationSection("commandWhitelist");
+			if(commandWhitelist == null) {
+				commandWhitelist = userSection.createSection("commandWhitelist");
+				commandWhitelist.addDefault("enabled", false);
+				commandWhitelist.addDefault("commandWhitelistActsAsBlacklist", false);
+				commandWhitelist.addDefault("whitelist", Arrays.asList("whisper", "gamemode survival"));
+			}
+		}
+		
+		//Create passwords.viewer section if it does not exist
+		ConfigurationSection viewerPasswordSection = passwordsSection.getConfigurationSection("viewer");
+		if(viewerPasswordSection == null) {
+			viewerPasswordSection = passwordsSection.createSection("viewer");
+		}
+		
+		//For each viewer user, create the password value and the commandWhitelist section if it does not exist
+//		Set<String> viewerUsersSections = viewerPasswordSection.getKeys(false);
+//		for (String viewerUserSectionName : viewerUsersSections) {
+//			ConfigurationSection userSection = viewerPasswordSection.getConfigurationSection(viewerUserSectionName);
+//			userSection.addDefault("password", "mySecurePassword");
+//		}
 		
 		config.options().copyDefaults(true);
 		plugin.saveConfig();
