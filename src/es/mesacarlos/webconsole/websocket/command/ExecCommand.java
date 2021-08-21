@@ -27,43 +27,7 @@ public class ExecCommand implements WSCommand {
 			return;
 		}
 
-		boolean allowCommand = false;
-
-		for(UserData ud : ConfigManager.getInstance().getAllUsers()) {
-			if (ud.getUsername().equals(loginManager.getUser(conn.getRemoteSocketAddress()).getUsername())) {
-
-				if (!ud.isWhitelistEnabled()) { //Skip whitelist check.
-					allowCommand = true;
-					break;
-				}
-
-				String[] splitCommand = command.split(" ");
-
-				for (String whitelistedCommand : ud.getWhitelistedCommands()) {
-					String[] splitWhitelistedCommand = whitelistedCommand.split(" ");
-
-					for (int x = 0; x < splitWhitelistedCommand.length; x ++) {
-
-						if (!ud.isWhitelistActsAsBlacklist()) {
-
-							if (splitCommand[x].equalsIgnoreCase(splitWhitelistedCommand[x])) { //cmd is whitelisted.
-								allowCommand = true;
-								continue;
-							}
-
-							allowCommand = false;
-							break;
-						}
-					}
-				}
-
-				if (!allowCommand //Check if was detected by whitelist
-						&& ud.isWhitelistActsAsBlacklist()) allowCommand = true; //cmd is not blacklisted.
-
-				break;
-			}
-		}
-
+		boolean allowCommand = checkWhitelist(conn, command);
 		if (!allowCommand) {
 			Bukkit.getLogger().warning(Internationalization.getPhrase("no-send-permission-console", u, command));
 			return;
@@ -80,6 +44,52 @@ public class ExecCommand implements WSCommand {
 			e.printStackTrace();
 		}
 
+	}
+	
+	private boolean checkWhitelist(WebSocket conn, String command) {
+		for(UserData ud : ConfigManager.getInstance().getAllUsers()) {
+			if (ud.getUsername().equals(loginManager.getUser(conn.getRemoteSocketAddress()).getUsername())) {
+
+				if (!ud.isWhitelistEnabled()) { //Skip whitelist check.
+					return true;
+				}
+
+				String[] splitCommand = command.split(" ");
+
+				for (String whitelistedCommand : ud.getWhitelistedCommands()) {
+					String[] splitWhitelistedCommand = whitelistedCommand.split(" ");
+
+					if(equalsArray(splitCommand, splitWhitelistedCommand)) {
+						//Command matches the whitelist
+						if(ud.isWhitelistActsAsBlacklist())
+							return false; //If acts as blacklist, do not allow command
+						else
+							return true; //If acts as Whitelist, allow command
+					}
+				}
+				
+				//If execution reached this point, then the command is not in the blacklist.
+				if(ud.isWhitelistActsAsBlacklist())
+					return true; //If acts as blacklist, allow command
+				else
+					return false; //If acts as Whitelist, do not allow command
+			}
+		}
+		throw new RuntimeException("No user matched the whitelist check.");
+	}
+	
+	/**
+	 * Check if the user command matches the whitelisted command
+	 * 
+	 * @param splitCommand Command sent by user
+	 * @param splitWhitelistedCommand Command in the whitelist
+	 * @return true if the user command matches the whitelist command
+	 */
+	private boolean equalsArray(String[] splitCommand, String[] splitWhitelistedCommand) {
+		for (int i = 0; i < splitWhitelistedCommand.length; i++)
+			if (!splitCommand[i].equalsIgnoreCase(splitWhitelistedCommand[i])) 
+				return false; //Does not match so far
+		return true; //Matches the command
 	}
 
 }

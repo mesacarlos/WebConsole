@@ -82,13 +82,6 @@ public class ConfigManager {
 			viewerPasswordSection = passwordsSection.createSection("viewer");
 		}
 		
-		//For each viewer user, create the password value and the commandWhitelist section if it does not exist
-//		Set<String> viewerUsersSections = viewerPasswordSection.getKeys(false);
-//		for (String viewerUserSectionName : viewerUsersSections) {
-//			ConfigurationSection userSection = viewerPasswordSection.getConfigurationSection(viewerUserSectionName);
-//			userSection.addDefault("password", "mySecurePassword");
-//		}
-		
 		config.options().copyDefaults(true);
 		plugin.saveConfig();
 	}
