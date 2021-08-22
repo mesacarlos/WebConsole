@@ -57,9 +57,8 @@ You can modify `language` to view console and command messages in your preferred
 
 From version 2.0 you can now create more than one user and set them as admin (Permission for both reading console and executing commands) or viewer (Permission for only reading console and CPU and RAM usage). This is configured using the `passwords` section:
 - By default, a user called user1 with password mySecurePassword is created, please replace or remove it as it is only served as an example.
-- If you want to create a admin user, type below `admin:` a row like `user: password` replacing user with your desired username and password with your password.
-- You can create as many admins as you want repeating this step.
-- If you want to create a view-only user, remove the `{}` after `viewer: ` and do the same process as for admin users below `viewer: `. You can also create as many viewers as needed.
+- If you want to create a view-only user, remove the `{}` after `viewer: ` and type below a row like `user: password` replacing user with your desired username and password with your password.
+- You can create as many admins or viewers as needed.
 - For all your admin users, you can enable a whitelist of commands under the commandWhitelist section of your user.
 
 The rest of the fields are used for SSL configuration. You can learn how to activate SSL [here](https://github.com/mesacarlos/WebConsole/wiki/SSL-Configuration). SSL **is not** required for WebConsole to work, you can still use it without encription, unless you are hosting your client in a HTTPS server, in this case is mandatory to enable SSL in all your servers due to web browsers restrictions.
