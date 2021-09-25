@@ -11,6 +11,7 @@ $(document).ready(function() {
 	$("#serverContainer").hide();
 	persistenceManager.initializeSettings();
 	setLanguage(persistenceManager.getLanguage());
+	readServerList();
 	updateServerList();
 
 	//Check SSL host
