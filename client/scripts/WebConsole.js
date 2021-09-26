@@ -15,6 +15,31 @@ var statusCommandsInterval = -1;
 var commandHistoryIndex = -1; //Saves current command history index. -1 when not browsing history.
 
 /**
+ * Load list of servers in file servers.json
+ * and auto update in next request when file is changed
+ */
+function readServerList() {
+	let hash = persistenceManager.getSetting('server:hash')
+
+	/**
+	 * Hash code function used for compare version of file servers.json
+	 * https://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript
+	 */
+	const hashCode = s => s.split('').reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);
+
+	fetch('servers.json')
+		.then(res => res.text())
+		.then(json => {
+			if (hash !== hashCode(json)) {
+				persistenceManager.setSetting('server:hash', hashCode(json))
+				JSON.parse(json).forEach(server => persistenceManager.saveServer(server))
+			}
+		})
+		.then(updateServerList)
+		.catch(() => console.info('Ignore load new list in file servers.json.'));
+}
+
+/**
 * Prepare and show server to user
 */
 function openServer(serverName){
