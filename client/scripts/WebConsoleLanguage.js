@@ -501,6 +501,47 @@ function setLanguage(locale){
 				"sendCommandButton": "Gönder"
 			}
 			break;
+		case "ja_JA": //Credit to kuroneko6423 | https://kuroneko6423.com
+			lang = {
+				"navbarHomeLink": "ホーム",
+				"home_header": "メニューからサーバーを選択",
+				"home_description": "ナビゲーションバーを使って、新しいMinecraftサーバーを追加したり、以前に追加したサーバーに接続したりします。",
+				"serversDropdown": "あなたのサーバー",
+				"add_server": "サーバー追加",
+				"noServersAdded": "追加されたサーバーはありません",
+				"lang_dropdown": "言語",
+				"addServerModalLongTitle": "新規サーバーの追加",
+				"addServerModalSvName": "サーバー名:",
+				"addServerModalSvIp": "サーバーIP:",
+				"addServerModalSvPort": "WebConsoleポート:",
+				"addServerModalSvSsl": "サーバーでSSLが有効になっている",
+				"addServerModalSslAdvice": "HTTPSウェブサイトからの接続にはSSLが必要です。",
+				"addServerModalClose": "閉じる",
+				"saveAndConnectServerButton": "保存と接続",
+				"passwordModalLongTitle": "パスワードが必要です",
+				"passwordModalLabel": "パスワード:",
+				"passwordModalRememberLabel": "パスワードの記憶",
+				"passwordModalCloseButton": "閉じる",
+				"passwordSendButton": "ログイン",
+				"disconnectionModalLongTitle": "切断",
+				"disconnectionModalDescription": "サーバーとの接続が切断されました:",
+				"disconnectionModalsub1": "サーバーが意図的に閉じられました。",
+				"disconnectionModalsub2": "ポートがホスト上で開かれていません。この場合、ポートチェッカーを使ってトラブルシューティングを行い、ファイアウォールやルーターを再確認してください。",
+				"disconnectionModalCloseButton": "閉じる",
+				"disconnectionModalWelcomeScreenButton": "ホームに戻る",
+				"settingsLink": "設定",
+				"settingsModalLongTitle": "WebConsole 設定",
+				"showDateSettingsSwitchLabel": "各コンソールラインに時間を表示",
+				"readLogFileSwitchLabel": "ログイン後にサーバーからフルログファイルを取得する",
+				"settingsModalCloseButton": "了承",
+				"players_online": "プレイヤーオンライン",
+				"cpu_title": "CPU",
+				"ram_title": "RAM",
+				"user_title": "ログインします。",
+				"deleteServerButton": "サーバーを削除",
+				"sendCommandButton": "送信"
+			}
+			break;
 		default:
 			console.error("No language set");
 	}
