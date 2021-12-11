@@ -4,7 +4,7 @@
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/mesacarlos/WebConsole)](https://github.com/mesacarlos/WebConsole/releases/latest)
 ![GitHub All Releases](https://img.shields.io/github/downloads/mesacarlos/WebConsole/total?label=total%20downloads)
 
-WebConsole is a Spigot plugin for Minecraft 1.8-1.16+ that allows you to view your server console and manage your server from anywhere. It creates a WebSocket server in the background used by the web interface to send commands, receive your console log and manage your server.
+WebConsole is a Spigot plugin for Minecraft 1.8-1.18+ that allows you to view your server console and manage your server from anywhere. It creates a WebSocket server in the background used by the web interface to send commands, receive your console log and manage your server.
 
 Don't worry about privacy or security: all data is stored in your browser locally and your PC will connect directly to your minecraft server. No intermediary web servers, just you and your MC server.
 
@@ -14,7 +14,7 @@ Don't worry about privacy or security: all data is stored in your browser locall
 * Colors supported, for both Windows and Linux hosts. (Colors are represented different in each platform).
 * Real-time connected players, machine CPU and server RAM usage information.
 * Capable of keeping active connections to more than one server to keep retrieving console log in the background for them all.
-* English, Spanish, Chinese (thanks to Neubulae and OPhantomO), Czech (thanks to Tada), Deutsch (thanks to NoNamePro0), Dutch (thanks to Twockx), French (thanks to pickatchou999), Italian (thanks to AlexZap), Korean (thanks to XxPKBxX), Portuguese (thanks to AlexandreMuassab and Connect500BR), Russian (thanks to Stashenko) and Turkish (thanks to acarnd03) supported.
+* English, Spanish, Chinese (thanks to Neubulae and OPhantomO), Czech (thanks to Tada), Deutsch (thanks to NoNamePro0), Dutch (thanks to Twockx), French (thanks to pickatchou999), Italian (thanks to AlexZap), Japanese (thanks to kuroneko6423), Korean (thanks to XxPKBxX), Portuguese (thanks to AlexandreMuassab and Connect500BR), Russian (thanks to Stashenko) and Turkish (thanks to acarnd03) supported.
 * Free!
 
 ![Screenshot](https://i.imgur.com/sN1sYju.png)
