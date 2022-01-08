@@ -4,8 +4,9 @@ import com.google.gson.JsonObject;
 
 import es.mesacarlos.webconsole.config.UserType;
 
-public class LoggedIn implements JSONOutput{
-	private String message;
+public class LoggedIn implements JSONOutput {
+
+	private final String message;
 	private String respondsTo;
 	private String username;
 	private UserType as;

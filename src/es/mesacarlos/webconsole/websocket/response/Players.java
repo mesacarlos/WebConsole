@@ -5,11 +5,12 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-public class Players implements JSONOutput{
-	private String message;
-	private int connectedPlayers;
-	private int maxPlayers;
-	private List<String> connectedPlayersList;
+public class Players implements JSONOutput {
+
+	private final String message;
+	private final int connectedPlayers;
+	private final int maxPlayers;
+	private final List<String> connectedPlayersList;
 	
 	public Players(String message, int connectedPlayers, int maxPlayers, List<String> connectedPlayersList) {
 		this.message = message;

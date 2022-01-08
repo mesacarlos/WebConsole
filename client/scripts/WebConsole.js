@@ -5,14 +5,14 @@
 */
 
 /**
-* Global variables
-*/
-var persistenceManager = new WebConsolePersistenceManager();
-var connectionManager = new WebConsoleManager();
-var lang;
-var autoPasswordCompleted = false; //When true, saved password was used. If a 401 is received, then saved password is not correct
-var statusCommandsInterval = -1;
-var commandHistoryIndex = -1; //Saves current command history index. -1 when not browsing history.
+ * Global variables
+ */
+const persistenceManager = new WebConsolePersistenceManager();
+const connectionManager = new WebConsoleManager();
+let lang;
+let autoPasswordCompleted = false; //When true, saved password was used. If a 401 is received, then saved password is not correct
+let statusCommandsInterval = -1;
+let commandHistoryIndex = -1; //Saves current command history index. -1 when not browsing history.
 
 /**
  * Load list of servers in file servers.json
@@ -61,10 +61,10 @@ function openServer(serverName){
 	connectionManager.loadConnection(serverName);
 	
 	//Load saved messages
-	var i;
-	var messages = connectionManager.activeConnection.messages;
+	let i;
+	const messages = connectionManager.activeConnection.messages;
 	for(i = 0; i < messages.length; i++){
-		if(messages[i].status != 401){
+		if(messages[i].status !== 401){
 			onWebSocketsMessage(messages[i]);
 		}
 	}
@@ -88,7 +88,7 @@ function onWebSocketsMessage(message){
 			$("#loggedUserTypeLabel").text(message.as);
 
 			//Disable command bar if user is viewer
-			if(message.as.toLowerCase() == "viewer"){
+			if(message.as.toLowerCase() === "viewer"){
 				$("#commandInput").prop("disabled", true);
 				$("#sendCommandButton").prop("disabled", true);
 			}
@@ -106,7 +106,7 @@ function onWebSocketsMessage(message){
 			break;
 		case 401:
 			//Waiting for login. Show password modal or retrieve password
-			var savedPwd = persistenceManager.getServer(connectionManager.activeConnection.serverName).serverPassword;
+			const savedPwd = persistenceManager.getServer(connectionManager.activeConnection.serverName).serverPassword;
 			if(typeof savedPwd !== "undefined" && !autoPasswordCompleted){
 				connectionManager.sendPassword(savedPwd);
 				autoPasswordCompleted = true;
@@ -127,13 +127,17 @@ function onWebSocketsMessage(message){
 			//RAM Usage
 			writeRamInfo(message.free, message.used, message.max);
 			break;
+		case 1003:
+			//Server TPS
+			writeTpsInfo(message.tps, 20);
+			break;
 		default:
 			console.log('Unknown server response:');
 	}
 	console.log(message);
 	
 	//Add interval for Players, CPU and RAM info, if not set
-	if(statusCommandsInterval == -1 && message.status !== 401){
+	if(statusCommandsInterval === -1 && message.status !== 401){
 		statusCommandsInterval = setInterval(function(){
 			connectionManager.askForInfo();
 		}, 2500);
@@ -144,8 +148,8 @@ function onWebSocketsMessage(message){
 * Write to console
 */
 function writeToWebConsole(msg, time){
-	var isScrolledDown = document.getElementById("consoleTextArea").scrollHeight - document.getElementById("consoleTextArea").scrollTop - 40 == $("#consoleTextArea").height();
-	
+	const isScrolledDown = document.getElementById("consoleTextArea").scrollHeight - document.getElementById("consoleTextArea").scrollTop - 40 === $("#consoleTextArea").height();
+
 	//Write to div, replacing < to &lt; (to avoid XSS) and replacing new line to br.
 	msg = msg.replace(/</g, "&lt;");
 	msg = msg.replace(/(?:\r\n|\r|\n)/g, "<br>");
@@ -209,7 +213,7 @@ function writeToWebConsole(msg, time){
 	$("#consoleTextArea").append(msg + "<br>");
 	
 	if(isScrolledDown){
-		var textarea = document.getElementById('consoleTextArea');
+		const textarea = document.getElementById('consoleTextArea');
 		textarea.scrollTop = textarea.scrollHeight;
 	}
 }
@@ -220,8 +224,8 @@ function writeToWebConsole(msg, time){
 function writePlayerInfo(connected, maximum){
 	$("#connectedPlayers").text(connected);
 	$("#maxPlayers").text(maximum);
-	
-	var percent = (connected/maximum)*100;
+
+	const percent = (connected / maximum) * 100;
 	$("#playerProgressBar").width(percent + "%");
 }
 
@@ -240,16 +244,30 @@ function writeCpuInfo(usage){
 function writeRamInfo(free, used, total){
 	$("#usedRam").text(used);
 	$("#totalRam").text(total);
-	
-	var percent = (used/total)*100;
+
+	const percent = (used / total) * 100;
 	$("#RamProgressBar").width(percent + "%");
+}
+
+/**
+ * Fill TPS info card
+ */
+function writeTpsInfo(tps, max){
+	if(tps > 20) {
+		tps = 20;
+	}
+	$("#tps").text(tps);
+	$("#maxTps").text(max);
+
+	const percent = (tps / max) * 100;
+	$("#TpsProgressBar").width(percent + "%");
 }
 
 /**
 * Called from WebConsoleConnector only.
 */
 function closedConnection(serverName){
-	if(connectionManager.activeConnection.serverName == serverName){
+	if(connectionManager.activeConnection.serverName === serverName){
 		//Disable command input and button
 		$("#commandInput").prop("disabled", true);
 		$("#sendCommandButton").prop("disabled", true);
@@ -288,13 +306,13 @@ function updateServerList(){
 	$('.servermenuitem').remove();
 	
 	//Add all servers
-	var servers = persistenceManager.getAllServers();
-	for(var i = 0; i < servers.length; i++){
+	const servers = persistenceManager.getAllServers();
+	for(let i = 0; i < servers.length; i++){
 		$('#ServerListDropDown').append('<a class="dropdown-item servermenuitem" href="#" onclick="openServer(\'' + servers[i].serverName + '\')">' + servers[i].serverName.replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/'/g,"").replace(/"/g,"") + '</a>');
 	}
 	
 	//Show a "no servers" message when no servers are added
-	if(servers.length == 0){
+	if(servers.length === 0){
 		$('#ServerListDropDown').append('<a class="dropdown-item servermenuitem disabled" href="#" id="noServersAdded">No servers added</a>');
 	}
 }
