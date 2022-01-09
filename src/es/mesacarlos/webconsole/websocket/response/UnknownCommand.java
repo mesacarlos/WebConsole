@@ -2,9 +2,10 @@ package es.mesacarlos.webconsole.websocket.response;
 
 import com.google.gson.JsonObject;
 
-public class UnknownCommand implements JSONOutput{
-	private String message;
-	private String respondsTo;
+public class UnknownCommand implements JSONOutput {
+
+	private final String message;
+	private final String respondsTo;
 	
 	public UnknownCommand(String message, String respondsTo) {
 		this.message = message;

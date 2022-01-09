@@ -3,10 +3,11 @@ package es.mesacarlos.webconsole.websocket.response;
 import com.google.gson.JsonObject;
 
 public class RamUsage implements JSONOutput {
-	private String message;
-	private long free;
-	private long used;
-	private long max;
+
+	private final String message;
+	private final long free;
+	private final long used;
+	private final long max;
 
 	public RamUsage(String message, long free, long used, long max) {
 		this.message = message;

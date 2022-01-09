@@ -23,7 +23,8 @@ import es.mesacarlos.webconsole.websocket.response.LoggedIn;
 import es.mesacarlos.webconsole.websocket.response.UnknownCommand;
 
 public class WSServer extends WebSocketServer {
-	private HashMap<String, WSCommand> commands = WSCommandFactory.getCommandsHashMap();
+
+	private final HashMap<String, WSCommand> commands = WSCommandFactory.getCommandsHashMap();
 
 	public WSServer(InetSocketAddress address) {
 		super(address);

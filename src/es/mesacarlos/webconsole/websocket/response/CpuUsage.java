@@ -2,9 +2,10 @@ package es.mesacarlos.webconsole.websocket.response;
 
 import com.google.gson.JsonObject;
 
-public class CpuUsage implements JSONOutput{
-	private String message;
-	private double usage;
+public class CpuUsage implements JSONOutput {
+
+	private final String message;
+	private final double usage;
 
 	public CpuUsage(String message, double usage) {
 		this.message = message;

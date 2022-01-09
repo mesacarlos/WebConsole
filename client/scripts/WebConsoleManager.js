@@ -97,6 +97,11 @@ class WebConsoleManager {
 			command: "RAMUSAGE",
 			token: this.activeConnection.token,
 		});
+
+		this.activeConnection.sendToServer({
+			command: "TPS",
+			token: this.activeConnection.token,
+		});
 	}
 
 	/**

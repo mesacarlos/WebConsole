@@ -2,8 +2,9 @@ package es.mesacarlos.webconsole.websocket.response;
 
 import com.google.gson.JsonObject;
 
-public class LoginRequired implements JSONOutput{
-	private String message;
+public class LoginRequired implements JSONOutput {
+
+	private final String message;
 	
 	public LoginRequired(String message) {
 		this.message = message;

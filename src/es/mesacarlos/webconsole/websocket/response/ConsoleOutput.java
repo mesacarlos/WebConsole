@@ -2,9 +2,10 @@ package es.mesacarlos.webconsole.websocket.response;
 
 import com.google.gson.JsonObject;
 
-public class ConsoleOutput implements JSONOutput{
-	private String message;
-	private String time;
+public class ConsoleOutput implements JSONOutput {
+
+	private final String message;
+	private final String time;
 	
 	public ConsoleOutput(String message, String time) {
 		this.message = message;
