@@ -542,6 +542,47 @@ function setLanguage(locale){
 				"sendCommandButton": "送信"
 			}
 			break;
+		case "pl_PL": //Credit to gpewojan1
+			lang = {
+				"navbarHomeLink": "Strona główna",
+				"home_header": "Wybierz serwer z menu",
+				"home_description": "Użyj zakładki \"Twoje serwery\", aby dodać nowy serwer Minecraft lub połączyć się do serwera dodanego wcześniej",
+				"serversDropdown": "Twoje serwery",
+				"add_server": "Dodaj Serwer",
+				"noServersAdded": "Nie dodano żadnych serwerów",
+				"lang_dropdown": "Język",
+				"addServerModalLongTitle": "Dodaj nowy serwer",
+				"addServerModalSvName": "Nazwa serwera:",
+				"addServerModalSvIp": "IP Serwera:",
+				"addServerModalSvPort": "Port WebConsole:",
+				"addServerModalSvSsl": "SSL jest włączony na tym serwerze",
+				"addServerModalSslAdvice": "SSL jest wymagany do połączeń ze stronami HTTPS",
+				"addServerModalClose": "Zamknij",
+				"saveAndConnectServerButton": "Zapisz i połącz",
+				"passwordModalLongTitle": "Hasło jest wymagane",
+				"passwordModalLabel": "Hasło:",
+				"passwordModalRememberLabel": "Zapamiętaj hasło",
+				"passwordModalCloseButton": "Zamknij",
+				"passwordSendButton": "Zaloguj się",
+				"disconnectionModalLongTitle": "Rozłączono",
+				"disconnectionModalDescription": "Połączenie z serwerem zostało zerwane. Możliwe powody:",
+				"disconnectionModalsub1": "Serwer został wyłączony intencjonalnie.",
+				"disconnectionModalsub2": "Port nie jest otworzony przez host. W tym przypadku sprawdź, czy port jest otwarty używając port checkera i sprawdź twój firewall oraz router.",
+				"disconnectionModalCloseButton": "Zamknij",
+				"disconnectionModalWelcomeScreenButton": "Strona główna",
+				"settingsLink": "Ustawienia",
+				"settingsModalLongTitle": "Ustawienia WebConsole",
+				"showDateSettingsSwitchLabel": "Pokaż czas na każdej linijce w konsoli",
+				"readLogFileSwitchLabel": "Pokaż pełny log z serwera po zalogowaniu się",
+				"settingsModalCloseButton": "Ok",
+				"players_online": "Gracze Online",
+				"cpu_title": "Zużycie CPU",
+				"ram_title": "Zużycie RAM",
+				"user_title": "Zalogowano jako",
+				"deleteServerButton": "Usuń serwer",
+				"sendCommandButton": "Wyślij"
+			}
+			break;
 		default:
 			console.error("No language set");
 	}
