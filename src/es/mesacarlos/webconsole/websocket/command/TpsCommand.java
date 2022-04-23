@@ -12,12 +12,14 @@ import es.mesacarlos.webconsole.util.Internationalization;
 import es.mesacarlos.webconsole.websocket.WSServer;
 import es.mesacarlos.webconsole.websocket.response.Tps;
 import org.java_websocket.WebSocket;
+import org.bukkit.Bukkit;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class TpsCommand implements WSCommand {
+	private static final String mcVer = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
 
     @Override
     public void execute(WSServer wsServer, WebSocket conn, String params) {
@@ -33,7 +35,7 @@ public class TpsCommand implements WSCommand {
      * @return Current server Tps
      */
     public double[] getTps() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException {
-        Class<?> minecraftServerClass = Class.forName("net.minecraft.server.MinecraftServer");
+        Class<?> minecraftServerClass = Class.forName("net.minecraft.server." + mcVer + ".MinecraftServer");
         Method getServerMethod = minecraftServerClass.getDeclaredMethod("getServer");
         Object serverInstance = getServerMethod.invoke(null);
         Field recentTpsField = serverInstance.getClass().getField("recentTps");
