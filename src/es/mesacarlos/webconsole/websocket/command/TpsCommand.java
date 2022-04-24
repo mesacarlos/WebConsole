@@ -21,29 +21,34 @@ import java.lang.reflect.Method;
 public class TpsCommand implements WSCommand {
 	private static final String mcVer = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
 
-    @Override
-    public void execute(WSServer wsServer, WebSocket conn, String params) {
-        try {
-            double tps = getTps()[0];
-            wsServer.sendToClient(conn, new Tps(Internationalization.getPhrase("tps-message", tps), tps));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	@Override
+	public void execute(WSServer wsServer, WebSocket conn, String params) {
+		try {
+			double tps = getTps()[0];
+			wsServer.sendToClient(conn, new Tps(Internationalization.getPhrase("tps-message", tps), tps));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-    /**
-     * @return Current server Tps
-     */
-    public double[] getTps() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException {
-        Class<?> minecraftServerClass = Class.forName("net.minecraft.server." + mcVer + ".MinecraftServer");
-        Method getServerMethod = minecraftServerClass.getDeclaredMethod("getServer");
-        Object serverInstance = getServerMethod.invoke(null);
-        Field recentTpsField = serverInstance.getClass().getField("recentTps");
-        double[] recentTps = (double[]) recentTpsField.get(serverInstance);
-        for (int i = 0; i < recentTps.length; i++) {
-            recentTps[i] = Math.round(recentTps[i]);
-        }
-        return recentTps;
-    }
+	/**
+	 * @return Current server Tps
+	 */
+	public double[] getTps() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException {
+		try {
+			Class<?> minecraftServerClass = Class.forName("net.minecraft.server." + mcVer + ".MinecraftServer");
+			Method getServerMethod = minecraftServerClass.getDeclaredMethod("getServer");
+			Object serverInstance = getServerMethod.invoke(null);
+			Field recentTpsField = serverInstance.getClass().getField("recentTps");
+			double[] recentTps = (double[]) recentTpsField.get(serverInstance);
+			for (int i = 0; i < recentTps.length; i++) {
+				recentTps[i] = Math.round(recentTps[i]);
+			}
+			return recentTps;
+		} catch (Exception e) {
+			//If an uncaught exception is thrown, maybe it is because this method of getting TPS does not work in the MV version currently running..
+			return new double[] { 0 };
+		}
+	}
 
 }
