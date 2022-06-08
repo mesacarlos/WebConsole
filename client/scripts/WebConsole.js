@@ -199,6 +199,32 @@ function writeToWebConsole(msg, time){
 	
 	msg = msg.replace(/§r/g, "</span>");  //&r
 
+	//Color filter for MC 1.18 (Also easy :D)
+	//span may not be closed every time but browsers will do for ourselves
+	msg = msg.replace(/0/g, "<span style='color: #000000;'>"); //&0
+	msg = msg.replace(/1/g, "<span style='color: #0000AA;'>"); //&1
+	msg = msg.replace(/2/g, "<span style='color: #00AA00;'>"); //&2
+	msg = msg.replace(/3/g, "<span style='color: #00AAAA;'>"); //&3
+	msg = msg.replace(/4/g, "<span style='color: #AA0000;'>"); //&4
+	msg = msg.replace(/5/g, "<span style='color: #AA00AA;'>"); //&5
+	msg = msg.replace(/6/g, "<span style='color: #FFAA00;'>"); //&6
+	msg = msg.replace(/7/g, "<span style='color: #AAAAAA;'>"); //&7
+	msg = msg.replace(/8/g, "<span style='color: #555555;'>"); //&8
+	msg = msg.replace(/9/g, "<span style='color: #5555FF;'>"); //&9
+	msg = msg.replace(/a/g, "<span style='color: #55FF55;'>"); //&a
+	msg = msg.replace(/b/g, "<span style='color: #55FFFF;'>"); //&b
+	msg = msg.replace(/c/g, "<span style='color: #FF5555;'>"); //&c
+	msg = msg.replace(/d/g, "<span style='color: #FF55FF;'>"); //&d
+	msg = msg.replace(/e/g, "<span style='color: #FFFF55;'>"); //&e
+	msg = msg.replace(/f/g, "<span style='color: #FFFFFF;'>"); //&f
+	
+	msg = msg.replace(/l/g, "<span style='font-weight:bold;'>"); //&l
+	msg = msg.replace(/m/g, "<span style='text-decoration: line-through;'>"); //&m
+	msg = msg.replace(/n/g, "<span style='text-decoration: underline;'>"); //&n
+	msg = msg.replace(/o/g, "<span style='font-style: italic;'>"); //&o
+	
+	msg = msg.replace(/r/g, "</span>");  //&r
+
 	//Append datetime if enabled
 	if(persistenceManager.getSetting("dateTimePrefix")){
 		if(typeof time !== 'undefined' && time !== null) //if time is present and not null
