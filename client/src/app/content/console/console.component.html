@@ -1,0 +1,130 @@
+<!-- Server name, insights toggler and badges -->
+<div class="row">
+	<div class="col">
+		<h1>{{ server.serverName }}</h1>
+	</div>
+	<div class="col-md-auto d-flex align-self-center">
+		<button type="button" class="btn btn-outline-primary" *ngIf="showConsole" (click)="showServerInfo = !showServerInfo">
+			<fa-icon *ngIf="!showServerInfo" [icon]="icons.faEye"></fa-icon>
+			<fa-icon *ngIf="showServerInfo" [icon]="icons.faEyeSlash"></fa-icon> {{ "CONSOLE.ToggleServerInfo" | translate }}
+		</button>
+	</div>
+</div>
+<span class="badge bg-success me-1" *ngIf="activeConnection.connectionStatus == 2">{{ "CONSOLE.Connected" | translate }}</span>
+<span class="badge bg-danger mb-3" *ngIf="activeConnection.connectionStatus == 3 && showConsole">{{ "CONSOLE.Disconnected" | translate }}</span>
+<span class="badge bg-secondary mb-3" *ngIf="activeConnection.connectionStatus == 2 && loggedInUsername">{{ "CONSOLE.LoggedInAs" | translate }} {{ loggedInUsername }} ({{ loggedInAs }})</span>
+
+<!-- Connected collapsable: Only shown when connection is or was stablished -->
+<div #collapseGlobal="ngbCollapse" [(ngbCollapse)]="!showConsole">
+	<!-- Server insights -->
+	<div class="row" #collapse="ngbCollapse" [(ngbCollapse)]="!showServerInfo">
+		<div class="col-lg-3">
+			<div class="card mb-3">
+				<div class="card-body">
+					<h5 class="card-title">{{ "CONSOLE.PlayersOnline" | translate }}</h5>
+					<p class="card-text">{{ connectedPlayers }} / {{ maxPlayers }}</p>
+					<p class="card-text">
+						<ngb-progressbar type="secondary" [value]="connectedPlayers*100/maxPlayers" [striped]="true" [animated]="true"></ngb-progressbar>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="card mb-3">
+				<div class="card-body">
+					<h5 class="card-title">{{ "CONSOLE.CpuUsage" | translate }}</h5>
+					<p class="card-text">{{ cpuUsage }}%</p>
+					<p class="card-text">
+						<ngb-progressbar [type]="cpuUsage>80 ? 'danger' : 'secondary'" [value]="cpuUsage" [striped]="true" [animated]="true"></ngb-progressbar>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="card mb-3">
+				<div class="card-body">
+					<h5 class="card-title">{{ "CONSOLE.RamUsage" | translate }}</h5>
+					<p class="card-text">{{ ramUsed }} MB / {{ ramMax }} MB</p>
+					<p class="card-text">
+						<ngb-progressbar [type]="ramUsed*100/ramMax>80 ? 'danger' : 'secondary'" [value]="ramUsed*100/ramMax" [striped]="true" [animated]="true"></ngb-progressbar>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-3">
+			<div class="card mb-3">
+				<div class="card-body">
+					<h5 class="card-title">{{ "CONSOLE.Tps" | translate }}</h5>
+					<p class="card-text">{{ tps }} / 20</p>
+					<p class="card-text">
+						<ngb-progressbar [type]="tps*100/20>80 ? 'success' : 'secondary'" [value]="tps*100/20" [striped]="true" [animated]="true"></ngb-progressbar>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Log in button -->
+	<div class="row" *ngIf="!activeConnection.isLoggedIn">
+		<div class="col-12">
+			<button type="button" class="btn btn-warning w-100" (click)="requestPassword()">
+				<fa-icon [icon]="icons.faLock"></fa-icon> {{ "CONSOLE.ClickToLogin" | translate }}
+			</button>
+		</div>
+	</div>
+
+
+	<!-- Console -->
+	<div class="card mt-3 mb-3">
+		<div #consoleDiv class="card-body overflow-auto text-light bg-dark console" [innerHTML]="consoleHtml | sanitize" [scrollTop]="keepScrollDown ? consoleDiv.scrollHeight : consoleDiv.scrollTop"></div>
+	</div>
+
+	<!-- Command Input -->
+	<div class="input-group mb-3">
+		<input #commandInput type="text" class="form-control" aria-label="Command" aria-describedby="button-command" (keyup)="onKeyUpCommandInput($event)" [disabled]="activeConnection.connectionStatus != 2">
+		<button class="btn btn-secondary" type="button" id="button-command" (click)="sendCommand()" [disabled]="activeConnection.connectionStatus != 2">{{ "CONSOLE.Send" | translate }}</button>
+	</div>
+</div>
+
+<!-- Connecting spinner -->
+<div class="d-flex flex-column min-vh-100 align-items-center" *ngIf="activeConnection.connectionStatus == 1">
+	<div class="spinner-border" role="status">
+		<span class="visually-hidden">{{ "GENERAL.Loading" | translate }}</span>
+	</div>
+	<p>{{ "CONSOLE.Connecting" | translate }}</p>
+</div>
+
+<!-- Disconnected -->
+<div class="d-flex flex-column min-vh-100 align-items-center" *ngIf="activeConnection.connectionStatus == 3 && !showConsole">
+	<fa-icon [icon]="icons.faXmark" size="3x"></fa-icon>
+	<p class="mb-0">{{ "CONSOLE.CannotConnect" | translate }}</p>
+	<p class="mb-0">{{ "CONSOLE.CannotConnectDescription1" | translate }} <a href="https://www.yougetsignal.com/tools/open-ports/" target="_blank">{{ "CONSOLE.Tool" | translate }}</a> {{ "CONSOLE.CannotConnectDescription2" | translate }}
+	</p>
+</div>
+
+<!-- Password modal -->
+<ng-template #setPasswordModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">{{ "CONSOLE.PasswordRequested" | translate }}</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<form class="row g-3">
+			<div class="col-12">
+				<input #passwordInput type="password" class="form-control" (keyup.enter)="setPassword(passwordInput.value, rememberInput.checked);modal.close();">
+				<small *ngIf="savedPasswordSent" class="form-text text-danger">{{ "CONSOLE.WrongPassword" | translate }}</small>
+			</div>
+			<div class="col-12">
+				<div class="form-check">
+					<input #rememberInput class="form-check-input" type="checkbox" id="rememberCheck">
+					<label class="form-check-label" for="rememberCheck">
+						{{ "CONSOLE.RememberPassword" | translate }}
+					</label>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-primary" (click)="setPassword(passwordInput.value, rememberInput.checked);modal.close();">{{ "CONSOLE.Connect" | translate }}</button>
+	</div>
+</ng-template>

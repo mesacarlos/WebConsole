@@ -1,0 +1,28 @@
+<div class="toolbar d-none d-lg-block">
+	<div *ngFor="let server of currentlyConnectedServers | slice:0:maxTabsToShow" class="toolbar-item ms-2 me-2 d-inline-flex">
+		<span class="toolbar-item-description hover ps-3 pe-3 flex-grow-1 d-flex align-items-center" [routerLink]="['/console', server]" routerLinkActive="bg-primary">{{ server }}</span>
+		<fa-icon class="toolbar-item-close hover d-flex align-items-center justify-content-center" [icon]="icons.faXmark" (click)="disconnectServer(server)"></fa-icon>
+	</div>
+	<div *ngIf="currentlyConnectedServers.length > maxTabsToShow" class="toolbar-item-all ms-2 me-2 d-inline-flex">
+		<fa-icon class="toolbar-item-all-icon hover d-flex align-items-center justify-content-center" [icon]="icons.faAdd" (click)="openOffcanvas(navbarOffcanvasContent)"></fa-icon>
+	</div>
+</div>
+
+<ng-template #navbarOffcanvasContent let-offcanvas>
+	<div class="offcanvas-header">
+		<h4 class="offcanvas-title" id="offcanvas-basic-title">{{ "LAYOUT.CurrentlyConnectedTo" | translate }}</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+	</div>
+	<div class="offcanvas-body" *ngIf="currentlyConnectedServers.length == 0">
+		<p>{{ "LAYOUT.NoConnectedToServers" | translate }}</p>
+	</div>
+	<div class="offcanvas-body" *ngIf="currentlyConnectedServers.length != 0">
+		<ul class="nav flex-column">
+			<li class="nav-item" *ngFor="let server of currentlyConnectedServers">
+				<a class="d-inline-block nav-link active" [routerLink]="['/console', server]" (click)="offcanvas.dismiss('Connect')">{{ server }}</a>
+				<a class="d-inline-block nav-link active" (click)="disconnectServer(server)">({{ "LAYOUT.Disconnect" | translate }})</a>
+			</li>
+
+		</ul>
+	</div>
+</ng-template>

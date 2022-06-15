@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+//Make placeholders less visible
+.form-control::-webkit-input-placeholder { opacity: 0.3; }  /* WebKit, Blink, Edge */
+.form-control:-moz-placeholder { opacity: 0.3; }  /* Mozilla Firefox 4 to 18 */
+.form-control::-moz-placeholder { opacity: 0.3; }  /* Mozilla Firefox 19+ */
+.form-control:-ms-input-placeholder { opacity: 0.3; }  /* Internet Explorer 10-11 */
+.form-control::-ms-input-placeholder { opacity: 0.3; }  /* Microsoft Edge */

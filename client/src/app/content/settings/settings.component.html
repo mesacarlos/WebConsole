@@ -1,0 +1,81 @@
+<h1>{{ "SETTINGS.WebConsoleClientSettings" | translate }}</h1>
+<h2>{{ "SETTINGS.GeneralSettings" | translate }}</h2>
+<div class="mb-2">
+	<div class="form-check form-switch">
+		<input class="form-check-input" type="checkbox" id="showDateSettingsSwitch" [(ngModel)]="isDateSwitchChecked" (change)="onSwitchChanges()">
+		<label class="form-check-label" for="showDateSettingsSwitch">{{ "SETTINGS.ShowTimeOnConsoleLine" | translate }}</label>
+	</div>
+	<div class="form-check form-switch">
+		<input class="form-check-input" type="checkbox" id="readLogFileSwitch" [(ngModel)]="isLogFileSwitchChecked" (change)="onSwitchChanges()">
+		<label class="form-check-label" for="readLogFileSwitch">{{ "SETTINGS.RetrieveFullLogOnConnect" | translate }}</label>
+	</div>
+	<div class="form-check form-switch">
+		<input class="form-check-input" type="checkbox" id="showUriSwitch" [(ngModel)]="isBlurrySwitchChecked" (change)="onSwitchChanges()">
+		<label class="form-check-label" for="showUriSwitch">{{ "SETTINGS.BlurryUriHomepage" | translate }}</label>
+	</div>
+	<div class="form-check form-switch">
+		<input class="form-check-input" type="checkbox" id="widerSwitch" [(ngModel)]="isWiderSwitchChecked" (change)="onSwitchChanges()">
+		<label class="form-check-label" for="widerSwitch">{{ "SETTINGS.WiderViewport" | translate }}</label>
+	</div>
+</div>
+
+<hr />
+
+<h2>{{ "SETTINGS.MigrateData" | translate }}</h2>
+<p>{{ "SETTINGS.MigrateDataDescription" | translate }}</p>
+<div class="mb-2">
+	<p>
+		<button type="button" class="btn btn-outline-primary" (click)="openExportCollapse()" [attr.aria-expanded]="!exportContainerCollapsed" aria-controls="collapseExport">
+			{{ "SETTINGS.ExportData" | translate }}
+		</button>
+		<button type="button" class="btn btn-outline-primary ms-2" (click)="openImportCollapse();" [attr.aria-expanded]="!exportContainerCollapsed" aria-controls="collapseImport">
+			{{ "SETTINGS.ImportData" | translate }}
+		</button>
+		<button *ngIf="!exportContainerCollapsed || !importContainerCollapsed" type="button" class="btn btn-outline-primary ms-2" (click)="closeMigrateCollapse();">
+			<fa-icon [icon]="icons.faClose"></fa-icon>
+		</button>
+	</p>
+	<div #collapseExport="ngbCollapse" [(ngbCollapse)]="exportContainerCollapsed">
+		<div class="card">
+			<div class="card-body">
+				<h6 class="card-subtitle mb-2 text-muted">{{ "SETTINGS.CopyString" | translate }}</h6>
+				<p class="card-text">{{ exportString }}</p>
+			</div>
+		</div>
+	</div>
+	<div #collapseImport="ngbCollapse" [(ngbCollapse)]="importContainerCollapsed">
+		<div class="input-group mb-3" [class.is-valid]="errorOccuredImporting === true" [class.is-invalid]="errorOccuredImporting === false">
+			<input type="text" class="form-control" placeholder="{{ 'SETTINGS.PasteString' | translate }}" aria-label="Paste import string..." aria-describedby="button-import" [(ngModel)]="importString">
+			<button class="btn btn-outline-primary" type="button" id="button-import" (click)="onImportClick()">{{ "SETTINGS.Import" | translate }}</button>
+		</div>
+		<div class="valid-feedback">
+			{{ "SETTINGS.ImportSuccessful" | translate }}
+		</div>
+		<div class="invalid-feedback">
+			{{ "SETTINGS.ImportFailed" | translate }}
+		</div>
+	</div>
+</div>
+
+<hr />
+
+<h2>{{ "SETTINGS.Language" | translate }}</h2>
+<p>{{ "SETTINGS.SelectLanguage" | translate }}</p>
+<div class="mb-2">
+	<select [(ngModel)]="savedLanguage" (change)="onLanguageChanged()" class="form-select" aria-label="Language selector">
+		<option value="en">English</option>
+		<option value="es">Español</option>
+		<option value="zh">中文</option>
+		<option value="ko">한국어</option>
+		<option value="cs">Czech</option>
+		<option value="de">Deutsche</option>
+		<option value="nl">Dutch</option>
+		<option value="fr">Français</option>
+		<option value="it">Italiano</option>
+		<option value="pt">Português</option>
+		<option value="pl">Polskie</option>
+		<option value="ru">русский</option>
+		<option value="tr">Türk</option>
+		<option value="ja">日本語</option>
+	</select>
+</div>

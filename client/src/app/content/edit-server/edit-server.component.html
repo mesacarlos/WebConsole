@@ -1,0 +1,49 @@
+<h1 *ngIf="!asModal">{{ "ADDEDITSERVER.EditServer" | translate }}</h1>
+<form class="row g-3" [formGroup]="editServerFormGroup" (ngSubmit)="saveServer()">
+	<div class="col-12">
+		<label for="inputName" class="form-label">{{ "ADDEDITSERVER.Name" | translate }}</label>
+		<input type="text" class="form-control" id="inputName" placeholder="{{ 'ADDEDITSERVER.NamePlaceholder' | translate }}" formControlName="serverNameControl">
+		<small class="form-text text-warning">{{ "ADDEDITSERVER.NameNotEditable" | translate }}</small>
+	</div>
+	<div class="col-lg-10">
+		<label for="inputIp" class="form-label">{{ "ADDEDITSERVER.Ip" | translate }}</label>
+		<input type="text" class="form-control" id="inputIp" placeholder="{{ 'ADDEDITSERVER.IpPlaceholder' | translate }}" formControlName="serverIpControl"
+			[class.is-invalid]="editServerFormGroup.get('serverIpControl')?.invalid && (editServerFormGroup.get('serverIpControl')?.dirty || editServerFormGroup.get('serverIpControl')?.touched)">
+		<div class="invalid-feedback">
+			{{ "ADDEDITSERVER.RequiredField" | translate }}
+		</div>
+	</div>
+	<div class="col-lg-2">
+		<label for="inputPort" class="form-label">{{ "ADDEDITSERVER.Port" | translate }}</label>
+		<input type="number" class="form-control" id="inputPort" formControlName="serverPortControl"
+			[class.is-invalid]="editServerFormGroup.get('serverPortControl')?.invalid && (editServerFormGroup.get('serverPortControl')?.dirty || editServerFormGroup.get('serverPortControl')?.touched)">
+		<div class="invalid-feedback">
+			{{ "ADDEDITSERVER.InvalidPort" | translate }}
+		</div>
+	</div>
+	<div class="col-12">
+		<label for="inputPassword" class="form-label">{{ "ADDEDITSERVER.Password" | translate }}</label>
+		<input type="password" class="form-control" id="inputPassword" placeholder="{{ 'ADDEDITSERVER.PasswordPlaceholder' | translate }}" formControlName="serverPasswordControl"
+			[class.is-invalid]="editServerFormGroup.get('serverPasswordControl')?.invalid && (editServerFormGroup.get('serverPasswordControl')?.dirty || editServerFormGroup.get('serverPasswordControl')?.touched)">
+	</div>
+	<div class="col-md-6">
+		<div class="form-check">
+			<input class="form-check-input" type="checkbox" id="updatePasswordCheck" formControlName="keepServerPasswordControl" (change)="onUpdatePasswordCheckboxChange()">
+			<label class="form-check-label" for="updatePasswordCheck">
+				{{ "ADDEDITSERVER.KeepPasswordUnchanged" | translate }}
+			</label>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="form-check">
+			<input class="form-check-input" type="checkbox" id="sslCheck" formControlName="serverSslEnabledControl">
+			<label class="form-check-label" for="sslCheck">
+				{{ "ADDEDITSERVER.SslEnabled" | translate }}
+			</label>
+			<p *ngIf="isClientOverHttps" class="text-warning">{{ "ADDEDITSERVER.SslEnabledMandatory" | translate }}</p>
+		</div>
+	</div>
+	<div *ngIf="!asModal" class="col-12">
+		<button type="submit" class="btn btn-primary">{{ "ADDEDITSERVER.EditServer" | translate }}</button>
+	</div>
+</form>

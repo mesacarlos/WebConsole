@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+	<div class="container-fluid">
+		<a class="navbar-brand" routerLink="/">
+			<img src="assets/iconwhite.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top"> <span class="ms-3">WebConsole Client</span>
+		</a>
+		<button class="navbar-toggler" type="button" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" (click)="openOffcanvas(navbarOffcanvasContent)">
+			<span class="navbar-toggler-icon" [class.rotated]="ifMobileNavigationOpen"></span>
+		</button>
+		<div class="collapse navbar-collapse">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{ "LAYOUT.Home" | translate }}</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLink="/settings" routerLinkActive="active">{{ "LAYOUT.Settings" | translate }}</a>
+				</li>
+			</ul>
+			<ul class="navbar-nav ms-auto">
+				<span class="navbar-text">v2.5 - </span>
+				<a class="nav-link" target="_blank" href="https://github.com/mesacarlos/WebConsole">
+					<fa-icon [icon]="icons.faArrowUpRightFromSquare"></fa-icon> GitHub
+				</a>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<div [ngClass]="{ 'container': !isWiderViewportEnabled, 'container-fluid': isWiderViewportEnabled }" class="mb-5">
+	<!-- Content here -->
+	<router-outlet></router-outlet>
+</div>
+
+<app-server-toolbar></app-server-toolbar>
+
+<ng-template #navbarOffcanvasContent let-offcanvas>
+	<div class="offcanvas-header">
+		<h4 class="offcanvas-title" id="offcanvas-basic-title">{{ "LAYOUT.Navigation" | translate }}</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+	</div>
+	<div class="offcanvas-body">
+		<a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="offcanvas.dismiss('Navigate')">{{ "LAYOUT.Home" | translate }}</a>
+		<a class="nav-link" routerLink="/settings" routerLinkActive="active" (click)="offcanvas.dismiss('Navigate')">{{ "LAYOUT.Settings" | translate }}</a>
+
+		<hr />
+		<h4>{{ "LAYOUT.CurrentlyConnectedTo" | translate }}</h4>
+		<p *ngIf="currentlyConnectedServers.length == 0">{{ "LAYOUT.NoConnectedToServers" | translate }}</p>
+		<ul *ngIf="currentlyConnectedServers.length != 0" class="nav flex-column">
+			<li class="nav-item" *ngFor="let server of currentlyConnectedServers">
+				<a class="d-inline-block nav-link active" [routerLink]="['/console', server]" (click)="offcanvas.dismiss('Connect')">{{ server }}</a>
+				<a class="d-inline-block nav-link active" (click)="disconnectServer(server)">({{ "LAYOUT.Disconnect" | translate }})</a>
+			</li>
+		</ul>
+	</div>
+</ng-template>

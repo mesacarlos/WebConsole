@@ -1,0 +1,109 @@
+<div class="row mb-3">
+	<div class="col">
+		<h1>{{ "HOME.YourServers" | translate }}</h1>
+	</div>
+	<div class="col-md-auto d-flex align-self-center">
+		<button class="btn btn-primary" (click)="openModal(addModalContent)">
+			<fa-icon [icon]="icons.faAdd"></fa-icon> {{ "ADDEDITSERVER.AddNewServer" | translate }}
+		</button>
+	</div>
+</div>
+<p *ngIf="servers.length == 0">{{ "HOME.NoServersAdded" | translate }}</p>
+<div class="table-responsive" *ngIf="servers.length > 0">
+	<table class="table table-striped table-hover text-center">
+		<thead>
+			<tr>
+				<th scope="col">{{ "GENERAL.Server" | translate }}</th>
+				<th scope="col" class="d-none d-lg-table-cell">{{ "HOME.ServerUri" | translate }}</th>
+				<th scope="col">{{ "HOME.Actions" | translate }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let server of servers; let i = index">
+				<td>{{ server.serverName }}</td>
+				<td class="d-none d-lg-table-cell" [class.blurry-text]="blurryUris">{{ server.serverURI }}</td>
+				<td class="d-none d-lg-table-cell w-25">
+					<button type="button" class="btn btn-primary me-1" [ngbTooltip]="'HOME.Connect' | translate" (click)="connectServer(server.serverName)" [ngClass]="isConnectedTo(server.serverName) ? 'btn-success' : 'btn-primary'">
+						<fa-icon [icon]="icons.faTerminal"></fa-icon>
+					</button>
+					<button type="button" class="btn btn-primary me-1" [ngbTooltip]="'HOME.MoveUp' | translate" (click)="moveServerUp(server.serverName)">
+						<fa-icon [icon]="icons.faArrowUp"></fa-icon>
+					</button>
+					<button type="button" class="btn btn-primary me-1" [ngbTooltip]="'HOME.MoveDown' | translate" (click)="moveServerDown(server.serverName)">
+						<fa-icon [icon]="icons.faArrowDown"></fa-icon>
+					</button>
+					<button type="button" class="btn btn-primary me-1" [ngbTooltip]="'HOME.Edit' | translate" (click)="serverClicked = server; openModal(editModalContent)" [disabled]="isConnectedTo(server.serverName)">
+						<fa-icon [icon]="icons.faEdit"></fa-icon>
+					</button>
+					<button type="button" class="btn btn-danger" [ngbTooltip]="'HOME.Delete' | translate" (click)="deleteServer(server.serverName)">
+						<fa-icon [icon]="icons.faTrashCan"></fa-icon>
+					</button>
+				</td>
+				<td class="d-lg-none w-25">
+					<button type="button" class="btn btn-primary" (click)="serverClicked = server;openOffcanvas(serverDetailsOffcanvas)">
+						<fa-icon [icon]="icons.faAnglesRight"></fa-icon>
+					</button>
+				</td>
+				<!-- td para móvil con un boton que saque offcanvas. El offcanvas movil sera el mismo de navegacion, mostrara menu y conexiones activas ¿y luego otro offcanvas para las acciones? -->
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<!-- Modal template to add new server -->
+<ng-template #addModalContent let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">{{ "ADDEDITSERVER.AddNewServer" | translate }}</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<app-add-server #addServer [asModal]="true"></app-add-server>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-primary" (click)="addServer.saveServer(modal);">{{ "ADDEDITSERVER.Add" | translate }}</button>
+	</div>
+</ng-template>
+
+<!-- Modal template to edit server -->
+<ng-template #editModalContent let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">{{ "ADDEDITSERVER.EditServer" | translate }}</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<app-edit-server #editServer [asModal]="true" [serverNameBeingEdited]="serverClicked.serverName"></app-edit-server>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-primary" (click)="editServer.saveServer(modal);">{{ "ADDEDITSERVER.EditServer" | translate }}</button>
+	</div>
+</ng-template>
+
+<!-- Offcanvas template to show server details -->
+<ng-template #serverDetailsOffcanvas let-offcanvas>
+	<div class="offcanvas-header">
+		<h4 class="offcanvas-title" id="offcanvas-basic-title">{{ "HOME.ServerDetails" | translate }}</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+	</div>
+	<div class="offcanvas-body">
+		<p><strong>{{ "GENERAL.Server" | translate }}:</strong> {{ serverClicked.serverName }}</p>
+		<p><strong>{{ "HOME.ServerUri" | translate }}:</strong> {{ serverClicked.serverURI }}</p>
+		<p><strong>{{ "HOME.Actions" | translate }}</strong></p>
+		<p>
+			<button type="button" class="btn btn-primary me-1" (click)="offcanvas.dismiss('Action'); connectServer(serverClicked.serverName)" [ngClass]="isConnectedTo(serverClicked.serverName) ? 'btn-success' : 'btn-primary'">
+				<fa-icon [icon]="icons.faTerminal"></fa-icon>
+			</button>
+			<button type="button" class="btn btn-primary me-1" (click)="offcanvas.dismiss('Action'); moveServerUp(serverClicked.serverName)">
+				<fa-icon [icon]="icons.faArrowUp"></fa-icon>
+			</button>
+			<button type="button" class="btn btn-primary me-1" (click)="offcanvas.dismiss('Action'); moveServerDown(serverClicked.serverName)">
+				<fa-icon [icon]="icons.faArrowDown"></fa-icon>
+			</button>
+			<button type="button" class="btn btn-primary me-1" (click)="offcanvas.dismiss('Action'); openModal(editModalContent)" [disabled]="isConnectedTo(serverClicked.serverName)">
+				<fa-icon [icon]="icons.faEdit"></fa-icon>
+			</button>
+			<button type="button" class="btn btn-danger" (click)="offcanvas.dismiss('Action'); deleteServer(serverClicked.serverName)">
+				<fa-icon [icon]="icons.faTrashCan"></fa-icon>
+			</button>
+		</p>
+	</div>
+</ng-template>

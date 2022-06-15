@@ -1,0 +1,47 @@
+.toolbar {
+	position: fixed;
+	right: 0px;
+	bottom: 0px;
+}
+
+.toolbar-item {
+	width: 200px;
+	background-color: var(--bs-dark);
+	color: white;
+	border-radius: 10px 10px 0 0;
+}
+
+.toolbar-item-description {
+	height: 35px;
+	border-radius: 10px 0 0 0;
+	border-style: solid;
+	border-color: white;
+	border-width: 0 1px 0 0;
+}
+
+.toolbar-item-close {
+	height: 35px;
+	width: 30px;
+	border-radius: 0 10px 0 0;
+}
+
+.hover:hover {
+	background-color: var(--bs-secondary);
+	cursor: pointer;
+}
+
+.toolbar-item-all {
+	background-color: var(--bs-dark);
+	color: white;
+	border-radius: 10px 10px 0 0;
+}
+
+.toolbar-item-all-icon {
+	height: 38px;
+	width: 35px;
+	border-radius: 10px 10px 0 0;
+}
+
+a:hover {
+	cursor: pointer;
+}
