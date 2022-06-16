@@ -195,6 +195,7 @@ export class WebconsoleService {
 		if (serverConnection) {
 			serverConnection.subject$.complete();
 			serverConnection.connectionStatus = ConnectionStatusEnum.Disconnected;
+			this.webSocketClients[serverName]?.close();
 			this.webSocketClients[serverName] = undefined;
 			this.activeConnections = this.activeConnections.filter(e => e.serverName !== serverName);
 			this.activeConnectionsChangedSubject$.next();

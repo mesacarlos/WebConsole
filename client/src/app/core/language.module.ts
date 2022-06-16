@@ -5,7 +5,7 @@ import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { LanguageService } from "../_services/language.service";
 
 export const HttpLoaderFactory = (http: HttpClient): TranslateHttpLoader => {
-	return new TranslateHttpLoader(http, "/assets/i18n/")
+	return new TranslateHttpLoader(http, "./assets/i18n/")
 }
 
 @NgModule({

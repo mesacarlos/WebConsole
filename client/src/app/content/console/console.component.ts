@@ -390,7 +390,3 @@ export class ConsoleComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 }
-
-//TODO falta por hacer:
-//1. Listado de activeConnections para desktop a modo pestañas
-//2. Listado de activeConnections en responsive
