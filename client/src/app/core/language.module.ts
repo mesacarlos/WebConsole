@@ -20,7 +20,7 @@ export const HttpLoaderFactory = (http: HttpClient): TranslateHttpLoader => {
 	exports: []
 })
 export class LanguageModule {
-	readonly VALID_LANGUAGES = ["en", "es"];
+	readonly VALID_LANGUAGES = ["en", "es", "pl"];
 
 	constructor(private languageService: LanguageService) {
 		this.setup();
