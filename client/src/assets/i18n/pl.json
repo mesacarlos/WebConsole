@@ -31,7 +31,7 @@
 		"BlurryUriHomepage": "Rozmyty URI Serwera na stronie głównej (Przydatny w wypadku użycia WebConsole w miejscach publicznych)",
 		"WiderViewport": "Szerszy podgląd",
 		"MigrateData": "Migruj dane",
-		"MigrateDataDescription": "Here you can export your saved servers and settings and import them in another WebConsole Client.",
+		"MigrateDataDescription": "Tutaj możesz wyeksportować swoje zapisane serwery i ustawienia i zaimportować je w innym kliencie WebConsole.",
 		"ExportData": "Eksportuj dane",
 		"ImportData": "Importuj dane",
 		"CopyString": "Kopiuj następujący ciąg znaków i wklej go w twoim preferowanym kliencie:",
