@@ -9,10 +9,10 @@
 		"Navigation": "导航",
 		"CurrentlyConnectedTo": "当前连接的服务器",
 		"NoConnectedToServers": "您当前未连接到任何服务器. ",
-		"Disconnect": "断开"
+		"Disconnect": "断开连接"
     },
 	"HOME": {
-		"YourServers": "您保存的服务器",
+		"YourServers": "服务器列表",
 		"NoServersAdded": "您还没有添加任何服务器. 使用此页面右上角的按钮添加您的第一个. 此外, 请查看设置页面以完成自定义 WebConsole. ",
 		"ServerUri": "服务器地址",
 		"Actions": "功能",
@@ -52,7 +52,7 @@
 		"IpPlaceholder": "192.168.0.1 或 mc.example.com",
 		"Port": "端口",
 		"Password": "密码 (可选) ",
-		"PasswordPlaceholder": "留空以在连接时要求输入密码. ",
+		"PasswordPlaceholder": "留空以在连接时要求输入密码",
 		"KeepPasswordUnchanged": "保持密码不变",
 		"SslEnabled": "在插件配置上启用 SSL",
 		"SslEnabledMandatory": "由于浏览器限制, 在通过 HTTPS 连接的客户端上必须启用 SSL. ",
