@@ -14,10 +14,12 @@ Don't worry about privacy or security: all data is stored in your browser locall
 * Colors supported, for both Windows and Linux hosts. (Colors are represented different in each platform).
 * Real-time connected players, machine CPU and server RAM usage information.
 * Capable of keeping active connections to more than one server to keep retrieving console log in the background for them all.
-* English, Spanish, Chinese (thanks to Neubulae and OPhantomO), Czech (thanks to Tada), Deutsch (thanks to NoNamePro0), Dutch (thanks to Twockx), French (thanks to pickatchou999), Italian (thanks to AlexZap), Japanese (thanks to kuroneko6423), Korean (thanks to XxPKBxX), Portuguese (thanks to AlexandreMuassab and Connect500BR), Russian (thanks to Stashenko) and Turkish (thanks to acarnd03) supported.
+* English, Spanish, Chinese, Czech, Deutsch, Dutch, French, Italian, Japanese, Korean, Portuguese, Russian and Turkish supported. Big shout-out to all contributors around the world that helped translating this project into all these languages!
 * Free!
 
-![Screenshot](https://i.imgur.com/sN1sYju.png)
+![Screenshot1](https://i.imgur.com/tWp3JaB.png)
+
+![Screenshot2](https://i.imgur.com/Woay6TC.png)
 
 
 ## Step 1. Plugin installation
