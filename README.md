@@ -14,7 +14,7 @@ Don't worry about privacy or security: all data is stored in your browser locall
 * Colors supported, for both Windows and Linux hosts. (Colors are represented different in each platform).
 * Real-time connected players, machine CPU and server RAM usage information.
 * Capable of keeping active connections to more than one server to keep retrieving console log in the background for them all.
-* English, Spanish, Chinese, Czech, Deutsch, Dutch, French, Italian, Japanese, Korean, Portuguese, Russian and Turkish supported. Big shout-out to all contributors around the world that helped translating this project into all these languages!
+* English, Spanish, Traditional Chinese, Simplified Chinese, Czech, Deutsch, Dutch, French, Italian, Japanese, Korean, Portuguese, Russian and Turkish supported. Big shout-out to all contributors around the world that helped translating this project into all these languages!
 * Free!
 
 ![Screenshot1](https://i.imgur.com/tWp3JaB.png)
@@ -56,7 +56,7 @@ A explanation of the `host`, `port`, `language` and `passwords` fields follows:
 
 `port`: A port where to run this plugin (cannot be the port you are using for Minecraft).
 
-You can modify `language` to view console and command messages in your preferred language. Valid languages are English (`en`), Spanish (`es`), Chinese Simplified (`zh_CN`), Chinese Traditional (`zh_TW`), Czech (`cs`), Deutsch (`de`), Dutch (`nl`), French (`fr`), Italian (`it`), Japanese (`ja`) Korean (`ko`), Polskie (`pl`), Portuguese (`pt`), Russian (`ru`) and Turkish (`tr`). **IMPORTANT: There is a known issue with Microsoft Windows cmd that shows weird characters when using a language different than English. If you are using Windows to host your server, check [this wiki page](https://github.com/mesacarlos/WebConsole/wiki/Show-local-characters-in-Windows-Console) to solve the problem**.
+You can modify `language` to view console and command messages in your preferred language. Valid languages are English (`en`), Spanish (`es`), Traditional Chinese (`zh_TW`), Simplified  Chinese (`zh_CN`), Czech (`cs`), Deutsch (`de`), Dutch (`nl`), French (`fr`), Italian (`it`), Japanese (`ja`) Korean (`ko`), Polskie (`pl`), Portuguese (`pt`), Russian (`ru`) and Turkish (`tr`). **IMPORTANT: There is a known issue with Microsoft Windows cmd that shows weird characters when using a language different than English. If you are using Windows to host your server, check [this wiki page](https://github.com/mesacarlos/WebConsole/wiki/Show-local-characters-in-Windows-Console) to solve the problem**.
 
 Since version 2.0 you can now create more than one user and set them as admin (Permission for both reading console and executing commands) or viewer (Permission for only reading console and CPU and RAM usage). This is configured using the `passwords` section:
 - By default, a user called user1 with password mySecurePassword is created, please replace or remove it as it is only served as an example.
