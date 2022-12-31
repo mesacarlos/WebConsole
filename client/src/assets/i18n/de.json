@@ -4,17 +4,16 @@
 		"Loading": "Laden..."
 	},
     "LAYOUT": {
-        "Home": "Hauptmenu",
+        "Home": "Startseite",
 		"Settings": "Einstellungen",
 		"Navigation": "Navigation",
-		"CurrentlyConnectedTo": "Bereits verbundene Server",
-		"NoConnectedToServers": "Du bist zurzeit mit keinem Server verbunden.",
+		"CurrentlyConnectedTo": "Zurzeit verbundene Server",
+		"NoConnectedToServers": "Sie sind zurzeit mit keinem Server verbunden.",
 		"Disconnect": "Trennen"
     },
 	"HOME": {
 		"YourServers": "Dene gespeicherten Server",
-		"NoServersAdded": "Sie haben noch keine Server hinzugefügt. Fügen Sie Ihren ersten Server über die Schaltfläche oben rechts auf dieser Seite hinzu. Sehen Sie sich auch die Einstellungsseite an, um die Anpassung der WebConsole abzuschließen.
-.",
+		"NoServersAdded": "Sie haben noch keine Server hinzugefügt. Fügen Sie Ihren ersten Server über die Schaltfläche oben rechts auf dieser Seite hinzu. Sehen Sie sich auch die Einstellungsseite an, um die Anpassung der WebConsole abzuschließen.",
 		"ServerUri": "Server URI",
 		"Actions": "Aktionen",
 		"Connect": "Verbinden",
