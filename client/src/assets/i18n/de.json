@@ -17,8 +17,8 @@
 		"ServerUri": "Server URI",
 		"Actions": "Aktionen",
 		"Connect": "Verbinden",
-		"MoveUp": "Move up",
-		"MoveDown": "Move down",
+		"MoveUp": "Nach oben",
+		"MoveDown": "Nach unten",
 		"Edit": "Bearbeiten",
 		"Delete": "Entfernen",
 		"ServerDetails": "Server details"
