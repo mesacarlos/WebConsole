@@ -12,7 +12,7 @@
 		"Disconnect": "Trennen"
     },
 	"HOME": {
-		"YourServers": "Dene gespeicherten Server",
+		"YourServers": "Ihre gespeicherten Server",
 		"NoServersAdded": "Sie haben noch keine Server hinzugefügt. Fügen Sie Ihren ersten Server über die Schaltfläche oben rechts auf dieser Seite hinzu. Sehen Sie sich auch die Einstellungsseite an, um die Anpassung der WebConsole abzuschließen.",
 		"ServerUri": "Server URI",
 		"Actions": "Aktionen",
