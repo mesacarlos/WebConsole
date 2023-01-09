@@ -13,7 +13,7 @@
     },
 	"HOME": {
 		"YourServers": "Tus servidores guardados",
-		"NoServersAdded": "No has añadido ningún servidor aún. Comienza añadiendo uno utilizando el botón situado en la parte superior derecha de esta oagina. Ademas, puedes terminar de personalizar WebConsole utilizando la sección de configuración que encontrarás en el menú principal.",
+		"NoServersAdded": "No has añadido ningún servidor aún. Comienza añadiendo uno utilizando el botón situado en la parte superior derecha de esta página. Ademas, puedes terminar de personalizar WebConsole utilizando la sección de configuración que encontrarás en el menú principal.",
 		"ServerUri": "URI del servidor",
 		"Actions": "Acciones",
 		"Connect": "Conectar",
