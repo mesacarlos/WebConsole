@@ -60,7 +60,7 @@ You can modify `language` to view console and command messages in your preferred
 
 Since version 2.0 you can now create more than one user and set them as admin (Permission for both reading console and executing commands) or viewer (Permission for only reading console and CPU and RAM usage). This is configured using the `passwords` section:
 - By default, a user called user1 with password mySecurePassword is created, please replace or remove it as it is only served as an example.
-- If you want to create a view-only user, remove the `{}` after `viewer: ` and type below a row like `user: password` replacing user with your desired username and password with your password.
+- If you want to create a view-only user, remove the `{}` after `viewer: ` and type below a row like `user: password` replacing user with your desired username and password with your password. ([Example](https://github.com/mesacarlos/WebConsole/issues/140))
 - You can create as many admins or viewers as needed.
 - For all your admin users, you can enable a whitelist of commands under the commandWhitelist section of your user.
 
