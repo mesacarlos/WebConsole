@@ -19,7 +19,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class TpsCommand implements WSCommand {
-	private static final String mcVer = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+	private static final String mcVer = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[2];
 
 	@Override
 	public void execute(WSServer wsServer, WebSocket conn, String params) {
