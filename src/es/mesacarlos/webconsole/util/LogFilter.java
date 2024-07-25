@@ -130,8 +130,7 @@ public class LogFilter implements Filter{
 
 	@Override
 	public Result filter(LogEvent event) {
-		String message = event.getMessage().getFormattedMessage().replaceAll("\u001b"," ");
-        wsServer.onNewConsoleLinePrinted(message);
+        wsServer.onNewConsoleLinePrinted(event.getMessage().getFormattedMessage());
         return null;
 	}
 

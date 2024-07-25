@@ -19,6 +19,7 @@ import { WebSocketResponse } from 'src/app/_dto/response/WebSocketResponse';
 import { ServerDto } from 'src/app/_dto/ServerDto';
 import { SettingsEnum, StorageService } from 'src/app/_services/storage.service';
 import { WebconsoleService } from 'src/app/_services/webconsole.service';
+import { AnsiUp } from "ansi_up"
 
 @Component({
 	selector: 'app-console',
@@ -211,26 +212,7 @@ export class ConsoleComponent implements OnInit, AfterViewInit, OnDestroy {
 		msg = msg.replace(/</g, "&lt;");
 		msg = msg.replace(/(?:\r\n|\r|\n)/g, "<br>");
 
-		//Color filter for Windows (thanks to SuperPykkon)
-		msg = msg.replace(/\[0;30;22m/g, "<span style='color: #000000;'>"); //&0
-		msg = msg.replace(/\[0;34;22m/g, "<span style='color: #0000AA;'>"); //&1
-		msg = msg.replace(/\[0;32;22m/g, "<span style='color: #00AA00;'>"); //&2
-		msg = msg.replace(/\[0;36;22m/g, "<span style='color: #00AAAA;'>"); //&3
-		msg = msg.replace(/\[0;31;22m/g, "<span style='color: #AA0000;'>"); //&4
-		msg = msg.replace(/\[0;35;22m/g, "<span style='color: #AA00AA;'>"); //&5
-		msg = msg.replace(/\[0;33;22m/g, "<span style='color: #FFAA00;'>"); //&6
-		msg = msg.replace(/\[0;37;22m/g, "<span style='color: #AAAAAA;'>"); //&7
-		msg = msg.replace(/\[0;30;1m/g, "<span style='color: #555555;'>");  //&8
-		msg = msg.replace(/\[0;34;1m/g, "<span style='color: #5555FF;'>");  //&9
-		msg = msg.replace(/\[0;32;1m/g, "<span style='color: #55FF55;'>");  //&a
-		msg = msg.replace(/\[0;36;1m/g, "<span style='color: #55FFFF;'>");  //&b
-		msg = msg.replace(/\[0;31;1m/g, "<span style='color: #FF5555;'>");  //&c
-		msg = msg.replace(/\[0;35;1m/g, "<span style='color: #FF55FF;'>");  //&d
-		msg = msg.replace(/\[0;33;1m/g, "<span style='color: #FFFF55;'>");  //&e
-		msg = msg.replace(/\[0;37;1m/g, "<span style='color: #FFFFFF;'>");  //&f
-		msg = msg.replace(/\[m/g, "</span>");  //&f
-
-		//Color filter for UNIX (This is easier!)
+		//Color filter for MC codes.
 		msg = msg.replace(/§0/g, "<span style='color: #000000;'>"); //&0
 		msg = msg.replace(/§1/g, "<span style='color: #0000AA;'>"); //&1
 		msg = msg.replace(/§2/g, "<span style='color: #00AA00;'>"); //&2
@@ -280,6 +262,10 @@ export class ConsoleComponent implements OnInit, AfterViewInit, OnDestroy {
 
 		msg = msg.replace(/r/g, "</span>");  //&r
 
+		// ANSI Processing
+		var ansi_up = new AnsiUp();
+    	msg = ansi_up.ansi_to_html(msg);
+		
 		//Append datetime if enabled
 		if (this.storageService.getSetting(SettingsEnum.DateTimePrefix)) {
 			if (typeof time !== 'undefined' && time !== null) //if time is present and not null
