@@ -9,6 +9,7 @@ package es.mesacarlos.webconsole.websocket.command;
 //------------------------------
 
 import es.mesacarlos.webconsole.util.Internationalization;
+import es.mesacarlos.webconsole.util.TpsTracker;
 import es.mesacarlos.webconsole.websocket.WSServer;
 import es.mesacarlos.webconsole.websocket.response.Tps;
 import org.java_websocket.WebSocket;
@@ -35,20 +36,7 @@ public class TpsCommand implements WSCommand {
 	 * @return Current server Tps
 	 */
 	public double[] getTps() throws ClassNotFoundException, NoSuchMethodException, InvocationTargetException, IllegalAccessException, NoSuchFieldException {
-		try {
-			Class<?> minecraftServerClass = Class.forName("net.minecraft.server." + mcVer + ".MinecraftServer");
-			Method getServerMethod = minecraftServerClass.getDeclaredMethod("getServer");
-			Object serverInstance = getServerMethod.invoke(null);
-			Field recentTpsField = serverInstance.getClass().getField("recentTps");
-			double[] recentTps = (double[]) recentTpsField.get(serverInstance);
-			for (int i = 0; i < recentTps.length; i++) {
-				recentTps[i] = Math.round(recentTps[i]);
-			}
-			return recentTps;
-		} catch (Exception e) {
-			//If an uncaught exception is thrown, maybe it is because this method of getting TPS does not work in the MV version currently running..
-			return new double[] { 0 };
-		}
+		return new double[] { Math.round(TpsTracker.getTPS()) }; // rounding elsewe would get something like 19.93620414673046 / 20 tps
 	}
 
 }
