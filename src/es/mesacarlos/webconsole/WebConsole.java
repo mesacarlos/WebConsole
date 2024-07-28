@@ -9,6 +9,7 @@ import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManagerFactory;
 
+import es.mesacarlos.webconsole.util.TpsTracker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Filter;
 import org.bukkit.Bukkit;
@@ -28,6 +29,7 @@ public class WebConsole extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
+		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new TpsTracker(), 100L, 1L);
 		//Change language to user-specified language.
 		Internationalization.setCurrentLocale(ConfigManager.getInstance().getLanguage());
 		
